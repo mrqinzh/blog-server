@@ -1,6 +1,7 @@
 */target
 .idea
 .DS_Store
+*/test/
 
 # Compiled class file
 *.class
