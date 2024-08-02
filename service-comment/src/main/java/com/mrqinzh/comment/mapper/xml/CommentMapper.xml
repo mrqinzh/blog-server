@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrqinzh.comment.mapper.CommentMapper">
+
+    <resultMap id="baseMap" type="Comment">
+        <id property="id" column="id" />
+        <result property="avatar" column="avatar" />
+        <result property="nickname" column="nickname" />
+        <result property="articleId" column="article_id" />
+        <result property="commentContent" column="comment_content" />
+        <result property="commentTime" column="comment_time" />
+        <result property="parentId" column="parent_id" />
+        <result property="ip" column="ip" />
+        <association property="article" javaType="Article">
+            <result property="articleTitle" column="article_title" />
+        </association>
+    </resultMap>
+    
+    <select id="list" parameterType="com.mrqinzh.common.vo.comment.CommentPageVo" resultType="Comment">
+        select * from comment where status = 0
+        <if test="type != null">
+            AND `type` = #{type}
+        </if>
+        <if test="nickname != null and '' != nickname">
+            AND nickname LIKE CONCAT('%', #{nickname}, '%')
+        </if>
+        <if test="ip != null and '' != ip">
+            AND ip LIKE CONCAT('%', #{ip}, '%')
+        </if>
+        <if test="startTime != null and endTime != null">
+            AND comment_time &gt; #{startTime} AND comment_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <insert id="add" parameterType="Comment">
+        INSERT INTO `comment` (
+            avatar,
+            nickname,
+            comment_content,
+            article_id,
+            parent_id,
+            ip
+        )
+        VALUES
+            (
+                #{avatar},
+                #{nickname},
+                #{commentContent},
+                #{articleId},
+                #{parentId},
+                #{ip}
+            )
+    </insert>
+
+    <select id="getById" resultMap="baseMap">
+        SELECT
+            *
+        FROM
+            `comment` c
+        LEFT JOIN article a ON a.id = c.article_id
+        WHERE
+            c.status = 0
+            AND c.type = 1
+        <if test=" idType == 'commentId'">
+            and id = #{id}
+        </if>
+        <if test=" idType == 'articleId'">
+            and article_id = #{id}
+        </if>
+    </select>
+
+    <update id="deleteByTypeId">
+        UPDATE `comment`
+        SET status = 1
+        WHERE
+            1 = 1
+        <if test=" idType == 'commentId'">
+            and id = #{id}
+        </if>
+        <if test=" idType == 'articleId'">
+            and article_id = #{id}
+        </if>
+    </update>
+
+</mapper>

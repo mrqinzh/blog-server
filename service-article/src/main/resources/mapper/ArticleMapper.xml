@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrqinzh.article.mapper.ArticleMapper">
+
+    <resultMap id="baseMap" type="Article">
+        <id property="id" column="id" />
+        <result property="articleAuthor" column="article_author" />
+        <result property="articleTitle" column="article_title" />
+        <result property="articleSummary" column="article_summary" />
+        <result property="articleCoverImg" column="article_cover_img" />
+        <result property="articleCreateTime" column="article_create_time" />
+        <result property="articleUpdateTime" column="article_update_time" />
+        <result property="articleContentMd" column="article_content_md" />
+        <result property="articleTag" column="article_tag" />
+        <result property="articleType" column="article_type" />
+        <result property="articleViews" column="article_views" />
+        <association property="user" javaType="User">
+            <id property="id" column="id" />
+            <result property="userAvatar" column="user_avatar" />
+            <result property="userNickname" column="user_nickname" />
+            <result property="userEmail" column="user_email" />
+            <result property="userName" column="user_name" />
+        </association>
+    </resultMap>
+
+    <resultMap id="listMap" type="Article">
+        <id property="id" column="id" />
+        <result property="articleAuthor" column="article_author" />
+        <result property="articleTitle" column="article_title" />
+        <result property="articleSummary" column="article_summary" />
+        <result property="articleCoverImg" column="article_cover_img" />
+        <result property="articleCreateTime" column="article_create_time" />
+        <result property="articleUpdateTime" column="article_update_time" />
+        <result property="articleTag" column="article_tag" />
+        <result property="articleType" column="article_type" />
+        <result property="articleViews" column="article_views" />
+        <association property="user" javaType="User">
+            <id property="id" column="id" />
+            <result property="userAvatar" column="user_avatar" />
+            <result property="userNickname" column="user_nickname" />
+        </association>
+    </resultMap>
+
+    <select id="pageCount" resultType="long">
+        SELECT
+            COUNT(*)
+        FROM
+        article a
+        LEFT JOIN `user` u ON a.user_id = u.id
+        WHERE
+        status = 0
+        <if test="condition != null and '' != condition">
+            AND article_tag LIKE CONCAT('%', #{condition}, '%')
+            OR article_title LIKE CONCAT('%', #{condition}, '%')
+        </if>
+    </select>
+
+    <select id="list" resultMap="listMap">
+        SELECT
+            a.*, u.*
+        FROM
+            article a
+        LEFT JOIN `user` u ON a.user_id = u.id
+        WHERE
+            status = 0
+        <if test="condition != null and '' != condition">
+            AND article_tag LIKE CONCAT('%', #{condition}, '%')
+            OR article_title LIKE CONCAT('%', #{condition}, '%')
+        </if>
+        ORDER BY article_update_time DESC
+    </select>
+
+    <select id="getById" resultMap="baseMap">
+        SELECT
+            *
+        FROM
+            article a
+        LEFT JOIN `user` u ON a.user_id = u.id
+        WHERE
+            a.id = #{articleId}
+    </select>
+
+</mapper>

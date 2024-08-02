@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrqinzh.user.mapper.UserMapper">
+
+    <cache />
+
+    <resultMap id="userInfoMap" type="User">
+        <id column="id" property="id" />
+        <result column="telephone" property="telephone" />
+        <result column="user_avatar" property="userAvatar" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_email" property="userEmail" />
+        <result column="user_real_name" property="userRealName" />
+        <result column="user_name" property="userName" />
+        <result column="user_pwd" property="userPwd" />
+        <association property="role" javaType="Role">
+            <result column="role_id" property="id" />
+        </association>
+    </resultMap>
+
+    <!--<update id="update" parameterType="com.mrqinzh.blog.model.entity.User" flushCache="true">-->
+        <!--UPDATE `user`-->
+        <!--<trim prefix="set" suffixOverrides=",">-->
+            <!--<if test="roleName != null">role_name = #{roleName}, </if>-->
+            <!--<if test="loginLastTime != null">login_last_time = #{loginLastTime}, </if>-->
+            <!--<if test="userAvatar != null">user_avatar = #{userAvatar}, </if>-->
+            <!--<if test="userNickname != null">user_nickname = #{userNickname}, </if>-->
+            <!--<if test="userEmail != null">user_email = #{userEmail}, </if>-->
+            <!--<if test="userRealName != null">user_real_name = #{userRealName}, </if>-->
+            <!--<if test="userName != null">user_name = #{userName}, </if>-->
+            <!--<if test="userPwd != null">user_pwd = #{userPwd}, </if>-->
+        <!--</trim>-->
+        <!--WHERE-->
+            <!--id = #{id}-->
+    <!--</update>-->
+
+    <select id="getByUsernameOrEmail" resultType="User">
+        SELECT
+            *
+        FROM
+            `user` u
+        WHERE u.user_name = #{usernameOrEmail} OR u.user_email = #{usernameOrEmail}
+    </select>
+
+    <insert id="add" parameterType="User">
+        INSERT INTO `user` (
+            role_name,
+            login_last_time,
+            user_avatar,
+            user_nickname,
+            user_email,
+            user_real_name,
+            user_name,
+            user_pwd
+        )
+        VALUES
+        (
+            #{roleName}, #{loginLastTime}, #{userAvatar}, #{userNickname}, #{userEmail}, #{userRealName}, #{userName}, #{userPwd}
+        )
+    </insert>
+
+    <select id="list" resultType="User">
+        SELECT
+            *
+        FROM
+            `user`
+    </select>
+
+</mapper>
