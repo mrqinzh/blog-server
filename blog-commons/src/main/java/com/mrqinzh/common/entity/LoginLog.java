@@ -1,11 +1,9 @@
 package com.mrqinzh.common.entity;
 
 import com.mrqinzh.commons.entity.BaseEntity;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
 public class LoginLog extends BaseEntity {
 
     private Integer userId;
@@ -14,4 +12,35 @@ public class LoginLog extends BaseEntity {
 
     private Date loginTime;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
 }

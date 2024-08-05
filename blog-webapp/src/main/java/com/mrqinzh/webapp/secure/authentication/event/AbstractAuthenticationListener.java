@@ -1,11 +1,13 @@
 package com.mrqinzh.webapp.secure.authentication.event;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 
-@Slf4j
 public abstract class AbstractAuthenticationListener implements ApplicationListener<AbstractAuthenticationEvent> {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Async
     @Override
@@ -23,7 +25,7 @@ public abstract class AbstractAuthenticationListener implements ApplicationListe
 
     protected void doPreAuthEvent(PreAuthEvent event) {
         // todo ...
-        log.info("doPreAuthEvent.......");
+        logger.info("doPreAuthEvent.......");
     }
 
     protected abstract void doAuthSuccessEvent(AuthSuccessEvent event);

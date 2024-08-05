@@ -107,11 +107,8 @@ public class ArticleServiceProvider implements ArticleService {
 
         Date now = new Date();
         // 初始化文章的固定信息
-        article.setArticleViews(0)
-                .setUserId(user.getId())
-                .setArticleCreateTime(now)
-                .setArticleUpdateTime(now)
-                .setStatus(0);
+        article.setArticleViews(0);
+        article.setUserId(user.getId());
 
         articleMapper.insert(article);
 

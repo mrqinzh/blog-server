@@ -3,6 +3,7 @@
 .DS_Store
 */test/
 /config
+*.iml
 
 # Compiled class file
 *.class

@@ -5,7 +5,8 @@ import com.mrqinzh.webapp.secure.authentication.handler.AbstractPrePostAuthHandl
 import com.mrqinzh.webapp.secure.authentication.handler.DefaultLoginHandler;
 import com.mrqinzh.webapp.secure.authentication.token.AbstractAuthenticationToken;
 import com.mrqinzh.webapp.secure.authentication.token.AuthenticatedToken;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -17,9 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@Slf4j
 @Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 public abstract class AbsAuthenticationFilter extends OncePerRequestFilter {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private DefaultLoginHandler defaultLoginHandler;
@@ -61,7 +63,7 @@ public abstract class AbsAuthenticationFilter extends OncePerRequestFilter {
             // 登录成功
             defaultLoginHandler.onLoginSuccess(request, response, token);
         } catch (AuthException e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
             // 登录失败
             defaultLoginHandler.onLoginFailure(request, response, credential, e);
         }

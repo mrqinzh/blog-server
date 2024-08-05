@@ -1,11 +1,9 @@
 package com.mrqinzh.user.handler;
 
 import com.mrqinzh.common.entity.MyFile;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
 public class FileInfo {
 
     private String fileSize;
@@ -28,4 +26,59 @@ public class FileInfo {
         return file;
     }
 
+    public String getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public String getFileLink() {
+        return fileLink;
+    }
+
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
+    }
+
+    public String getFolderPath() {
+        return folderPath;
+    }
+
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
+    }
+
+    public FileClientType getFileClient() {
+        return fileClient;
+    }
+
+    public void setFileClient(FileClientType fileClient) {
+        this.fileClient = fileClient;
+    }
+
+    public String getFileKey() {
+        return fileKey;
+    }
+
+    public void setFileKey(String fileKey) {
+        this.fileKey = fileKey;
+    }
 }

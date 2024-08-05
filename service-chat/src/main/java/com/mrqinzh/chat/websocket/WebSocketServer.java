@@ -2,9 +2,9 @@ package com.mrqinzh.chat.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrqinzh.chat.adapter.WebSocketChatAdapter;
-import com.mrqinzh.chat.service.ChatManageService;
 import com.mrqinzh.framework.utils.SpringContextHolder;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -22,9 +22,10 @@ import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
-@Slf4j
 @ServerEndpoint("/api/websocket/{sid}")
 public class WebSocketServer {
+
+    private static Logger log = LoggerFactory.getLogger(WebSocketServer.class);
 
     /**
      * Q: 无法 autowired ?

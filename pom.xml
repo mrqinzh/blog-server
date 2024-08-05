@@ -33,7 +33,6 @@
         <java.version>1.8</java.version>
         <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
         <spring.boot.version>2.4.3</spring.boot.version>
-        <lombok.version>1.18.18</lombok.version>
         <mybatis.plus.version>3.3.0</mybatis.plus.version>
         <mybatis.spring.version>2.1.4</mybatis.spring.version>
         <hutool.version>5.5.8</hutool.version>
@@ -110,12 +109,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
@@ -152,17 +145,6 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.unfbx</groupId>
-                <artifactId>chatgpt-java</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>1.0.12</version>
             </dependency>
             <dependency>
                 <groupId>com.theokanning.openai-gpt3-java</groupId>

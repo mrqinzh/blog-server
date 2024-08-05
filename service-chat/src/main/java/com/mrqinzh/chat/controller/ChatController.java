@@ -1,11 +1,9 @@
 package com.mrqinzh.chat.controller;
 
-import com.mrqinzh.chat.service.ChatManageService;
 import com.mrqinzh.common.request.chat.ChatConversationRequest;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.vo.chat.ChatResponse;
-import com.unfbx.chatgpt.OpenAiStreamClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +18,10 @@ import java.util.HashMap;
 @RequestMapping("chat")
 public class ChatController {
 
-    @Autowired
-    private ChatManageService chatManageService;
-    @Autowired
-    private OpenAiStreamClient openAiStreamClient;
+//    @Autowired
+//    private ChatManageService chatManageService;
+//    @Autowired
+//    private OpenAiStreamClient openAiStreamClient;
 
     @RequestMapping(value = "/session", method = RequestMethod.POST)
     public Resp session() {
@@ -89,10 +87,10 @@ public class ChatController {
     @PostMapping("/chat-process")
     public ChatResponse sseChat(@RequestBody ChatConversationRequest request, HttpServletResponse res) {
 
-        long tokens = chatManageService.streamChat(request.getPrompt());
-        ChatResponse response = new ChatResponse();
-        response.setQuestionTokens(tokens);
-        return response;
+//        long tokens = chatManageService.streamChat(request.getPrompt());
+//        ChatResponse response = new ChatResponse();
+//        response.setQuestionTokens(tokens);
+        return null;
     }
 
 }

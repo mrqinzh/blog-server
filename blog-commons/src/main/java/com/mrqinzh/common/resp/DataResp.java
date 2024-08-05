@@ -1,9 +1,7 @@
 package com.mrqinzh.common.resp;
 
 import com.mrqinzh.common.enums.AppStatus;
-import lombok.Data;
 
-@Data
 public final class DataResp<T> extends Resp {
 
     private T data;
@@ -17,4 +15,11 @@ public final class DataResp<T> extends Resp {
         return new DataResp<>(data);
     }
 
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }

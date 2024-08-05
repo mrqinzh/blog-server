@@ -1,12 +1,10 @@
 package com.mrqinzh.webapp.secure.authentication.token;
 
 import com.mrqinzh.commons.auth.SecurityUser;
-import lombok.Data;
 
 /**
  * 认证完成的token
  */
-@Data
 public class AuthenticatedToken extends AbstractAuthenticationToken<SecurityUser> {
 
     private String tokenId;
@@ -34,5 +32,21 @@ public class AuthenticatedToken extends AbstractAuthenticationToken<SecurityUser
     @Override
     public SecurityUser getPrincipal() {
         return principal;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPrincipal(SecurityUser principal) {
+        this.principal = principal;
     }
 }

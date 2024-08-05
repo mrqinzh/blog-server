@@ -2,7 +2,8 @@ package com.mrqinzh.webapp.secure.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrqinzh.common.resp.Resp;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-@Slf4j
 @Component
 public class DefaultRedirectStrategy implements RedirectStrategy {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -31,7 +33,7 @@ public class DefaultRedirectStrategy implements RedirectStrategy {
             stream.write(bytes);
             stream.flush();
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

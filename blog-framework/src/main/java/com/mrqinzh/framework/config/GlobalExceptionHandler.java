@@ -4,7 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.Resp;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,9 +17,10 @@ import java.util.List;
  * @author mrqinzh
  * @Description 全局异常处理器
  */
-@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * 处理业务发生的异常

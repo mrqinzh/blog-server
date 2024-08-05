@@ -12,7 +12,6 @@ import com.mrqinzh.webapp.secure.authentication.context.AuthenticationContextUti
 import com.mrqinzh.webapp.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 
-@Slf4j
 @Api(tags = "文章接口")
 @RestController
 @RequestMapping("/article")

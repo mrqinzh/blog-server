@@ -2,13 +2,11 @@ package com.mrqinzh.common.exception;
 
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.resp.Resp;
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author mrqinzh
  */
-@Data
 public class BizException extends RuntimeException {
 
     private AppStatus status;
@@ -42,4 +40,27 @@ public class BizException extends RuntimeException {
                 Resp.sendErrorMsg(code, msg);
     }
 
+    public AppStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AppStatus status) {
+        this.status = status;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }

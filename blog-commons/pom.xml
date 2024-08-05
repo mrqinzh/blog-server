@@ -38,10 +38,6 @@
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
@@ -54,10 +50,7 @@
             <artifactId>cloud-commons</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.unfbx</groupId>
-            <artifactId>chatgpt-java</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.theokanning.openai-gpt3-java</groupId>
             <artifactId>api</artifactId>

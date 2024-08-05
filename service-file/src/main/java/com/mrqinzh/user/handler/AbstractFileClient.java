@@ -4,13 +4,15 @@ import com.mrqinzh.common.constant.FileConstant;
 import com.mrqinzh.common.enums.FileSourceType;
 import com.mrqinzh.common.enums.MimeType;
 import com.mrqinzh.common.utils.FileUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Date;
 
-@Slf4j
 public abstract class AbstractFileClient {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private String folderPath;
     private String fileSuffix;

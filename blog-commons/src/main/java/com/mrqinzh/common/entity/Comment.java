@@ -1,12 +1,10 @@
 package com.mrqinzh.common.entity;
 
 import com.mrqinzh.commons.entity.BaseEntity;
-import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
-@Data
 public class Comment extends BaseEntity {
 
     private String avatar;
@@ -34,4 +32,91 @@ public class Comment extends BaseEntity {
 
     private List<Comment> comments;
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
+
+    public Date getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Date commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
