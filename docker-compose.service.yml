@@ -1,0 +1,38 @@
+version: '3'
+services:
+  blog-app:
+    container_name: blog-app
+    build:
+      context: ./blog-webapp
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+    depends_on:
+      - blog-article
+
+  blog-article:
+    container_name: blog-article-service
+    build:
+      context: ./service-article
+      dockerfile: Dockerfile
+    ports:
+      - "11111:11111"
+    depends_on:
+      - blog-comment
+      - blog-user
+
+  blog-comment:
+    container_name: blog-comment-service
+    build:
+      context: ./service-comment
+      dockerfile: Dockerfile
+    ports:
+      - "12221:12221"
+
+  blog-user:
+    container_name: blog-user-service
+    build:
+      context: ./service-user
+      dockerfile: Dockerfile
+    ports:
+      - "10001:10001"
