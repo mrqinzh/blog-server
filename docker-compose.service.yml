@@ -9,6 +9,8 @@ services:
       - "9999:9999"
     depends_on:
       - blog-article
+    networks:
+      - 1panel-network
 
   blog-article:
     container_name: blog-article-service
@@ -20,6 +22,8 @@ services:
     depends_on:
       - blog-comment
       - blog-user
+    networks:
+      - 1panel-network
 
   blog-comment:
     container_name: blog-comment-service
@@ -28,6 +32,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "12221:12221"
+    networks:
+      - 1panel-network
 
   blog-user:
     container_name: blog-user-service
@@ -36,3 +42,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "10001:10001"
+    networks:
+      - 1panel-network
+
+networks:
+  1panel-network:
+    external: true
