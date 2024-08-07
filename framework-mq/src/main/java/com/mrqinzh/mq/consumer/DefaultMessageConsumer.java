@@ -24,15 +24,16 @@ public class DefaultMessageConsumer<M extends Message> implements MessageConsume
     }
 
     protected void start() {
-        pool.execute(() -> {
-            while (true) {
-                Set<String> queues = messageQueue.getQueues();
-                if (queues == null || queues.isEmpty()) {
-                    continue;
-                }
-                queues.forEach(this::consume);
-            }
-        });
+        // todo need block
+//        pool.execute(() -> {
+//            while (true) {
+//                Set<String> queues = messageQueue.getQueues();
+//                if (queues == null || queues.isEmpty()) {
+//                    continue;
+//                }
+//                queues.forEach(this::consume);
+//            }
+//        });
 
     }
 
