@@ -8,11 +8,9 @@ import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.vo.PageVO;
 import com.mrqinzh.common.vo.article.ArticleVo;
-import com.mrqinzh.webapp.secure.authentication.context.AuthenticationContextUtils;
 import com.mrqinzh.webapp.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -43,7 +41,6 @@ public class ArticleController {
     @ApiOperation(value = "分页加载文章列表")
     @GetMapping("/list")
     public Resp list(PageVO pageVO) {
-        User user = AuthenticationContextUtils.getUser();
 //        if (user != null) {
 //            String message = user.getName() + "刚刚浏览了文章列表，请注意查收。";
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);

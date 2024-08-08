@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RequestMapping("test")
 @RestController
 public class TestController {
@@ -19,5 +20,6 @@ public class TestController {
         redisUtil.set("test_expire", 1, 5);
         return Resp.success();
     }
+
 
 }

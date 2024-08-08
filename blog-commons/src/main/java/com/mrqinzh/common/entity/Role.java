@@ -1,7 +1,7 @@
 package com.mrqinzh.common.entity;
 
 import com.mrqinzh.common.enums.RoleType;
-import com.mrqinzh.commons.entity.BaseEntity;
+import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;
 

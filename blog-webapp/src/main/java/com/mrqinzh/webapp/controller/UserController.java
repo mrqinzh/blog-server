@@ -7,7 +7,6 @@ import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.vo.PageVO;
 import com.mrqinzh.common.vo.user.UserVO;
-import com.mrqinzh.webapp.secure.authentication.context.AuthenticationContextUtils;
 import com.mrqinzh.webapp.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +60,7 @@ public class UserController {
     @ApiOperation(value = "获取用户信息")
     @GetMapping("info")
     public Resp info() {
-        User user = AuthenticationContextUtils.getUser();
+        User user = null;
         if (user == null) {
             return new Resp(AppStatus.TOKEN_EXPIRED);
         }

@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-framework</artifactId>
+            <artifactId>blog-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>

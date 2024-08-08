@@ -1,12 +1,12 @@
 package com.mrqinzh.common.entity;
 
-import com.mrqinzh.commons.auth.SecurityUser;
-import com.mrqinzh.commons.entity.BaseEntity;
+
+import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;
 import java.util.List;
 
-public class User extends BaseEntity implements SecurityUser {
+public class User extends BaseEntity {
 
     private String telephone;
     /**
@@ -36,12 +36,10 @@ public class User extends BaseEntity implements SecurityUser {
 
     private List<Role> roles;
 
-    @Override
     public String getName() {
         return userName;
     }
 
-    @Override
     public String getPassword() {
         return userPwd;
     }

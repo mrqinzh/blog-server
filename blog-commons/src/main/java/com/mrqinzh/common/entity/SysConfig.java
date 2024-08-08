@@ -1,6 +1,6 @@
 package com.mrqinzh.common.entity;
 
-import com.mrqinzh.commons.entity.BaseEntity;
+import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 public class SysConfig extends BaseEntity {
 

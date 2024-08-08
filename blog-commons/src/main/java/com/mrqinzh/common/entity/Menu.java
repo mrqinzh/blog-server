@@ -1,8 +1,7 @@
 package com.mrqinzh.common.entity;
 
-import com.mrqinzh.commons.entity.BaseEntity;
+import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
-import java.util.Date;
 import java.util.List;
 
 public class Menu extends BaseEntity {
