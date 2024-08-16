@@ -1,8 +1,9 @@
-package com.mrqinzh.comment.rpc;
+package com.mrqinzh.comment.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
-import com.mrqinzh.apis.comment.CommentService;
+import com.mrqinzh.comment.mapper.CommentMapper;
+import com.mrqinzh.comment.rpc.CommentServiceProvider;
 import com.mrqinzh.common.entity.Comment;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
@@ -11,22 +12,21 @@ import com.mrqinzh.common.utils.MyUtil;
 import com.mrqinzh.common.vo.comment.CommentPageVo;
 import com.mrqinzh.common.vo.comment.CommentVo;
 import com.mrqinzh.framework.utils.ServletUtil;
-import com.mrqinzh.comment.mapper.CommentMapper;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DubboService
+@Service
 public class CommentServiceImpl implements CommentService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommentServiceProvider.class);
 
     @Resource
     private CommentMapper commentMapper;
@@ -108,5 +108,4 @@ public class CommentServiceImpl implements CommentService {
     public void deleteByTypeId(String articleOrCommentId, Integer id) {
         commentMapper.deleteByTypeId(articleOrCommentId, id);
     }
-
 }

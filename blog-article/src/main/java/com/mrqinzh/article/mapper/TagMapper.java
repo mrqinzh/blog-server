@@ -1,4 +1,4 @@
-package com.mrqinzh.article.tag;
+package com.mrqinzh.article.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mrqinzh.common.entity.Tag;

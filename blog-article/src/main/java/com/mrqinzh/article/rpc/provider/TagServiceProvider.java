@@ -9,7 +9,7 @@ import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.PageResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.article.tag.TagMapper;
+import com.mrqinzh.article.mapper.TagMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 

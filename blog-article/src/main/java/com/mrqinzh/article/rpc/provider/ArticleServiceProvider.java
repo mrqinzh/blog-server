@@ -15,10 +15,9 @@ import com.mrqinzh.common.utils.DateUtil;
 import com.mrqinzh.common.utils.MyUtil;
 import com.mrqinzh.common.vo.PageVO;
 import com.mrqinzh.common.vo.article.ArticleVo;
-import com.mrqinzh.framework.mybatis.page.PageDTO;
 import com.mrqinzh.framework.utils.RedisUtil;
 import com.mrqinzh.article.mapper.ArticleMapper;
-import com.mrqinzh.article.tag.TagMapper;
+import com.mrqinzh.article.mapper.TagMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
@@ -59,13 +58,8 @@ public class ArticleServiceProvider implements ArticleService {
     @Override
     public PageResp<Article> list(PageVO pageVO) {
         PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
-        long count = articleMapper.pageCount(pageVO);
-        if (count > 0) {
-            List<Article> articles = articleMapper.list(pageVO);
-            return null;
-        }
-
-        return null;
+        List<Article> articles = articleMapper.list(pageVO);
+        return PageResp.ok(articles);
     }
 
     @Override

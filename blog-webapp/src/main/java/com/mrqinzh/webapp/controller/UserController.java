@@ -27,6 +27,7 @@ public class UserController {
 
     @RequestMapping("user")
     public List<User> testDubbo() {
+
         return userServiceProxy.test();
     }
 
