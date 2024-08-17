@@ -3,13 +3,13 @@ package com.mrqinzh.comment.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mrqinzh.comment.mapper.CommentMapper;
 import com.mrqinzh.comment.rpc.CommentServiceProvider;
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.utils.MyUtil;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import com.mrqinzh.framework.utils.ServletUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
 //    private GlobalMessageProducer producer;
 
     @Override
-    public List<Comment> list(CommentPageVo commentPageVo) {
+    public List<Comment> list(CommentPageDTO commentPageVo) {
         return commentMapper.list(commentPageVo);
     }
 

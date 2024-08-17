@@ -46,18 +46,19 @@
 
     <insert id="add" parameterType="User">
         INSERT INTO `user` (
-            role_name,
-            login_last_time,
-            user_avatar,
-            user_nickname,
-            user_email,
-            user_real_name,
-            user_name,
-            user_pwd
+        role_name,
+        login_last_time,
+        user_avatar,
+        user_nickname,
+        user_email,
+        user_real_name,
+        user_name,
+        user_pwd
         )
         VALUES
         (
-            #{roleName}, #{loginLastTime}, #{userAvatar}, #{userNickname}, #{userEmail}, #{userRealName}, #{userName}, #{userPwd}
+        #{roleName}, #{loginLastTime}, #{avatar}, #{nickname}, #{email}, #{realName}, #{username},
+        #{pwd}
         )
     </insert>
 

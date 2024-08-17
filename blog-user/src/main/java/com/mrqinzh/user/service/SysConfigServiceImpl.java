@@ -2,7 +2,7 @@ package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mrqinzh.common.entity.SysConfig;
+import com.mrqinzh.common.domain.entity.SysConfig;
 import com.mrqinzh.user.mapper.SysConfigMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,10 @@
 package com.mrqinzh.webapp.client.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.apis.article.ArticleService;
-import com.mrqinzh.common.entity.Article;
-import com.mrqinzh.common.resp.PageResp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.article.ArticleVo;
+import com.mrqinzh.common.domain.entity.Article;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.article.ArticleVo;
 import com.mrqinzh.webapp.client.ArticleClient;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
@@ -26,8 +26,8 @@ public class ArticleClientImpl implements ArticleClient {
     }
 
     @Override
-    public PageResp<Article> list(PageVO pageVO) {
-        return articleService.list(pageVO);
+    public Page<Article> list(PageDTO pageDTO) {
+        return articleService.list(pageDTO);
     }
 
     @Override

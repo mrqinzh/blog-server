@@ -1,5 +1,6 @@
-package com.mrqinzh.common.vo.article;
+package com.mrqinzh.common.domain.vo.article;
 
+import com.mrqinzh.common.domain.entity.Article;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -32,6 +33,20 @@ public class ArticleVo {
     @ApiModelProperty(value = "文章类型： 原创 --- 转载")
     @NotBlank
     private String articleType;
+
+    public ArticleVo() {
+
+    }
+
+    public ArticleVo(Article article) {
+        this.id = article.getId();
+        this.articleTitle = article.getTitle();
+        this.articleSummary = article.getSummary();
+        this.articleCoverImg = article.getCoverImg();
+        this.articleContentMd = article.getContentMd();
+        this.articleTag = article.getTag();
+        this.articleType = article.getType();
+    }
 
     public Integer getId() {
         return id;

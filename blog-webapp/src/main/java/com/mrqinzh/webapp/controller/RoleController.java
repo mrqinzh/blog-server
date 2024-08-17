@@ -1,15 +1,12 @@
 package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.role.RoleService;
-import com.mrqinzh.common.entity.Role;
-import com.mrqinzh.common.enums.RoleType;
+import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.PageResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +28,9 @@ public class RoleController {
 
     @ApiOperation(value = "分页获取所有角色列表")
     @GetMapping("page")
-    public Resp findPage(PageVO pageVO) {
-        List<Role> roles = roleService.findPage(pageVO);
-        return PageResp.ok(roles);
+    public Resp findPage(PageDTO pageDTO) {
+        List<Role> roles = roleService.findPage(pageDTO);
+        return DataResp.ok(roles);
     }
 
     @ApiOperation(value = "根据id获取指定角色信息")

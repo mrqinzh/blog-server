@@ -1,6 +1,7 @@
 package com.mrqinzh.framework.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,7 +18,7 @@ public class MybatisConfiguration {
 
         properties.setConfiguration(configuration());
 
-        properties.setTypeAliasesPackage("com.mrqinzh.common.entity");
+        properties.setTypeAliasesPackage("com.mrqinzh.common.domain.entity");
 
         return properties;
     }
@@ -25,6 +26,9 @@ public class MybatisConfiguration {
     public com.baomidou.mybatisplus.core.MybatisConfiguration configuration() {
         com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
         configuration.setMapUnderscoreToCamelCase(false);
+
+        configuration.addInterceptor(new PaginationInterceptor());
+
         return configuration;
     }
 

@@ -1,7 +1,7 @@
 package com.mrqinzh.user.rpc.provider;
 
 import com.mrqinzh.apis.config.SysConfigService;
-import com.mrqinzh.common.entity.SysConfig;
+import com.mrqinzh.common.domain.entity.SysConfig;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;

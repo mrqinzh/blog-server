@@ -1,12 +1,12 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.PageResp;
+import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.user.UserVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.user.UserVO;
 import com.mrqinzh.framework.utils.RedisUtil;
 import com.mrqinzh.user.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
                 throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "原密码发生了错误。。。");
             }
             // Todo 此处可以对密码进行加密。。。
-            user.setUserPwd(userVO.getNewPass()); // 设置新密码
+            user.setPwd(userVO.getNewPass()); // 设置新密码
         } else {
             // 避免前端传入密码脏数据，导致BeanUtils.copyProperties 复制脏密码，导致修改了原密码
             userVO.setUserPwd(null);
@@ -73,8 +73,8 @@ public class UserServiceImpl implements UserService {
         // 返回用户信息
         Map<String, Object> map = new HashMap<>();
         map.put("userId", user.getId());
-        map.put("name", user.getUserNickname());
-        map.put("avatar", user.getUserAvatar());
+        map.put("name", user.getNickname());
+        map.put("avatar", user.getAvatar());
 
         map.put("roles", user.getRoles());
 
@@ -85,12 +85,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Resp list(PageVO pageVO) {
-        if (pageVO == null) {
+    public Resp list(PageDTO pageDTO) {
+        if (pageDTO == null) {
             return new Resp();
         }
         List<User> users = userMapper.list();
-        return PageResp.ok(users);
+        return DataResp.ok(users);
     }
 
     @Override

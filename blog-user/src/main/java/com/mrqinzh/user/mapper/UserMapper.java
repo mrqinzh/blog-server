@@ -1,7 +1,7 @@
 package com.mrqinzh.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

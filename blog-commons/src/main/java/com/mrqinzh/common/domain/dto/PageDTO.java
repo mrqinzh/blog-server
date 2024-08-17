@@ -1,11 +1,11 @@
-package com.mrqinzh.common.vo;
+package com.mrqinzh.common.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 
 @ApiModel(value = "分页信息类", description = "前端传入的分页信息")
-public class PageVO implements Serializable {
+public class PageDTO implements Serializable {
 
     private Integer currentPage = 1;
 

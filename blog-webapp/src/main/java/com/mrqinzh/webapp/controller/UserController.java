@@ -1,12 +1,12 @@
 package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.menu.MenuService;
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.user.UserVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.user.UserVO;
 import com.mrqinzh.webapp.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class UserController {
 
     @ApiOperation(value = "获取所有用户信息")
     @GetMapping("list")
-    public Resp list(PageVO pageVO) {
-        return userServiceProxy.list(pageVO);
+    public Resp list(PageDTO pageDTO) {
+        return userServiceProxy.list(pageDTO);
     }
 
     @ApiOperation(value = "根据id获取指定用户")
@@ -68,8 +68,8 @@ public class UserController {
         // 返回用户信息
         Map<String, Object> map = new HashMap<>();
         map.put("userId", user.getId());
-        map.put("name", user.getUserNickname());
-        map.put("avatar", user.getUserAvatar());
+        map.put("name", user.getNickname());
+        map.put("avatar", user.getAvatar());
 
         map.put("roles", user.getRoles());
 

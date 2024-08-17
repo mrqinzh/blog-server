@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.common.entity.Role;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.entity.Role;
+import com.mrqinzh.common.domain.dto.PageDTO;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface RoleService {
 
     List<Role> findAll();
 
-    List<Role> findPage(PageVO pageVO);
+    List<Role> findPage(PageDTO pageDTO);
 
     Role getById(Integer id);
 

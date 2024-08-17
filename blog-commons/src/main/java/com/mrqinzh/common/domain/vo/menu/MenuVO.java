@@ -1,4 +1,4 @@
-package com.mrqinzh.common.vo.menu;
+package com.mrqinzh.common.domain.vo.menu;
 
 import io.swagger.annotations.ApiModelProperty;
 

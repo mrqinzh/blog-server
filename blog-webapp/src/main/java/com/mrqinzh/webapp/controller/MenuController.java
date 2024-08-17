@@ -1,16 +1,13 @@
 package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.menu.MenuService;
-import com.mrqinzh.common.entity.Menu;
-import com.mrqinzh.common.enums.RoleType;
+import com.mrqinzh.common.domain.entity.Menu;
 import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.PageResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.menu.MenuVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.menu.MenuVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,9 +30,9 @@ public class MenuController {
 
     @ApiOperation(value = "分页获取菜单信息")
     @GetMapping("page")
-    public Resp findPage(PageVO pageVO) {
-        List<Menu> menus = menuService.findPage(pageVO);
-        return PageResp.ok(menus);
+    public Resp findPage(PageDTO pageDTO) {
+        List<Menu> menus = menuService.findPage(pageDTO);
+        return DataResp.ok(menus);
     }
 
     @ApiOperation(value = "根据id获取菜单信息")

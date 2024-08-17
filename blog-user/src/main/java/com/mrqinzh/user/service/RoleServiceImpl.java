@@ -1,10 +1,10 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.mrqinzh.common.entity.Role;
+import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.user.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> findPage(PageVO pageVO) {
+    public List<Role> findPage(PageDTO pageDTO) {
         List<Role> roles = roleMapper.selectList(new QueryWrapper<Role>().lambda().eq(Role::getStatus, 0));
         return roles;
     }

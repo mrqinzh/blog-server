@@ -1,15 +1,14 @@
 package com.mrqinzh.webapp.client.impl;
 
 import com.mrqinzh.apis.comment.CommentService;
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import com.mrqinzh.webapp.client.CommentClient;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -19,7 +18,7 @@ public class CommentClientImpl implements CommentClient {
     private CommentService commentService;
 
     @Override
-    public List<Comment> list(CommentPageVo commentPageVo) {
+    public List<Comment> list(CommentPageDTO commentPageVo) {
         return commentService.list(commentPageVo);
     }
 

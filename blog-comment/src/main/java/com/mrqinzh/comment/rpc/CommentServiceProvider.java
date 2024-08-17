@@ -1,14 +1,13 @@
 package com.mrqinzh.comment.rpc;
 
 import com.mrqinzh.apis.comment.CommentService;
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 @DubboService
@@ -18,7 +17,7 @@ public class CommentServiceProvider implements CommentService {
     private com.mrqinzh.comment.service.CommentService commentService;
 
     @Override
-    public List<Comment> list(CommentPageVo commentPageVo) {
+    public List<Comment> list(CommentPageDTO commentPageVo) {
         return commentService.list(commentPageVo);
     }
 

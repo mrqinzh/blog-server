@@ -1,13 +1,14 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.common.entity.Article;
-import com.mrqinzh.common.entity.User;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.common.domain.entity.Article;
+import com.mrqinzh.common.domain.vo.PageVO;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.article.ArticleVo;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.article.ArticleVo;
 import com.mrqinzh.webapp.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,18 +36,19 @@ public class ArticleController {
         CompletableFuture.runAsync(() -> {
             articleService.addView(article.getId());
         });
-        return DataResp.ok(article);
+        return DataResp.ok(new ArticleVo(article));
     }
 
     @ApiOperation(value = "分页加载文章列表")
     @GetMapping("/list")
-    public Resp list(PageVO pageVO) {
+    public Resp list(PageDTO pageDTO) {
 //        if (user != null) {
 //            String message = user.getName() + "刚刚浏览了文章列表，请注意查收。";
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);
 //            producer.send(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
-        return articleService.list(pageVO);
+        Page<Article> page = articleService.list(pageDTO);
+        return DataResp.ok(PageVO.convert(page, ArticleVo::new));
     }
 
 //    @AccessPermission(RoleType.SUPER_ADMIN)

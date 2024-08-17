@@ -1,8 +1,8 @@
 package com.mrqinzh.user.rpc.provider;
 
 import com.mrqinzh.apis.role.RoleService;
-import com.mrqinzh.common.entity.Role;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.entity.Role;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
@@ -20,8 +20,8 @@ public class RoleServiceProvider implements RoleService {
     }
 
     @Override
-    public List<Role> findPage(PageVO pageVO) {
-        return roleService.findPage(pageVO);
+    public List<Role> findPage(PageDTO pageDTO) {
+        return roleService.findPage(pageDTO);
     }
 
     @Override

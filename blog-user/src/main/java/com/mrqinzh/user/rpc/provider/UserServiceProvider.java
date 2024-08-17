@@ -1,14 +1,10 @@
 package com.mrqinzh.user.rpc.provider;
 
-import com.mrqinzh.apis.menu.MenuService;
 import com.mrqinzh.apis.user.UserService;
-import com.mrqinzh.common.entity.User;
-import com.mrqinzh.common.enums.AppStatus;
-import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.PageResp;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.user.UserVO;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.vo.user.UserVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
@@ -42,8 +38,8 @@ public class UserServiceProvider implements UserService {
     }
 
     @Override
-    public Resp list(PageVO pageVO) {
-        return userService.list(pageVO);
+    public Resp list(PageDTO pageDTO) {
+        return userService.list(pageDTO);
     }
 
     @Override

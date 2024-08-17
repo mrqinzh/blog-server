@@ -1,7 +1,7 @@
 package com.mrqinzh.webapp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mrqinzh.common.entity.Menu;
+import com.mrqinzh.common.domain.entity.Menu;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

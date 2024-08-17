@@ -1,18 +1,14 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.enums.AppStatus;
-import com.mrqinzh.common.enums.RoleType;
 import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.PageResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import com.mrqinzh.webapp.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,9 +25,9 @@ public class CommentController {
 
     @ApiOperation(value = "分页获取所有评论信息")
     @GetMapping("list")
-    public Resp list(CommentPageVo commentPageVo) {
+    public Resp list(CommentPageDTO commentPageVo) {
         List<Comment> comments = commentService.list(commentPageVo);
-        return PageResp.ok(comments);
+        return DataResp.ok(comments);
     }
 
     @ApiOperation(value = "添加一条评论/留言，任何人均可添加")

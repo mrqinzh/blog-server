@@ -1,4 +1,4 @@
-package com.mrqinzh.auth.filter;
+package com.mrqinzh.framework.filter;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.core.annotation.Order;

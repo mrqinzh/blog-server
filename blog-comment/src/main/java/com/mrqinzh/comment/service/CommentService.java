@@ -1,15 +1,15 @@
 package com.mrqinzh.comment.service;
 
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 
 import java.util.List;
 
 public interface CommentService {
 
-    List<Comment> list(CommentPageVo commentPageVo);
+    List<Comment> list(CommentPageDTO commentPageVo);
 
     List<Comment> getMessageList();
 

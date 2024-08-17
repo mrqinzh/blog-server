@@ -1,9 +1,9 @@
 package com.mrqinzh.apis.menu;
 
 
-import com.mrqinzh.common.entity.Menu;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.menu.MenuVO;
+import com.mrqinzh.common.domain.entity.Menu;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.menu.MenuVO;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface MenuService {
 
     List<Menu> findAll();
 
-    List<Menu> findPage(PageVO pageVO);
+    List<Menu> findPage(PageDTO pageDTO);
 
     Menu findById(Integer id);
 

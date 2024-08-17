@@ -4,21 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mrqinzh.comment.mapper.CommentMapper">
 
-    <resultMap id="baseMap" type="Comment">
+    <resultMap id="baseMap" type="Comment" autoMapping="true">
         <id property="id" column="id" />
-        <result property="avatar" column="avatar" />
-        <result property="nickname" column="nickname" />
-        <result property="articleId" column="article_id" />
-        <result property="commentContent" column="comment_content" />
-        <result property="commentTime" column="comment_time" />
-        <result property="parentId" column="parent_id" />
-        <result property="ip" column="ip" />
         <association property="article" javaType="Article">
-            <result property="articleTitle" column="article_title" />
+            <result property="title" column="title" />
         </association>
     </resultMap>
     
-    <select id="list" parameterType="com.mrqinzh.common.vo.comment.CommentPageVo" resultType="Comment">
+    <select id="list" parameterType="com.mrqinzh.common.domain.vo.comment.CommentPageDTO" resultType="Comment">
         select * from comment where status = 0
         <if test="type != null">
             AND `type` = #{type}
@@ -30,7 +23,7 @@
             AND ip LIKE CONCAT('%', #{ip}, '%')
         </if>
         <if test="startTime != null and endTime != null">
-            AND comment_time &gt; #{startTime} AND comment_time &lt; #{endTime}
+            AND createTime &gt; #{startTime} AND createTime &lt; #{endTime}
         </if>
     </select>
 
@@ -38,16 +31,16 @@
         INSERT INTO `comment` (
             avatar,
             nickname,
-            comment_content,
-            article_id,
-            parent_id,
+            content,
+            articleId,
+            parentId,
             ip
         )
         VALUES
             (
                 #{avatar},
                 #{nickname},
-                #{commentContent},
+                #{content},
                 #{articleId},
                 #{parentId},
                 #{ip}
@@ -59,7 +52,7 @@
             *
         FROM
             `comment` c
-        LEFT JOIN article a ON a.id = c.article_id
+        LEFT JOIN article a ON a.id = c.articleId
         WHERE
             c.status = 0
             AND c.type = 1
@@ -67,7 +60,7 @@
             and id = #{id}
         </if>
         <if test=" idType == 'articleId'">
-            and article_id = #{id}
+            and articleId = #{id}
         </if>
     </select>
 
@@ -80,7 +73,7 @@
             and id = #{id}
         </if>
         <if test=" idType == 'articleId'">
-            and article_id = #{id}
+            and articleId = #{id}
         </if>
     </update>
 

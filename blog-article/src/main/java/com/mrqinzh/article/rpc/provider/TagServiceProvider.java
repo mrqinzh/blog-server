@@ -2,12 +2,12 @@ package com.mrqinzh.article.rpc.provider;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mrqinzh.apis.tag.TagService;
-import com.mrqinzh.common.entity.Tag;
+import com.mrqinzh.common.domain.entity.Tag;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.PageResp;
+import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.article.mapper.TagMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -22,10 +22,10 @@ public class TagServiceProvider implements TagService {
     private TagMapper tagMapper;
 
     @Override
-    public Resp page(PageVO pageVO) {
-        List<Tag> tags = tagMapper.page(pageVO);
+    public Resp page(PageDTO pageDTO) {
+        List<Tag> tags = tagMapper.page(pageDTO);
 
-        return PageResp.ok(tags);
+        return DataResp.ok(tags);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class TagServiceProvider implements TagService {
 
     @Override
     public void add(Tag tag) {
-        if (StringUtils.isBlank(tag.getTagImg())) {
+        if (StringUtils.isBlank(tag.getCoverImg())) {
             throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "必须上传标签对应图片！");
         }
         tagMapper.insert(tag);
@@ -51,7 +51,7 @@ public class TagServiceProvider implements TagService {
 
     @Override
     public void update(Tag tag) {
-        if (tag.getId() == null || StringUtils.isBlank(tag.getTagImg())) {
+        if (tag.getId() == null || StringUtils.isBlank(tag.getCoverImg())) {
             throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
         }
         tagMapper.updateById(tag);

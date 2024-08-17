@@ -30,7 +30,6 @@
         <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
         <spring.boot.version>2.4.3</spring.boot.version>
         <mybatis.plus.version>3.3.0</mybatis.plus.version>
-        <mybatis.spring.version>2.1.4</mybatis.spring.version>
         <hutool.version>5.5.8</hutool.version>
         <mysql.connector.java>8.0.33</mysql.connector.java>
         <swagger.version>2.9.2</swagger.version>
@@ -101,17 +100,6 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.version}</version>
-            </dependency>
-            <!-- pageHelper -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>1.2.12</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>

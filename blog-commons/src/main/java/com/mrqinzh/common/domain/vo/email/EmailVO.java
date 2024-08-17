@@ -1,4 +1,4 @@
-package com.mrqinzh.common.vo.email;
+package com.mrqinzh.common.domain.vo.email;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

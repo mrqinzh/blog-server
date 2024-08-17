@@ -2,7 +2,7 @@ package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.sms.EmailService;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.email.EmailVO;
+import com.mrqinzh.common.domain.vo.email.EmailVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

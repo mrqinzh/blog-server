@@ -1,8 +1,7 @@
 package com.mrqinzh.comment.aop;
 
-import com.mrqinzh.common.entity.Comment;
 import com.mrqinzh.common.message.CommentReplyMessage;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import com.mrqinzh.framework.message.MessageProducer;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

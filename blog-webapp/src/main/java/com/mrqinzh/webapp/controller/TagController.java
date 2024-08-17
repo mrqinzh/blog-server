@@ -1,16 +1,14 @@
 package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.tag.TagService;
-import com.mrqinzh.common.entity.Tag;
+import com.mrqinzh.common.domain.entity.Tag;
 import com.mrqinzh.common.enums.AppStatus;
-import com.mrqinzh.common.enums.RoleType;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +38,8 @@ public class TagController {
 
     @ApiOperation(value = "分页查询 tags")
     @GetMapping("page")
-    public Resp page(PageVO pageVO) {
-        return tagService.page(pageVO);
+    public Resp page(PageDTO pageDTO) {
+        return tagService.page(pageDTO);
     }
 
     @ApiOperation(value = "查询所有标签，limit 20")

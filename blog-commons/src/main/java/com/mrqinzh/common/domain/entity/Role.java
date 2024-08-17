@@ -1,4 +1,4 @@
-package com.mrqinzh.common.entity;
+package com.mrqinzh.common.domain.entity;
 
 import com.mrqinzh.common.enums.RoleType;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;

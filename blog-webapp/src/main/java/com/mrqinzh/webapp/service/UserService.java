@@ -1,10 +1,9 @@
 package com.mrqinzh.webapp.service;
 
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.user.UserVO;
-import org.springframework.stereotype.Service;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.user.UserVO;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,7 @@ public interface UserService {
 
     Map<String, Object> info(String token);
 
-    Resp list(PageVO pageVO);
+    Resp list(PageDTO pageDTO);
 
     User getById(Integer id);
 

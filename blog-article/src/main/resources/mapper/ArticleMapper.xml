@@ -4,18 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mrqinzh.article.mapper.ArticleMapper">
 
-    <resultMap id="baseMap" type="Article">
+    <resultMap id="baseMap" type="Article" autoMapping="true">
         <id property="id" column="id" />
-        <result property="articleAuthor" column="article_author" />
-        <result property="articleTitle" column="article_title" />
-        <result property="articleSummary" column="article_summary" />
-        <result property="articleCoverImg" column="article_cover_img" />
-        <result property="articleCreateTime" column="article_create_time" />
-        <result property="articleUpdateTime" column="article_update_time" />
-        <result property="articleContentMd" column="article_content_md" />
-        <result property="articleTag" column="article_tag" />
-        <result property="articleType" column="article_type" />
-        <result property="articleViews" column="article_views" />
         <association property="user" javaType="User">
             <id property="id" column="id" />
             <result property="userAvatar" column="user_avatar" />
@@ -25,17 +15,8 @@
         </association>
     </resultMap>
 
-    <resultMap id="listMap" type="Article">
+    <resultMap id="listMap" type="Article" autoMapping="true">
         <id property="id" column="id" />
-        <result property="articleAuthor" column="article_author" />
-        <result property="articleTitle" column="article_title" />
-        <result property="articleSummary" column="article_summary" />
-        <result property="articleCoverImg" column="article_cover_img" />
-        <result property="articleCreateTime" column="article_create_time" />
-        <result property="articleUpdateTime" column="article_update_time" />
-        <result property="articleTag" column="article_tag" />
-        <result property="articleType" column="article_type" />
-        <result property="articleViews" column="article_views" />
         <association property="user" javaType="User">
             <id property="id" column="id" />
             <result property="userAvatar" column="user_avatar" />
@@ -77,7 +58,7 @@
             *
         FROM
             article a
-        LEFT JOIN `user` u ON a.user_id = u.id
+        LEFT JOIN `user` u ON a.userId = u.id
         WHERE
             a.id = #{articleId}
     </select>

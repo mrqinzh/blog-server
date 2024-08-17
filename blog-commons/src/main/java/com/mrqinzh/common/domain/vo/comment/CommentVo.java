@@ -1,4 +1,4 @@
-package com.mrqinzh.common.vo.comment;
+package com.mrqinzh.common.domain.vo.comment;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

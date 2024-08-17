@@ -1,4 +1,4 @@
-package com.mrqinzh.common.vo.chat;
+package com.mrqinzh.common.domain.vo.chat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

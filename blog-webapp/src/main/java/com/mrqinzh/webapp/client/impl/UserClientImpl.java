@@ -1,15 +1,14 @@
 package com.mrqinzh.webapp.client.impl;
 
 import com.mrqinzh.apis.user.UserService;
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.user.UserVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.user.UserVO;
 import com.mrqinzh.webapp.client.UserClient;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +39,8 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
-    public Resp list(PageVO pageVO) {
-        return userService.list(pageVO);
+    public Resp list(PageDTO pageDTO) {
+        return userService.list(pageDTO);
     }
 
     @Override

@@ -1,47 +1,51 @@
-package com.mrqinzh.common.entity;
-
-
-import com.mrqinzh.framework.mybatis.entity.BaseEntity;
+package com.mrqinzh.common.domain.vo.user;
 
 import java.util.Date;
-import java.util.List;
 
-public class User extends BaseEntity {
+public class UserVO {
+
+    private Integer id;
+
+    private String roleName;
 
     private String telephone;
+
     /**
      * 用户最后登录时间
      */
     private Date loginLastTime;
+
     private String userAvatar;
-    /**
-     * 昵称
-     */
+
     private String userNickname;
-    /**
-     * email
-     */
+
     private String userEmail;
+
     private String userRealName;
-    /**
-     * 用户名
-     */
+
     private String userName;
-    /**
-     * 密码
-     */
+
     private String userPwd;
-    private String qqNo;
-    private String wxNo;
 
-    private List<Role> roles;
+    /**
+     * 新密码，用于更新密码
+     */
+    private String newPass;
 
-    public String getName() {
-        return userName;
+    public Integer getId() {
+        return id;
     }
 
-    public String getPassword() {
-        return userPwd;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getTelephone() {
@@ -108,27 +112,11 @@ public class User extends BaseEntity {
         this.userPwd = userPwd;
     }
 
-    public String getQqNo() {
-        return qqNo;
+    public String getNewPass() {
+        return newPass;
     }
 
-    public void setQqNo(String qqNo) {
-        this.qqNo = qqNo;
-    }
-
-    public String getWxNo() {
-        return wxNo;
-    }
-
-    public void setWxNo(String wxNo) {
-        this.wxNo = wxNo;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
     }
 }

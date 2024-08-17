@@ -1,11 +1,11 @@
-package com.mrqinzh.common.vo.comment;
+package com.mrqinzh.common.domain.vo.comment;
 
-import com.mrqinzh.common.vo.PageVO;
+import com.mrqinzh.common.domain.dto.PageDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class CommentPageVo extends PageVO {
+public class CommentPageDTO extends PageDTO {
 
     private String nickname;
 

@@ -1,9 +1,9 @@
 package com.mrqinzh.webapp.service.impl;
 
-import com.mrqinzh.common.entity.Comment;
+import com.mrqinzh.common.domain.entity.Comment;
 import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.vo.comment.CommentPageVo;
-import com.mrqinzh.common.vo.comment.CommentVo;
+import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.common.domain.vo.comment.CommentVo;
 import com.mrqinzh.webapp.client.CommentClient;
 import com.mrqinzh.webapp.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentClient commentClient;
 
     @Override
-    public List<Comment> list(CommentPageVo commentPageVo) {
+    public List<Comment> list(CommentPageDTO commentPageVo) {
         return commentClient.list(commentPageVo);
     }
 

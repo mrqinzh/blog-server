@@ -1,9 +1,9 @@
 package com.mrqinzh.webapp.service.impl;
 
-import com.mrqinzh.common.entity.Article;
-import com.mrqinzh.common.resp.PageResp;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.article.ArticleVo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.common.domain.entity.Article;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.article.ArticleVo;
 import com.mrqinzh.webapp.client.ArticleClient;
 import com.mrqinzh.webapp.service.ArticleService;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public PageResp<Article> list(PageVO pageVO) {
-        return articleClient.list(pageVO);
+    public Page<Article> list(PageDTO pageDTO) {
+        return articleClient.list(pageDTO);
     }
 
     @Override

@@ -1,19 +1,19 @@
 package com.mrqinzh.article.rpc.provider;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.apis.article.ArticleService;
 import com.mrqinzh.apis.comment.CommentService;
-import com.mrqinzh.common.entity.Article;
-import com.mrqinzh.common.entity.Tag;
-import com.mrqinzh.common.entity.User;
+import com.mrqinzh.common.domain.entity.Article;
+import com.mrqinzh.common.domain.entity.Tag;
+import com.mrqinzh.common.domain.entity.User;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.PageResp;
 import com.mrqinzh.common.utils.BizAssert;
 import com.mrqinzh.common.utils.DateUtil;
 import com.mrqinzh.common.utils.MyUtil;
-import com.mrqinzh.common.vo.PageVO;
-import com.mrqinzh.common.vo.article.ArticleVo;
+import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.vo.article.ArticleVo;
 import com.mrqinzh.framework.utils.RedisUtil;
 import com.mrqinzh.article.mapper.ArticleMapper;
 import com.mrqinzh.article.mapper.TagMapper;
@@ -55,9 +55,10 @@ public class ArticleServiceProvider implements ArticleService {
     }
 
     @Override
-    public PageResp<Article> list(PageVO pageVO) {
-        List<Article> articles = articleMapper.list(pageVO);
-        return PageResp.ok(articles);
+    public Page<Article> list(PageDTO pageDTO) {
+        Page<Article> page = new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize());
+        articleMapper.selectPage(page, null);
+        return page;
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ArticleServiceProvider implements ArticleService {
         if (article == null) {
             return;
         }
-        article.setArticleViews(article.getArticleViews() + 1);
+        article.setViews(article.getViews() + 1);
         articleMapper.updateById(article);
     }
 
@@ -90,16 +91,16 @@ public class ArticleServiceProvider implements ArticleService {
         BeanUtils.copyProperties(articleVo, article);
 
         // 设置文章作者，优先为realName
-        article.setArticleAuthor(StringUtils.isNotBlank(user.getUserRealName()) ? user.getUserRealName() : user.getUserNickname());
+        article.setAuthor(StringUtils.isNotBlank(user.getRealName()) ? user.getRealName() : user.getNickname());
 
         // 如果添加文章时，没有上传文章的封面图，系统将从选择的标签中，随机选择一个标签所对应的图片为其设置为封面。
-        if (StringUtils.isBlank(article.getArticleCoverImg())) {
-            article.setArticleCoverImg(getArticleCoverImgByTag(article.getArticleTag()));
+        if (StringUtils.isBlank(article.getCoverImg())) {
+            article.setCoverImg(getArticleCoverImgByTag(article.getTag()));
         }
 
         Date now = new Date();
         // 初始化文章的固定信息
-        article.setArticleViews(0);
+        article.setViews(0);
         article.setUserId(user.getId());
 
         articleMapper.insert(article);
@@ -120,15 +121,15 @@ public class ArticleServiceProvider implements ArticleService {
             throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "当前文章错误。");
         }
 
-        origin.setArticleTitle(articleVo.getArticleTitle());
+        origin.setTitle(articleVo.getArticleTitle());
         // 获取文章摘要，截取内容的前100
-        origin.setArticleSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
-        origin.setArticleCoverImg(articleVo.getArticleCoverImg());
-        origin.setArticleContentMd(articleVo.getArticleContentMd());
-        origin.setArticleTag(articleVo.getArticleTag());
-        origin.setArticleType(articleVo.getArticleType());
+        origin.setSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
+        origin.setCoverImg(articleVo.getArticleCoverImg());
+        origin.setContentMd(articleVo.getArticleContentMd());
+        origin.setTag(articleVo.getArticleTag());
+        origin.setType(articleVo.getArticleType());
         // 设置更新时间
-        origin.setArticleUpdateTime(new Date());
+        origin.setUpdateTime(new Date());
         articleMapper.updateById(origin);
     }
 
@@ -150,10 +151,10 @@ public class ArticleServiceProvider implements ArticleService {
             int i = MyUtil.randomInt(tags.length);
             String currTag = tags[i];
             QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(Tag::getTagName, currTag);
+            queryWrapper.lambda().eq(Tag::getName, currTag);
             List<Tag> tagList = tagMapper.selectList(queryWrapper);
-            if (!CollectionUtils.isEmpty(tagList) && StringUtils.isNotBlank(tagList.get(0).getTagImg())) {
-                return tagList.get(0).getTagImg();
+            if (!CollectionUtils.isEmpty(tagList) && StringUtils.isNotBlank(tagList.get(0).getCoverImg())) {
+                return tagList.get(0).getCoverImg();
             }
             if (threshold++ > 4) {
                 throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "对不起，系统里好像没有选择标签的相关图片，请重新选择标签，或者上传自己的封面图！！！");
