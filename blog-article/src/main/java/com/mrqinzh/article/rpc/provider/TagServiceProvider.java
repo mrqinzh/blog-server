@@ -1,7 +1,6 @@
 package com.mrqinzh.article.rpc.provider;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.apis.tag.TagService;
 import com.mrqinzh.common.entity.Tag;
 import com.mrqinzh.common.enums.AppStatus;
@@ -24,7 +23,6 @@ public class TagServiceProvider implements TagService {
 
     @Override
     public Resp page(PageVO pageVO) {
-        PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
         List<Tag> tags = tagMapper.page(pageVO);
 
         return PageResp.ok(tags);

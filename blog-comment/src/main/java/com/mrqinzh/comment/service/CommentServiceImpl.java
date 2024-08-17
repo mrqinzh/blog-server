@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.comment.mapper.CommentMapper;
 import com.mrqinzh.comment.rpc.CommentServiceProvider;
 import com.mrqinzh.common.entity.Comment;
@@ -35,7 +34,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> list(CommentPageVo commentPageVo) {
-        PageHelper.startPage(commentPageVo.getCurrentPage(), commentPageVo.getPageSize(), commentPageVo.getOrderBy());
         return commentMapper.list(commentPageVo);
     }
 
@@ -67,7 +65,7 @@ public class CommentServiceImpl implements CommentService {
         Date now = new Date();
         comment.setAvatar(avatar);
         comment.setIp(ip);
-        comment.setCommentTime(now);
+        comment.setCreateTime(now);
 
         commentMapper.insert(comment);
 

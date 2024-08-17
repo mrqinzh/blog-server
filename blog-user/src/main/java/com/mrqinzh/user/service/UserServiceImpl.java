@@ -1,6 +1,5 @@
 package com.mrqinzh.user.service;
 
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.common.entity.User;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
@@ -90,7 +89,6 @@ public class UserServiceImpl implements UserService {
         if (pageVO == null) {
             return new Resp();
         }
-        PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
         List<User> users = userMapper.list();
         return PageResp.ok(users);
     }

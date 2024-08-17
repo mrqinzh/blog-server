@@ -1,7 +1,6 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.common.entity.Role;
 import com.mrqinzh.common.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
@@ -29,7 +28,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> findPage(PageVO pageVO) {
-        PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
         List<Role> roles = roleMapper.selectList(new QueryWrapper<Role>().lambda().eq(Role::getStatus, 0));
         return roles;
     }

@@ -1,7 +1,6 @@
 package com.mrqinzh.article.rpc.provider;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.apis.article.ArticleService;
 import com.mrqinzh.apis.comment.CommentService;
 import com.mrqinzh.common.entity.Article;
@@ -57,7 +56,6 @@ public class ArticleServiceProvider implements ArticleService {
 
     @Override
     public PageResp<Article> list(PageVO pageVO) {
-        PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
         List<Article> articles = articleMapper.list(pageVO);
         return PageResp.ok(articles);
     }

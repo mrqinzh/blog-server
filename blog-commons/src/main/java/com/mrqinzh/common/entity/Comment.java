@@ -1,5 +1,6 @@
 package com.mrqinzh.common.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;
@@ -11,9 +12,9 @@ public class Comment extends BaseEntity {
 
     private String nickname;
 
-    private String commentContent;
+    private String content;
 
-    private Date commentTime;
+    private Date createTime;
 
     private String ip;
 
@@ -26,10 +27,11 @@ public class Comment extends BaseEntity {
     private Integer status;
 
     private Integer articleId;
-    private Article article;
-
     private Integer parentId;
 
+    @TableField(exist = false)
+    private Article article;
+    @TableField(exist = false)
     private List<Comment> comments;
 
     public String getAvatar() {
@@ -46,22 +48,6 @@ public class Comment extends BaseEntity {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public String getCommentContent() {
-        return commentContent;
-    }
-
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
-    }
-
-    public Date getCommentTime() {
-        return commentTime;
-    }
-
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
     }
 
     public String getIp() {
@@ -118,5 +104,23 @@ public class Comment extends BaseEntity {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    @Override
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

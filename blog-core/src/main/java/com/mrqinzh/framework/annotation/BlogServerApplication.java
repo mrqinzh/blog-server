@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@MapperScan(basePackages = "com.mrqinzh.mapper")
+@MapperScan(basePackages = "com.mrqinzh.*.mapper")
 @SpringBootApplication(scanBasePackages = { "com.mrqinzh" })
 public @interface BlogServerApplication {
 

@@ -1,7 +1,6 @@
 package com.mrqinzh.webapp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.apis.menu.MenuService;
 import com.mrqinzh.common.entity.Menu;
 import com.mrqinzh.common.enums.AppStatus;
@@ -46,7 +45,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findPage(PageVO pageVO) {
-        PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getPageSize());
         List<Menu> menus = menuMapper.selectList(new QueryWrapper<Menu>().lambda().eq(Menu::getStatus, 0));
         return menus;
     }

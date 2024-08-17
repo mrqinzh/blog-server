@@ -1,60 +1,31 @@
 package com.mrqinzh.framework.mybatis;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.context.annotation.Primary;
 
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 @Configuration
 public class MybatisConfiguration {
 
-    // 实体主键字段
-    private final static String ID_FIELD = "id";
-
-
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
-//        bean.setTypeAliases(BlogTypeAlias.class);
+    @Primary
+    public MybatisPlusProperties mybatisPlusProperties() {
+        MybatisPlusProperties properties = new MybatisPlusProperties();
 
-        bean.setTypeAliasesPackage("com.mrqinzh.common.entity");
+        properties.setConfiguration(configuration());
 
-        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        bean.setMapperLocations(
-                Stream.of(
-                        "classpath:mapper/*.xml"
-                ).map(locationPattern -> {
-                    try {
-                        return resourcePatternResolver.getResources(locationPattern);
-                    } catch (IOException e) {
+        properties.setTypeAliasesPackage("com.mrqinzh.common.entity");
 
-                    }
-                    return null;
-                }).filter(Objects::nonNull).flatMap(Arrays::stream).toArray(Resource[]::new)
-        );
-        return bean.getObject();
+        return properties;
     }
 
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setAnnotationClass(Mapper.class);
-        mapperScannerConfigurer.setBasePackage("com.mrqinzh");
-        return mapperScannerConfigurer;
+    public com.baomidou.mybatisplus.core.MybatisConfiguration configuration() {
+        com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
+        configuration.setMapUnderscoreToCamelCase(false);
+        return configuration;
     }
-
 
 }

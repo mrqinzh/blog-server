@@ -1,6 +1,5 @@
 package com.mrqinzh.user.rpc.provider;
 
-import com.github.pagehelper.PageHelper;
 import com.mrqinzh.apis.menu.MenuService;
 import com.mrqinzh.apis.user.UserService;
 import com.mrqinzh.common.entity.User;
