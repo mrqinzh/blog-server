@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class ArticleVo {
 
     @ApiModelProperty(value = "文章id")
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty(value = "文章标题")
     @NotBlank
@@ -48,11 +48,11 @@ public class ArticleVo {
         this.articleType = article.getType();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

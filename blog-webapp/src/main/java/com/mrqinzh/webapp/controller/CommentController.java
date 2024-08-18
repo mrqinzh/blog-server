@@ -45,14 +45,14 @@ public class CommentController extends AbstractController {
      */
     @ApiOperation(value = "根据 userId、articleId 查询评论")
     @GetMapping("{idType}/{id}")
-    public Resp getById(@PathVariable String idType, @PathVariable Integer id) {
+    public Resp getById(@PathVariable String idType, @PathVariable Long id) {
         return commentService.getById(idType, id);
     }
 
     @ApiOperation(value = "根据(*id)删除评论")
     @DeleteMapping("{idType}/{id}")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
-    public Resp deleteById(@PathVariable String idType, @PathVariable Integer id) {
+    public Resp deleteById(@PathVariable String idType, @PathVariable Long id) {
         return commentService.deleteById(idType, id);
     }
 

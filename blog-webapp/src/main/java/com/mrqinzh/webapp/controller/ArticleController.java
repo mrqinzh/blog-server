@@ -30,7 +30,7 @@ public class ArticleController extends AbstractController {
 
     @ApiOperation(value = "根据 articleId 查询文章具体信息")
     @GetMapping("/{articleId}")
-    public Resp getById(@PathVariable("articleId") Integer articleId) {
+    public Resp getById(@PathVariable("articleId") Long articleId) {
         Article article = articleService.getDetail(articleId);
 
         CompletableFuture.runAsync(() -> {
@@ -73,7 +73,7 @@ public class ArticleController extends AbstractController {
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     @ApiOperation(value = "根据 id 删除文章")
     @DeleteMapping("/{articleId}")
-    public Resp delete(@PathVariable("articleId") Integer articleId){
+    public Resp delete(@PathVariable("articleId") Long articleId){
         articleService.delete(articleId);
         return Resp.sendMsg(AppStatus.DELETE_SUCCESS);
     }

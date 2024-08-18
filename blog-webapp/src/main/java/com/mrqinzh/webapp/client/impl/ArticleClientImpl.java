@@ -21,7 +21,7 @@ public class ArticleClientImpl implements ArticleClient {
     }
 
     @Override
-    public Article get(Integer id) {
+    public Article get(Long id) {
         return articleService.get(id);
     }
 
@@ -31,12 +31,12 @@ public class ArticleClientImpl implements ArticleClient {
     }
 
     @Override
-    public Article getDetail(Integer articleId) {
+    public Article getDetail(Long articleId) {
         return articleService.getDetail(articleId);
     }
 
     @Override
-    public void addView(Integer articleId) {
+    public void addView(Long articleId) {
         articleService.addView(articleId);
     }
 
@@ -51,7 +51,7 @@ public class ArticleClientImpl implements ArticleClient {
     }
 
     @Override
-    public void delete(Integer articleId) {
+    public void delete(Long articleId) {
         articleService.delete(articleId);
     }
 }

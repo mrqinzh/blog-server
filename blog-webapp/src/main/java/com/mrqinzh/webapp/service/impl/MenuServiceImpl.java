@@ -92,7 +92,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
 
-    public List<Menu> getChildren(Integer id, List<Menu> allMenu) {
+    public List<Menu> getChildren(Long id, List<Menu> allMenu) {
         List<Menu> childList = new ArrayList<>();
         for (Menu entry : allMenu) {
             if (entry.getParentId() == id) {

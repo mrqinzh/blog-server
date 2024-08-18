@@ -15,7 +15,7 @@ public interface CommentService {
 
     void add(CommentVo commentVo);
 
-    Resp getById(String idType, Integer id);
+    Resp getById(String idType, Long id);
 
     /**
      * 根据id 删除评论
@@ -23,7 +23,7 @@ public interface CommentService {
      * @param id id 值
      * @return
      */
-    Resp deleteById(String idType, Integer id);
+    Resp deleteById(String idType, Long id);
 
-    void deleteByTypeId(String articleOrCommentId, Integer id);
+    void deleteByTypeId(String articleOrCommentId, Long id);
 }

@@ -48,7 +48,7 @@ public class ArticleServiceProvider implements ArticleService {
     }
 
     @Override
-    public Article get(Integer id) {
+    public Article get(Long id) {
         return articleMapper.selectById(id);
     }
 
@@ -60,14 +60,14 @@ public class ArticleServiceProvider implements ArticleService {
     }
 
     @Override
-    public Article getDetail(Integer articleId) {
+    public Article getDetail(Long articleId) {
         Article article = articleMapper.getById(articleId);
         BizAssert.notNull(articleId, "文章查询失败，查询id为空");
         return article;
     }
 
     @Override
-    public void addView(Integer articleId) {
+    public void addView(Long articleId) {
         Article article = get(articleId);
         if (article == null) {
             return;
@@ -136,7 +136,7 @@ public class ArticleServiceProvider implements ArticleService {
      */
     @Override
     @Transactional
-    public void delete(Integer articleId) {
+    public void delete(Long articleId) {
         articleMapper.deleteStatus(articleId);
         commentService.deleteByTypeId("articleId", articleId);
     }

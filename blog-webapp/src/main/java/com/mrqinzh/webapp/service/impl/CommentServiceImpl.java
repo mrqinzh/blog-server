@@ -33,17 +33,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Resp getById(String idType, Integer id) {
+    public Resp getById(String idType, Long id) {
         return commentClient.getById(idType, id);
     }
 
     @Override
-    public Resp deleteById(String idType, Integer id) {
+    public Resp deleteById(String idType, Long id) {
         return commentClient.deleteById(idType, id);
     }
 
     @Override
-    public void deleteByTypeId(String articleOrCommentId, Integer id) {
+    public void deleteByTypeId(String articleOrCommentId, Long id) {
         commentClient.deleteByTypeId(articleOrCommentId, id);
     }
 }

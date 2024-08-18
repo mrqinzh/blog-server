@@ -9,7 +9,7 @@ import java.util.List;
 @TableName("sys_menu")
 public class Menu extends BaseEntity {
 
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 菜单名
@@ -47,11 +47,11 @@ public class Menu extends BaseEntity {
     @TableField(exist = false)
     private List<Menu> menuChildren;
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

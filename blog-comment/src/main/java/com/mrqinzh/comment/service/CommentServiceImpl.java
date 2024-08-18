@@ -68,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Resp getById(String idType, Integer id) {
+    public Resp getById(String idType, Long id) {
         List<Comment> comments = commentMapper.getById(idType, id);
         // 遍历comments，将子评论添加到对应的父评论下面
         comments.stream().forEach(comment -> {
@@ -87,13 +87,13 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     @Override
-    public Resp deleteById(String idType, Integer id) {
+    public Resp deleteById(String idType, Long id) {
         commentMapper.deleteByTypeId(idType, id);
         return Resp.sendMsg(AppStatus.DELETE_SUCCESS);
     }
 
     @Override
-    public void deleteByTypeId(String articleOrCommentId, Integer id) {
+    public void deleteByTypeId(String articleOrCommentId, Long id) {
         commentMapper.deleteByTypeId(articleOrCommentId, id);
     }
 }
