@@ -11,7 +11,7 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 17/08/2024 16:02:31
+ Date: 18/08/2024 18:32:22
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
-                           `id` int NOT NULL AUTO_INCREMENT,
+                           `id` bigint NOT NULL AUTO_INCREMENT,
                            `author` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '文章作者',
                            `title` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '文章标题',
                            `summary` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '文章摘要',
@@ -33,9 +33,9 @@ CREATE TABLE `article` (
                            `tag` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '文章标签',
                            `type` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '文章类型',
                            `views` int NOT NULL DEFAULT '0' COMMENT '文章访问量统计',
-                           `userId` int NOT NULL,
+                           `userId` bigint NOT NULL,
                            `status` int NOT NULL DEFAULT '0' COMMENT '逻辑删除',
-                           PRIMARY KEY (`id`) USING BTREE,
+                           PRIMARY KEY (`id`,`userId`) USING BTREE,
                            KEY `user_id` (`userId`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
@@ -102,19 +102,19 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
-                           `id` int NOT NULL AUTO_INCREMENT,
+                           `id` bigint NOT NULL AUTO_INCREMENT,
                            `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '头像',
                            `nickname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '昵称',
                            `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '评论内容',
                            `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '评论时间',
                            `status` int NOT NULL DEFAULT '0' COMMENT '逻辑删除',
-                           `articleId` int DEFAULT NULL COMMENT '文章id',
-                           `parentId` int NOT NULL DEFAULT '0' COMMENT '父评论id',
+                           `articleId` bigint DEFAULT NULL,
+                           `parentId` bigint NOT NULL DEFAULT '0' COMMENT '父评论id',
                            `ip` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'IP地址',
                            `type` int NOT NULL COMMENT '1：评论    2：留言',
                            `updateTime` datetime DEFAULT NULL COMMENT '修改时间',
-                           PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+                           PRIMARY KEY (`id`,`parentId`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -131,7 +131,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `file`;
 CREATE TABLE `file` (
-                        `id` int NOT NULL AUTO_INCREMENT,
+                        `id` bigint NOT NULL AUTO_INCREMENT,
                         `file_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '图片名称',
                         `file_path` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '图片路径',
                         `file_type` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '图片类型',
@@ -180,7 +180,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `SYS_CONFIG`;
 CREATE TABLE `SYS_CONFIG` (
-                              `id` int NOT NULL,
+                              `id` bigint NOT NULL,
                               `configKey` varchar(255) DEFAULT NULL,
                               `configValue` varchar(255) DEFAULT NULL,
                               `createTime` datetime DEFAULT NULL,
@@ -199,43 +199,43 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
-                            `id` int NOT NULL AUTO_INCREMENT,
-                            `parent_id` int NOT NULL DEFAULT '0',
-                            `menu_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '菜单名',
-                            `component_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组件名',
-                            `component_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组件位置',
+                            `id` bigint NOT NULL AUTO_INCREMENT,
+                            `parentId` bigint NOT NULL DEFAULT '0',
+                            `menuTitle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '菜单名',
+                            `componentName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组件名',
+                            `componentPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '组件位置',
                             `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
                             `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图标',
-                            `menu_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '菜单路径',
+                            `menuPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '菜单路径',
                             `cache` int NOT NULL DEFAULT '0' COMMENT '是否缓存 0：缓存 1：不缓存',
                             `hidden` int NOT NULL DEFAULT '1' COMMENT '是否隐藏 0：隐藏 1：不隐藏',
-                            `menu_sort` int DEFAULT NULL,
+                            `menuSort` int DEFAULT NULL,
                             `type` int DEFAULT NULL,
                             `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-                            `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                            `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                            `updateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                             `status` int NOT NULL DEFAULT '0' COMMENT '0：未删 1：已删',
-                            PRIMARY KEY (`id`) USING BTREE
+                            PRIMARY KEY (`id`,`parentId`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (3, 0, '权限管理', 'Authority', 'Layout', 'noRedirect', 'el-icon-medal', '/admin/authority', 1, 1, 1, NULL, NULL, '2021-10-26 15:26:23', '2021-10-29 11:20:31', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (4, 3, '菜单管理', 'Menu', 'authority/menu/', NULL, 'el-icon-s-operation', '/admin/authority/menu', 1, 1, 3, NULL, NULL, '2021-10-26 14:58:28', '2021-10-29 13:30:38', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (5, 3, '角色管理', 'Role', 'authority/role/', NULL, 'el-icon-user-solid', '/admin/authority/role', 1, 1, 2, NULL, NULL, '2021-10-26 14:58:29', '2021-10-29 13:30:47', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (8, 0, '系统管理', 'System', 'Layout', NULL, 'el-icon-data-board', '/admin/system', 1, 1, 2, NULL, NULL, '2021-10-29 11:09:27', '2021-10-29 11:09:27', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (9, 3, '用户管理', 'User', 'system/user/User', NULL, 'el-icon-s-custom', '/admin/authority/user', 0, 1, 1, NULL, NULL, '2021-10-29 11:15:52', '2021-10-29 11:17:15', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (10, 8, '评论管理', 'Comment', 'system/comment/Comment', NULL, 'el-icon-chat-line-round', '/admin/system/comment', 1, 1, 2, NULL, NULL, '2021-10-29 11:24:08', '2021-10-29 14:05:37', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (11, 8, '文章管理', 'Article', 'system/article/index', NULL, 'el-icon-reading', '/admin/system/article', 1, 1, 1, NULL, NULL, '2021-10-29 13:38:37', '2021-10-29 13:38:37', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (12, 11, '文章列表', 'ArticleList', 'system/article/Article', NULL, 'el-icon-menu', '/admin/system/article/list', 1, 1, 1, NULL, NULL, '2021-10-29 13:40:33', '2021-10-29 15:41:36', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (13, 8, '标签管理', 'Tag', 'system/tag/index', NULL, 'el-icon-collection-tag', '/admin/system/tag', 0, 1, 3, NULL, NULL, '2021-10-29 14:05:21', '2021-10-29 14:05:21', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (14, 11, '写文章', 'ArticleAdd', 'system/article/add_copy', NULL, 'el-icon-edit', '/admin/system/article/add', 0, 1, 2, NULL, NULL, '2021-10-29 15:42:52', '2021-10-29 15:44:21', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (15, 0, '图标库', 'Icons', 'Layout', '', 'el-icon-star-on', '/icon/index', 0, 1, 3, NULL, NULL, '2021-10-29 16:32:45', '2021-10-29 16:32:45', 1);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (17, 0, '邮件', 'Email', 'Layout', NULL, 'el-icon-s-promotion', '/email/index', 0, 1, 4, NULL, NULL, '2021-10-29 16:32:46', '2021-10-29 16:32:46', 1);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (18, 0, '个人中心', 'Account', 'Layout', NULL, 'el-icon-s-custom', '/account', 0, 0, 5, NULL, NULL, '2021-11-03 15:26:59', '2021-11-03 15:31:24', 0);
-INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_title`, `component_name`, `component_path`, `redirect`, `icon`, `menu_path`, `cache`, `hidden`, `menu_sort`, `type`, `permission`, `create_time`, `update_time`, `status`) VALUES (19, 18, '个人页', 'Center', 'account/center/', NULL, 'el-icon-s-custom', '/account/center', 0, 1, 5, NULL, NULL, '2021-11-03 15:28:16', '2021-11-03 15:28:16', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (3, 0, '权限管理', 'Authority', 'Layout', 'noRedirect', 'el-icon-medal', '/admin/authority', 1, 1, 1, NULL, NULL, '2021-10-26 15:26:23', '2021-10-29 11:20:31', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (4, 3, '菜单管理', 'Menu', 'authority/menu/', NULL, 'el-icon-s-operation', '/admin/authority/menu', 1, 1, 3, NULL, NULL, '2021-10-26 14:58:28', '2021-10-29 13:30:38', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (5, 3, '角色管理', 'Role', 'authority/role/', NULL, 'el-icon-user-solid', '/admin/authority/role', 1, 1, 2, NULL, NULL, '2021-10-26 14:58:29', '2021-10-29 13:30:47', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (8, 0, '系统管理', 'System', 'Layout', NULL, 'el-icon-data-board', '/admin/system', 1, 1, 2, NULL, NULL, '2021-10-29 11:09:27', '2021-10-29 11:09:27', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (9, 3, '用户管理', 'User', 'system/user/User', NULL, 'el-icon-s-custom', '/admin/authority/user', 0, 1, 1, NULL, NULL, '2021-10-29 11:15:52', '2021-10-29 11:17:15', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (10, 8, '评论管理', 'Comment', 'system/comment/Comment', NULL, 'el-icon-chat-line-round', '/admin/system/comment', 1, 1, 2, NULL, NULL, '2021-10-29 11:24:08', '2021-10-29 14:05:37', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (11, 8, '文章管理', 'Article', 'system/article/index', NULL, 'el-icon-reading', '/admin/system/article', 1, 1, 1, NULL, NULL, '2021-10-29 13:38:37', '2021-10-29 13:38:37', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (12, 11, '文章列表', 'ArticleList', 'system/article/Article', NULL, 'el-icon-menu', '/admin/system/article/list', 1, 1, 1, NULL, NULL, '2021-10-29 13:40:33', '2021-10-29 15:41:36', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (13, 8, '标签管理', 'Tag', 'system/tag/index', NULL, 'el-icon-collection-tag', '/admin/system/tag', 0, 1, 3, NULL, NULL, '2021-10-29 14:05:21', '2021-10-29 14:05:21', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (14, 11, '写文章', 'ArticleAdd', 'system/article/add_copy', NULL, 'el-icon-edit', '/admin/system/article/add', 0, 1, 2, NULL, NULL, '2021-10-29 15:42:52', '2021-10-29 15:44:21', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (15, 0, '图标库', 'Icons', 'Layout', '', 'el-icon-star-on', '/icon/index', 0, 1, 3, NULL, NULL, '2021-10-29 16:32:45', '2021-10-29 16:32:45', 1);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (17, 0, '邮件', 'Email', 'Layout', NULL, 'el-icon-s-promotion', '/email/index', 0, 1, 4, NULL, NULL, '2021-10-29 16:32:46', '2021-10-29 16:32:46', 1);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (18, 0, '个人中心', 'Account', 'Layout', NULL, 'el-icon-s-custom', '/account', 0, 0, 5, NULL, NULL, '2021-11-03 15:26:59', '2021-11-03 15:31:24', 0);
+INSERT INTO `sys_menu` (`id`, `parentId`, `menuTitle`, `componentName`, `componentPath`, `redirect`, `icon`, `menuPath`, `cache`, `hidden`, `menuSort`, `type`, `permission`, `createTime`, `updateTime`, `status`) VALUES (19, 18, '个人页', 'Center', 'account/center/', NULL, 'el-icon-s-custom', '/account/center', 0, 1, 5, NULL, NULL, '2021-11-03 15:28:16', '2021-11-03 15:28:16', 0);
 COMMIT;
 
 -- ----------------------------
@@ -243,7 +243,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
-                            `id` int NOT NULL AUTO_INCREMENT,
+                            `id` bigint NOT NULL AUTO_INCREMENT,
                             `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '角色名称',
                             `create_time` datetime DEFAULT NULL,
                             `update_time` datetime DEFAULT NULL,
@@ -265,13 +265,13 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu` (
-                                 `id` int NOT NULL AUTO_INCREMENT,
-                                 `role_id` int DEFAULT NULL COMMENT '角色id',
-                                 `menu_id` int DEFAULT NULL COMMENT '菜单id',
-                                 `create_time` datetime DEFAULT NULL,
-                                 `update_time` datetime DEFAULT NULL,
+                                 `id` bigint NOT NULL AUTO_INCREMENT,
+                                 `roleId` bigint NOT NULL COMMENT '角色id',
+                                 `menuId` bigint NOT NULL COMMENT '菜单id',
+                                 `createTime` datetime DEFAULT NULL,
+                                 `updateTime` datetime DEFAULT NULL,
                                  `status` int NOT NULL DEFAULT '0',
-                                 PRIMARY KEY (`id`) USING BTREE
+                                 PRIMARY KEY (`id`,`roleId`,`menuId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -285,13 +285,13 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
-                                 `id` int NOT NULL AUTO_INCREMENT,
-                                 `user_id` int DEFAULT NULL COMMENT '用户id',
-                                 `role_id` int DEFAULT NULL COMMENT '角色id',
-                                 `create_time` datetime DEFAULT NULL,
-                                 `update_time` datetime DEFAULT NULL,
+                                 `id` bigint NOT NULL AUTO_INCREMENT,
+                                 `userId` bigint NOT NULL COMMENT '用户id',
+                                 `roleId` bigint NOT NULL COMMENT '角色id',
+                                 `createTime` datetime DEFAULT NULL,
+                                 `updateTime` datetime DEFAULT NULL,
                                  `status` int NOT NULL DEFAULT '0' COMMENT '逻辑删除',
-                                 PRIMARY KEY (`id`) USING BTREE
+                                 PRIMARY KEY (`id`,`userId`,`roleId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -305,19 +305,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_login_log`;
 CREATE TABLE `t_login_log` (
-                               `id` int NOT NULL AUTO_INCREMENT,
-                               `user_id` int DEFAULT NULL,
+                               `id` bigint NOT NULL AUTO_INCREMENT,
+                               `userId` bigint NOT NULL,
                                `token` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '',
                                `ip` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-                               `login_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-                               PRIMARY KEY (`id`) USING BTREE
+                               `createTime` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+                               `updateTime` datetime DEFAULT NULL,
+                               PRIMARY KEY (`id`,`userId`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of t_login_log
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_login_log` (`id`, `user_id`, `token`, `ip`, `login_time`) VALUES (1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEiLCJpc3MiOiJhdXRoMCIsImF2YXRhciI6Imh0dHA6Ly9tcnFpbnpoLmluZm86OTA5MC9pbWcvYXZhdGFyLmpwZyIsImV4cCI6MTYyOTcwNTQ2MCwidXNlcm5hbWUiOiJhZG1pbiJ9.6YbDjXX8hxWGJk2xZ-v8sCBGYUr7BLmsN6zduMk2Iyg', '127.0.0.1', '2021-08-23 14:57:41');
+INSERT INTO `t_login_log` (`id`, `userId`, `token`, `ip`, `createTime`, `updateTime`) VALUES (1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6IjEiLCJpc3MiOiJhdXRoMCIsImF2YXRhciI6Imh0dHA6Ly9tcnFpbnpoLmluZm86OTA5MC9pbWcvYXZhdGFyLmpwZyIsImV4cCI6MTYyOTcwNTQ2MCwidXNlcm5hbWUiOiJhZG1pbiJ9.6YbDjXX8hxWGJk2xZ-v8sCBGYUr7BLmsN6zduMk2Iyg', '127.0.0.1', '2021-08-23 14:57:41', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -325,14 +326,15 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_message`;
 CREATE TABLE `t_message` (
-                             `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
                              `avatar` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '头像',
                              `nickname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '昵称',
                              `content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '留言内容',
                              `time` tinyint(1) DEFAULT NULL COMMENT '弹幕速度',
-                             `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+                             `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
                              `ip` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '远程ip',
                              `status` int NOT NULL DEFAULT '0' COMMENT '0: 正常    1: 删除',
+                             `updateTime` datetime DEFAULT NULL,
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
@@ -340,9 +342,9 @@ CREATE TABLE `t_message` (
 -- Records of t_message
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `create_time`, `ip`, `status`) VALUES (10, 'http://mrqinzh.info:9090/img/avatar.jpg', 'mrqinzh', '留言功能上线', 10, '2021-09-17 11:03:29', '202.98.63.138', 0);
-INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `create_time`, `ip`, `status`) VALUES (11, 'http://mrqinzh.info:9090/img/random-avatars/avatar7.png', '陈博', '牛牛牛', 9, '2021-09-17 12:11:50', '202.98.63.138', 0);
-INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `create_time`, `ip`, `status`) VALUES (12, 'http://mrqinzh.info:9090/img/random-avatars/avatar10.png', '世界无敌美少女', '秦志宏是猪猪', 8, '2021-09-19 18:43:53', '183.226.63.12', 0);
+INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `createTime`, `ip`, `status`, `updateTime`) VALUES (10, 'http://mrqinzh.info:9090/img/avatar.jpg', 'mrqinzh', '留言功能上线', 10, '2021-09-17 11:03:29', '202.98.63.138', 0, NULL);
+INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `createTime`, `ip`, `status`, `updateTime`) VALUES (11, 'http://mrqinzh.info:9090/img/random-avatars/avatar7.png', '陈博', '牛牛牛', 9, '2021-09-17 12:11:50', '202.98.63.138', 0, NULL);
+INSERT INTO `t_message` (`id`, `avatar`, `nickname`, `content`, `time`, `createTime`, `ip`, `status`, `updateTime`) VALUES (12, 'http://mrqinzh.info:9090/img/random-avatars/avatar10.png', '世界无敌美少女', '秦志宏是猪猪', 8, '2021-09-19 18:43:53', '183.226.63.12', 0, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -350,7 +352,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
-                       `id` int NOT NULL AUTO_INCREMENT,
+                       `id` bigint NOT NULL AUTO_INCREMENT,
                        `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签名称',
                        `coverImg` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签图片',
                        `createTime` datetime DEFAULT NULL,
@@ -390,7 +392,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-                        `id` int NOT NULL AUTO_INCREMENT,
+                        `id` bigint NOT NULL AUTO_INCREMENT,
                         `roleName` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
                         `mobile` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '电话号码',
                         `loginLastTime` datetime DEFAULT NULL COMMENT '最后登录时间',
