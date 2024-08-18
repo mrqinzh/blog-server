@@ -14,6 +14,6 @@ public class CommentReplyListener implements RocketMQListener<CommentVo> {
     @Override
     public void onMessage(CommentVo message) {
 //        logger.info("this is CommentReplyListener ...");
-        Integer articleId = message.getArticleId();
+        Long articleId = message.getArticleId();
     }
 }

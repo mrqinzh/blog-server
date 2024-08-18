@@ -26,8 +26,8 @@ public class Comment extends BaseEntity {
 
     private Integer status;
 
-    private Integer articleId;
-    private Integer parentId;
+    private Long articleId;
+    private Long parentId;
 
     @TableField(exist = false)
     private Article article;
@@ -74,11 +74,11 @@ public class Comment extends BaseEntity {
         this.status = status;
     }
 
-    public Integer getArticleId() {
+    public Long getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(Long articleId) {
         this.articleId = articleId;
     }
 
@@ -90,11 +90,11 @@ public class Comment extends BaseEntity {
         this.article = article;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

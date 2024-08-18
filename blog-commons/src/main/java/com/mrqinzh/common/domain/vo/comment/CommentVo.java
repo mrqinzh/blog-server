@@ -22,8 +22,8 @@ public class CommentVo implements BaseVO {
     @NotNull
     private Integer type;
 
-    private Integer parentId;
-    private Integer articleId;
+    private Long parentId;
+    private Long articleId;
     private String commentIp;
 
     public String getNickname() {
@@ -50,19 +50,19 @@ public class CommentVo implements BaseVO {
         this.type = type;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
-    public Integer getArticleId() {
+    public Long getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(Long articleId) {
         this.articleId = articleId;
     }
 

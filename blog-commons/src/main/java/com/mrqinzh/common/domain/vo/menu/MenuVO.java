@@ -6,10 +6,10 @@ import javax.validation.constraints.NotBlank;
 
 public class MenuVO {
 
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty(value = "父菜单id")
-    private Integer parentId;
+    private Long parentId;
 
     @ApiModelProperty(value = "图标")
     private String icon;
@@ -38,19 +38,19 @@ public class MenuVO {
     @ApiModelProperty(value = "是否隐藏，默认1，不隐藏")
     private Integer hidden;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
