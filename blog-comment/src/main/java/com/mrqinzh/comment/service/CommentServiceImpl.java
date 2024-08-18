@@ -10,7 +10,6 @@ import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.utils.MyUtil;
 import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
 import com.mrqinzh.common.domain.vo.comment.CommentVo;
-import com.mrqinzh.framework.utils.ServletUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +28,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Resource
     private CommentMapper commentMapper;
-//    @Autowired
-//    private GlobalMessageProducer producer;
 
     @Override
     public List<Comment> list(CommentPageDTO commentPageVo) {
@@ -52,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentVo, comment);
 
-        String ip = ServletUtil.getClientIp(ServletUtil.getRequest());
+        String ip = commentVo.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论
         List<Comment> commentsByIp = commentMapper.getByIpOrNickname(ip, commentVo.getNickname());
         String avatar;
@@ -68,13 +65,6 @@ public class CommentServiceImpl implements CommentService {
         comment.setCreateTime(now);
 
         commentMapper.insert(comment);
-
-        // Todo 通过webSocket向super-admin发送信息通知
-        String message = "ip为" + ip + "的用户，留下了他的足迹。";
-//        WebSocketBean webSocketBean = new WebSocketBean();
-//        webSocketBean.setJsonMsg(false);
-//        webSocketBean.setMsgContent(message);
-//        producer.send(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, 1));
     }
 
     @Override

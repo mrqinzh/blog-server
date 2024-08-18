@@ -42,7 +42,8 @@ public class DefaultLoginHandler implements LoginSuccessHandler, LoginFailureHan
     }
 
     @Override
-    public void logout(HttpServletRequest request, HttpServletResponse response, AuthenticatedToken token) {
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        AuthenticatedToken token = sessionManager.getToken(request);
         sessionManager.expire(token);
         AuthenticationContextHolder.clearContext();
         writeLogoutResponse(request, response, token);

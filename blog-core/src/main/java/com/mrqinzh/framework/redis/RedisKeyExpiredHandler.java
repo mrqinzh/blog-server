@@ -2,7 +2,7 @@ package com.mrqinzh.framework.redis;
 
 public interface RedisKeyExpiredHandler {
 
-    void handle(String value) throws Exception;
+    void onExpired(String value);
 
     boolean support(String value);
 

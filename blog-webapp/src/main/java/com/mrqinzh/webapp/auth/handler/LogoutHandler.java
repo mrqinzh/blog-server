@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 public interface LogoutHandler {
 
-    void logout(HttpServletRequest request, HttpServletResponse response, AuthenticatedToken token);
+    void logout(HttpServletRequest request, HttpServletResponse response);
 
     default void writeLogoutResponse(HttpServletRequest request, HttpServletResponse response, AuthenticatedToken token) {
         response.setContentType("application/json;charset=UTF-8");

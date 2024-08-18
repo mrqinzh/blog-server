@@ -6,6 +6,7 @@ import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
 import com.mrqinzh.common.domain.vo.comment.CommentVo;
+import com.mrqinzh.webapp.auth.util.WebUtils;
 import com.mrqinzh.webapp.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +19,7 @@ import java.util.List;
 @Api(tags = "评论接口")
 @RestController
 @RequestMapping("comment")
-public class CommentController {
+public class CommentController extends AbstractController {
 
     @Resource
     private CommentService commentService;
@@ -33,6 +34,7 @@ public class CommentController {
     @ApiOperation(value = "添加一条评论/留言，任何人均可添加")
     @PostMapping("add")
     public Resp add(@RequestBody @Valid CommentVo commentVo) {
+        commentVo.setCommentIp(getClientIp());
         commentService.add(commentVo);
         return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
     }

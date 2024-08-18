@@ -2,13 +2,7 @@ package com.mrqinzh.webapp.auth.filter;
 
 
 import com.mrqinzh.webapp.auth.handler.LogoutHandler;
-import com.mrqinzh.webapp.auth.redirect.RedirectStrategy;
 import com.mrqinzh.webapp.auth.core.SecurityProperties;
-import com.mrqinzh.webapp.auth.context.AuthenticationContextHolder;
-import com.mrqinzh.webapp.auth.context.AuthenticationContextUtils;
-import com.mrqinzh.webapp.auth.session.SessionManager;
-import com.mrqinzh.webapp.auth.token.AuthenticatedToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,7 +27,7 @@ public class LogoutFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        logoutHandler.logout(request, response, AuthenticationContextUtils.getAuthenticatedToken());
+        logoutHandler.logout(request, response);
 
     }
 

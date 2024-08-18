@@ -1,6 +1,8 @@
-package com.mrqinzh.framework.redis;
+package com.mrqinzh.webapp.auth.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mrqinzh.framework.cache.AuthenticationCache;
+import com.mrqinzh.framework.redis.RedisKeyExpiredHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +17,8 @@ public class TokenExpireHandler implements RedisKeyExpiredHandler {
 //    private SecurityService securityService;
 
     @Override
-    public void handle(String value) throws Exception {
-        // todo 后续将token转为jwt方式保存
+    public void onExpired(String value) {
+        System.out.println(value);
 //        String username = value.substring(SecurityProperties.TOKEN_CACHE_PREFIX.length() +
 //                UUID.randomUUID().toString().replaceAll("-", "").length());
 //        SecurityUser user = securityService.loadSecurityUserFromDb(username);
@@ -29,8 +31,7 @@ public class TokenExpireHandler implements RedisKeyExpiredHandler {
 
     @Override
     public boolean support(String value) {
-//        return value.startsWith(SecurityProperties.TOKEN_CACHE_PREFIX);
-        return false;
+        return value.startsWith(AuthenticationCache.PREFIX);
     }
 
 }

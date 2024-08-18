@@ -4,6 +4,7 @@ import com.mrqinzh.webapp.auth.context.AuthenticationContextHolder;
 import com.mrqinzh.webapp.auth.core.SecurityUser;
 import com.mrqinzh.framework.cache.AuthenticationCache;
 import com.mrqinzh.webapp.auth.core.Token;
+import com.mrqinzh.webapp.auth.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -34,6 +35,10 @@ public abstract class AbstractController {
     protected SecurityUser getCurrentUser() {
         Token token = AuthenticationContextHolder.getContext().getToken();
         return Optional.ofNullable(token).map(t -> (SecurityUser) t.getPrincipal()).orElse(null);
+    }
+
+    protected String getClientIp() {
+        return WebUtils.getClientIp(getRequest());
     }
 
 }

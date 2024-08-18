@@ -45,7 +45,7 @@ public class ArticleController extends AbstractController {
 //        if (user != null) {
 //            String message = user.getName() + "刚刚浏览了文章列表，请注意查收。";
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);
-//            producer.send(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
+//            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
         Page<Article> page = articleService.list(pageDTO);
         return DataResp.ok(PageVO.convert(page, ArticleVo::new));

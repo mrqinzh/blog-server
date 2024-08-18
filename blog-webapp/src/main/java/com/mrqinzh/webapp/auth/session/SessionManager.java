@@ -30,7 +30,11 @@ public class SessionManager {
         Cookie cookie = new Cookie(SecurityProperties.COOKIE_NAME, token.getTokenId());
         response.addCookie(cookie);
 
-        cache.put(tokenId, token, SecurityProperties.DEFAULT_EXPIRE_TIME_SECONDS);
+        cache.put(tokenId, token, 60);
+    }
+
+    public AuthenticatedToken getToken(HttpServletRequest request) {
+        return (AuthenticatedToken) cache.get(getTokenId(request));
     }
 
     public AuthenticatedToken getToken(String sessionId) {

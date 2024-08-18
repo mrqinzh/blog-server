@@ -1,5 +1,6 @@
 package com.mrqinzh.common.domain.vo.comment;
 
+import com.mrqinzh.common.domain.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -7,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @ApiModel(description = "添加评论请求实体")
-public class CommentVo {
+public class CommentVo implements BaseVO {
 
     @ApiModelProperty(value = "昵称")
     @NotBlank
@@ -23,6 +24,7 @@ public class CommentVo {
 
     private Integer parentId;
     private Integer articleId;
+    private String commentIp;
 
     public String getNickname() {
         return nickname;
@@ -62,5 +64,13 @@ public class CommentVo {
 
     public void setArticleId(Integer articleId) {
         this.articleId = articleId;
+    }
+
+    public String getCommentIp() {
+        return commentIp;
+    }
+
+    public void setCommentIp(String commentIp) {
+        this.commentIp = commentIp;
     }
 }
