@@ -1,15 +1,16 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.apis.menu.MenuService;
 import com.mrqinzh.common.domain.entity.Menu;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.common.domain.vo.menu.MenuVO;
+import com.mrqinzh.webapp.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("menu")
 public class MenuController {
 
-//    @Autowired
+    @Resource
     private MenuService menuService;
 
     @ApiOperation(value = "获取所有菜单信息")

@@ -2,7 +2,7 @@ package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.tag.TagService;
 import com.mrqinzh.common.domain.entity.Tag;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.dto.PageDTO;

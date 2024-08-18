@@ -1,7 +1,7 @@
 package com.mrqinzh.common.exp;
 
 import cn.hutool.core.util.StrUtil;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.Resp;
 import org.slf4j.Logger;

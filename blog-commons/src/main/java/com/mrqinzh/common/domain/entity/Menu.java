@@ -1,9 +1,12 @@
 package com.mrqinzh.common.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.List;
 
+@TableName("sys_menu")
 public class Menu extends BaseEntity {
 
     private Integer parentId;
@@ -41,7 +44,7 @@ public class Menu extends BaseEntity {
 
     private Integer status;
 
-
+    @TableField(exist = false)
     private List<Menu> menuChildren;
 
     public Integer getParentId() {

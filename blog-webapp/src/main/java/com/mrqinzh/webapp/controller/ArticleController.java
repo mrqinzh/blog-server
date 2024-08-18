@@ -3,7 +3,7 @@ package com.mrqinzh.webapp.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.common.domain.entity.Article;
 import com.mrqinzh.common.domain.vo.PageVO;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 @Api(tags = "文章接口")
 @RestController
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends AbstractController {
 
     @Resource
     private ArticleService articleService;

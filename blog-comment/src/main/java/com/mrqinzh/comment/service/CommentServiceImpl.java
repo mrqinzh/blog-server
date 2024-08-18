@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mrqinzh.comment.mapper.CommentMapper;
 import com.mrqinzh.comment.rpc.CommentServiceProvider;
 import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.utils.MyUtil;

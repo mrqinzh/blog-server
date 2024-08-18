@@ -7,16 +7,16 @@ import com.mrqinzh.apis.comment.CommentService;
 import com.mrqinzh.common.domain.entity.Article;
 import com.mrqinzh.common.domain.entity.Tag;
 import com.mrqinzh.common.domain.entity.User;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.utils.BizAssert;
 import com.mrqinzh.common.utils.DateUtil;
 import com.mrqinzh.common.utils.MyUtil;
 import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.common.domain.vo.article.ArticleVo;
-import com.mrqinzh.framework.utils.RedisUtil;
 import com.mrqinzh.article.mapper.ArticleMapper;
 import com.mrqinzh.article.mapper.TagMapper;
+import com.mrqinzh.framework.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
@@ -41,8 +41,6 @@ public class ArticleServiceProvider implements ArticleService {
     private ArticleMapper articleMapper;
     @Resource
     private TagMapper tagMapper;
-    @Resource
-    private RedisUtil redisUtil;
 
     @Override
     public Article safeGet(Long id) {
@@ -84,7 +82,7 @@ public class ArticleServiceProvider implements ArticleService {
         BizAssert.notNull(articleVo, "文章添加失败，文章信息为空");
         articleVo.setArticleSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
 
-        User user = (User) redisUtil.get("user");
+        User user = RedisUtil.get("user");
 
         BizAssert.notNull(user, "用户异常。！");
         Article article = new Article();

@@ -1,12 +1,13 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.apis.menu.MenuService;
 import com.mrqinzh.common.domain.entity.User;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.common.domain.vo.user.UserVO;
+import com.mrqinzh.webapp.auth.core.SecurityUser;
+import com.mrqinzh.webapp.service.MenuService;
 import com.mrqinzh.webapp.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class UserController {
+@RequestMapping("user")
+public class UserController extends AbstractController {
 
     @Autowired
     private MenuService menuService;
@@ -25,7 +27,6 @@ public class UserController {
     @Autowired
     private UserService userServiceProxy;
 
-    @RequestMapping("user")
     public List<User> testDubbo() {
 
         return userServiceProxy.test();
@@ -61,10 +62,11 @@ public class UserController {
     @ApiOperation(value = "获取用户信息")
     @GetMapping("info")
     public Resp info() {
-        User user = null;
-        if (user == null) {
+        SecurityUser securityUser = getCurrentUser();
+        if (securityUser == null) {
             return new Resp(AppStatus.TOKEN_EXPIRED);
         }
+        User user = userServiceProxy.getById(securityUser.getId());
         // 返回用户信息
         Map<String, Object> map = new HashMap<>();
         map.put("userId", user.getId());

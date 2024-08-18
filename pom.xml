@@ -17,7 +17,6 @@
         <module>blog-comment</module>
         <module>blog-apis</module>
         <module>blog-commons</module>
-        <module>blog-auth</module>
     </modules>
 
     <groupId>com.mrqinzh</groupId>

@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.mrqinzh.common.domain.entity.User;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
@@ -22,8 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
-    @Resource
-    private RedisUtil redisUtil;
 
     @Override
     public List<User> test() {
@@ -33,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Resp update(UserVO userVO) {
 
-        User securityUser = (User) redisUtil.get("user"); // 当前登录的用户
+        User securityUser = RedisUtil.get("user"); // 当前登录的用户
 
         User user = new User();
 
@@ -67,7 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> info(String token) {
 
-        User securityUser = (User) redisUtil.get("user");
+        User securityUser = RedisUtil.get("user");
         User user = userMapper.selectById(securityUser.getId());
 
         // 返回用户信息

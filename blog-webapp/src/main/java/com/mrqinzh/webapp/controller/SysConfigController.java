@@ -2,7 +2,7 @@ package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.apis.config.SysConfigService;
 import com.mrqinzh.common.domain.entity.SysConfig;
-import com.mrqinzh.common.enums.ConfigKey;
+import com.mrqinzh.common.domain.enums.ConfigKey;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.utils.BizAssert;

@@ -1,9 +1,11 @@
 package com.mrqinzh.article.rpc.provider;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.apis.tag.TagService;
 import com.mrqinzh.common.domain.entity.Tag;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
@@ -23,16 +25,14 @@ public class TagServiceProvider implements TagService {
 
     @Override
     public Resp page(PageDTO pageDTO) {
-        List<Tag> tags = tagMapper.page(pageDTO);
-
-        return DataResp.ok(tags);
+        Page<Tag> tagPage = new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize());
+        tagMapper.selectPage(tagPage, new LambdaQueryWrapper<Tag>().like(Tag::getName, pageDTO.getCondition()));
+        return DataResp.ok(tagPage);
     }
 
     @Override
     public List<Tag> getByLimit() {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.last("limit 20");
-        return tagMapper.selectList(queryWrapper);
+        return tagMapper.selectList(new LambdaQueryWrapper<Tag>().last("limit 20"));
     }
 
     @Override

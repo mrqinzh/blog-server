@@ -1,0 +1,40 @@
+package com.mrqinzh.webapp.auth.filter;
+
+
+import com.mrqinzh.webapp.auth.handler.LogoutHandler;
+import com.mrqinzh.webapp.auth.redirect.RedirectStrategy;
+import com.mrqinzh.webapp.auth.core.SecurityProperties;
+import com.mrqinzh.webapp.auth.context.AuthenticationContextHolder;
+import com.mrqinzh.webapp.auth.context.AuthenticationContextUtils;
+import com.mrqinzh.webapp.auth.session.SessionManager;
+import com.mrqinzh.webapp.auth.token.AuthenticatedToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.annotation.Resource;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 60)
+@Component
+public class LogoutFilter extends OncePerRequestFilter {
+
+    @Resource
+    private LogoutHandler logoutHandler;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (!SecurityProperties.LOGOUT_URL.equals(request.getRequestURI())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        logoutHandler.logout(request, response, AuthenticationContextUtils.getAuthenticatedToken());
+
+    }
+
+}

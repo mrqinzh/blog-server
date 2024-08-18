@@ -1,12 +1,7 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.common.enums.RoleType;
-import com.mrqinzh.common.resp.Resp;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Api(tags = "文件接口")
 @RequestMapping("file")

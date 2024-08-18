@@ -1,6 +1,6 @@
 package com.mrqinzh.common.resp;
 
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 
 import java.io.Serializable;
 

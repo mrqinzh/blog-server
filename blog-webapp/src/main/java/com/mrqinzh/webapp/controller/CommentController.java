@@ -1,7 +1,7 @@
 package com.mrqinzh.webapp.controller;
 
 import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;

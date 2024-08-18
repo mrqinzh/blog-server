@@ -11,8 +11,6 @@ import java.util.List;
 @Mapper
 public interface TagMapper extends BaseMapper<Tag> {
 
-    List<Tag> page(PageDTO pageDTO);
-
     @Select("select * from tag where id = #{id}")
     Tag getById(Integer id);
 }

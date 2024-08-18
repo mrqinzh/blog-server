@@ -2,7 +2,7 @@ package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mrqinzh.common.domain.entity.Role;
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
 import com.mrqinzh.common.domain.dto.PageDTO;
 import com.mrqinzh.user.mapper.RoleMapper;

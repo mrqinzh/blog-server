@@ -1,6 +1,6 @@
 package com.mrqinzh.common.domain.entity;
 
-import com.mrqinzh.common.enums.RoleType;
+import com.mrqinzh.common.domain.enums.RoleType;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;

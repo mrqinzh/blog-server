@@ -4,13 +4,4 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mrqinzh.article.mapper.TagMapper">
 
-    <select id="page" resultType="Tag">
-        SELECT * FROM tag
-        WHERE
-          1 = 1
-        <if test="condition != null">
-            AND tag_name like '%${condition}%'
-        </if>
-    </select>
-
 </mapper>

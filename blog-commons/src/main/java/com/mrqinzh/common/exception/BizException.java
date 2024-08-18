@@ -1,6 +1,6 @@
 package com.mrqinzh.common.exception;
 
-import com.mrqinzh.common.enums.AppStatus;
+import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.resp.Resp;
 import org.apache.commons.lang3.StringUtils;
 
