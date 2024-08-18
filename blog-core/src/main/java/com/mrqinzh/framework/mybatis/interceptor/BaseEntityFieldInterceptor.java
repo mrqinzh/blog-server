@@ -8,7 +8,6 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Objects;
@@ -18,8 +17,7 @@ import java.util.Objects;
                 @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class })
         }
 )
-@Component
-public class BasicPropertiesInterceptor implements Interceptor {
+public class BaseEntityFieldInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

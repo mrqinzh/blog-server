@@ -31,7 +31,7 @@ public class TestController {
         CommentVo commentVo = new CommentVo();
         commentVo.setCommentIp("123123");
         commentVo.setNickname("name");
-        rocketMQTemplate.syncSend(MessageConstant.CommentMessage.COMMENT_REPLY_TOPIC, new GenericMessage<>(commentVo));
+        rocketMQTemplate.syncSend(MessageConstant.Comment.COMMENT_REPLY_TOPIC, new GenericMessage<>(commentVo));
         return Resp.success();
     }
 

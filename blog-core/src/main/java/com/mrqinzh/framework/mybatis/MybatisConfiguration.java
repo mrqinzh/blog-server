@@ -2,6 +2,7 @@ package com.mrqinzh.framework.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.mrqinzh.framework.mybatis.interceptor.BaseEntityFieldInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -27,6 +28,7 @@ public class MybatisConfiguration {
         com.baomidou.mybatisplus.core.MybatisConfiguration configuration = new com.baomidou.mybatisplus.core.MybatisConfiguration();
         configuration.setMapUnderscoreToCamelCase(false);
 
+        configuration.addInterceptor(new BaseEntityFieldInterceptor());
         configuration.addInterceptor(new PaginationInterceptor());
 
         return configuration;

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-public class GlobalMQConfiguration {
+public class RocketMQConfiguration {
 
     @Autowired
     private RocketMqAdapter rocketMqAdapter;

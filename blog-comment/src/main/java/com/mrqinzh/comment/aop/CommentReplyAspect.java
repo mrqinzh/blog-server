@@ -36,7 +36,7 @@ public class CommentReplyAspect {
     }
 
     private void sendCommentMessage(CommentVo commentVo) {
-        rocketMQTemplate.syncSend(MessageConstant.CommentMessage.COMMENT_REPLY_TOPIC, new GenericMessage<>(commentVo));
+        rocketMQTemplate.syncSend(MessageConstant.Comment.COMMENT_REPLY_TOPIC, new GenericMessage<>(commentVo));
     }
 
 }

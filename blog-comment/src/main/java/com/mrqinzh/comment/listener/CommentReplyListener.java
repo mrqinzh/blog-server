@@ -7,7 +7,7 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@RocketMQMessageListener(topic = MessageConstant.CommentMessage.COMMENT_REPLY_TOPIC, consumerGroup = MessageConstant.CommentMessage.COMMENT_REPLY_TOPIC)
+@RocketMQMessageListener(topic = MessageConstant.Comment.COMMENT_REPLY_TOPIC, consumerGroup = MessageConstant.Comment.COMMENT_REPLY_TOPIC)
 public class CommentReplyListener implements RocketMQListener<CommentVo> {
 
 
