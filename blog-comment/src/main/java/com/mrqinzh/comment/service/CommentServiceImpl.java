@@ -48,12 +48,13 @@ public class CommentServiceImpl implements CommentService {
     public void add(CommentVo commentVo) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentVo, comment);
+        comment.setContent(commentVo.getCommentContent());
 
         String ip = commentVo.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论
         List<Comment> commentsByIp = commentMapper.getByIpOrNickname(ip, commentVo.getNickname());
         String avatar;
-        if (commentsByIp.size() > 0 && StringUtils.isNotBlank(commentsByIp.get(0).getAvatar())) {
+        if (!commentsByIp.isEmpty() && StringUtils.isNotBlank(commentsByIp.get(0).getAvatar())) {
             avatar = commentsByIp.get(0).getAvatar();
         } else {
             avatar = MyUtil.getRandomAvatarUrl();
