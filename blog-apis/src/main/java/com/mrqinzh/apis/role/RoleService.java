@@ -1,5 +1,6 @@
 package com.mrqinzh.apis.role;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.domain.dto.PageDTO;
 
@@ -9,16 +10,16 @@ public interface RoleService {
 
     List<Role> findAll();
 
-    List<Role> findPage(PageDTO pageDTO);
+    Page<Role> findPage(PageDTO pageDTO);
 
-    Role getById(Integer id);
+    Role getById(Long id);
 
     void add(Role role);
 
     void update(Role role);
 
-    void delete(Integer id);
+    void delete(Long id);
 
-    List<Role> getRolesByUserId(Integer userId);
+    List<Role> getRolesByUserId(Long userId);
 
 }

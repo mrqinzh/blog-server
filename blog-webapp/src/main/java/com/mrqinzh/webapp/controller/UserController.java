@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,25 +22,19 @@ public class UserController extends AbstractController {
 
     @Autowired
     private MenuService menuService;
-
     @Autowired
-    private UserService userServiceProxy;
-
-    public List<User> testDubbo() {
-
-        return userServiceProxy.test();
-    }
+    private UserService userService;
 
     @ApiOperation(value = "获取所有用户信息")
     @GetMapping("list")
     public Resp list(PageDTO pageDTO) {
-        return userServiceProxy.list(pageDTO);
+        return userService.list(pageDTO);
     }
 
     @ApiOperation(value = "根据id获取指定用户")
     @GetMapping("{id}")
     public Resp getById(@PathVariable Integer id) {
-        User user = userServiceProxy.getById(id);
+        User user = userService.getById(id);
         return DataResp.ok(user);
     }
 
@@ -49,14 +42,14 @@ public class UserController extends AbstractController {
     @PostMapping("add")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp add(@RequestBody UserVO userVO) {
-        return userServiceProxy.add(userVO);
+        return userService.add(userVO);
     }
 
     @ApiOperation(value = "修改用户信息")
     @PostMapping("update")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp update(@RequestBody UserVO userVO) {
-        return userServiceProxy.update(userVO);
+        return userService.update(userVO);
     }
 
     @ApiOperation(value = "获取用户信息")
@@ -66,7 +59,7 @@ public class UserController extends AbstractController {
         if (securityUser == null) {
             return new Resp(AppStatus.TOKEN_EXPIRED);
         }
-        User user = userServiceProxy.getById(securityUser.getId());
+        User user = userService.getById(securityUser.getId());
         // 返回用户信息
         Map<String, Object> map = new HashMap<>();
         map.put("userId", user.getId());

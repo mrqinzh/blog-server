@@ -1,8 +1,8 @@
-package com.mrqinzh.user.service;
+package com.mrqinzh.webapp.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.common.domain.entity.Role;
 
 import java.util.List;
 

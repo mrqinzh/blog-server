@@ -1,19 +1,21 @@
-package com.mrqinzh.user.rpc.provider;
+package com.mrqinzh.webapp.client.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.apis.role.RoleService;
-import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.domain.dto.PageDTO;
-import org.apache.dubbo.config.annotation.DubboService;
+import com.mrqinzh.common.domain.entity.Role;
+import com.mrqinzh.webapp.client.RoleClient;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
-@DubboService
-public class RoleServiceProvider implements RoleService {
+@Service
+public class RoleClientImpl implements RoleClient {
 
-    @Resource
-    private com.mrqinzh.user.service.RoleService roleService;
+    @DubboReference
+    private RoleService roleService;
 
     @Override
     public List<Role> findAll() {
@@ -47,6 +49,6 @@ public class RoleServiceProvider implements RoleService {
 
     @Override
     public List<Role> getRolesByUserId(Long userId) {
-        return roleService.getRolesByUserId(userId);
+        return Collections.emptyList();
     }
 }

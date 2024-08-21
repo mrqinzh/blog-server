@@ -1,12 +1,14 @@
 package com.mrqinzh.webapp.controller;
 
-import com.mrqinzh.apis.role.RoleService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.resp.DataResp;
 import com.mrqinzh.common.resp.Resp;
 import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.webapp.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 @RequestMapping("role")
 public class RoleController {
 
-//    @Autowired
+    @Autowired
     private RoleService roleService;
 
     @ApiOperation(value = "获取所有角色列表")
@@ -29,13 +31,13 @@ public class RoleController {
     @ApiOperation(value = "分页获取所有角色列表")
     @GetMapping("page")
     public Resp findPage(PageDTO pageDTO) {
-        List<Role> roles = roleService.findPage(pageDTO);
+        Page<Role> roles = roleService.findPage(pageDTO);
         return DataResp.ok(roles);
     }
 
     @ApiOperation(value = "根据id获取指定角色信息")
     @GetMapping("{id}")
-    public Resp findById(@PathVariable Integer id) {
+    public Resp findById(@PathVariable Long id) {
         Role role = roleService.getById(id);
         return DataResp.ok(role);
     }
@@ -58,7 +60,7 @@ public class RoleController {
     @ApiOperation(value = "根据id删除角色")
     @DeleteMapping("{id}")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
-    public Resp delete(@PathVariable Integer id) {
+    public Resp delete(@PathVariable Long id) {
         roleService.delete(id);
         return Resp.success();
     }

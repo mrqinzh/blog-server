@@ -1,6 +1,8 @@
 package com.mrqinzh.user.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.common.domain.entity.Role;
 import com.mrqinzh.common.domain.enums.AppStatus;
 import com.mrqinzh.common.exception.BizException;
@@ -27,13 +29,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> findPage(PageDTO pageDTO) {
-        List<Role> roles = roleMapper.selectList(new QueryWrapper<Role>().lambda().eq(Role::getStatus, 0));
-        return roles;
+    public Page<Role> findPage(PageDTO pageDTO) {
+        Page<Role> page = new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize());
+        return roleMapper.selectPage(page, new LambdaQueryWrapper<Role>().eq(Role::getStatus, 0));
     }
 
     @Override
-    public Role getById(Integer id) {
+    public Role getById(Long id) {
         Role role = roleMapper.selectById(id);
         return role;
     }
@@ -59,11 +61,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         roleMapper.deleteById(id);
     }
 
-    public List<Role> getRolesByUserId(Integer userId) {
+    public List<Role> getRolesByUserId(Long userId) {
         return roleMapper.getRolesByUserId(userId);
     }
 
