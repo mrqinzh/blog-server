@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-commons</artifactId>
+            <artifactId>blog-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>

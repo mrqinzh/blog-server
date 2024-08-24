@@ -11,12 +11,11 @@
     </parent>
     <modules>
         <module>blog-webapp</module>
-        <module>blog-core</module>
         <module>blog-user</module>
         <module>blog-article</module>
         <module>blog-comment</module>
         <module>blog-apis</module>
-        <module>blog-commons</module>
+        <module>blog-framework</module>
     </modules>
 
     <groupId>com.mrqinzh</groupId>
@@ -29,9 +28,12 @@
         <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
         <spring.boot.version>2.4.3</spring.boot.version>
         <mybatis.plus.version>3.3.0</mybatis.plus.version>
+        <redisson.version>3.32.0</redisson.version>
         <hutool.version>5.5.8</hutool.version>
+        <lombok.version>1.18.34</lombok.version>
+        <jackson.version>2.11.4</jackson.version>
         <mysql.connector.java>8.0.33</mysql.connector.java>
-        <swagger.version>2.9.2</swagger.version>
+        <springdoc.version>1.7.0</springdoc.version>
         <commons.lang3.version>3.1</commons.lang3.version>
         <rocketmq-springboot.version>2.3.0</rocketmq-springboot.version>
     </properties>
@@ -40,7 +42,19 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
@@ -74,6 +88,18 @@
                 <version>${spring.boot.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.redisson</groupId>
+                        <!-- 使用 redisson-spring-data-27 替代，解决 Tuple NoClassDefFoundError 报错 -->
+                        <artifactId>redisson-spring-data-33</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq-springboot.version}</version>
@@ -83,18 +109,6 @@
                 <artifactId>commons-pool2</artifactId>
                 <version>2.9.0</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>30.1-jre</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons.lang3.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -105,22 +119,30 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.java}</version>
             </dependency>
+
+            <!--    工具类        -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
 
             <!-- 整合swagger -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>org.springdoc</groupId> <!-- 接口文档 UI：默认 -->
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.theokanning.openai-gpt3-java</groupId>
@@ -137,11 +159,6 @@
                 <artifactId>service</artifactId>
                 <version>0.12.0</version>
             </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-            </dependency>
 
             <!--     blog-modules       -->
             <dependency>
@@ -149,19 +166,46 @@
                 <artifactId>blog-apis</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
+
+            <!--     blog framework       -->
             <dependency>
                 <groupId>com.mrqinzh</groupId>
-                <artifactId>blog-core</artifactId>
+                <artifactId>blog-common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.mrqinzh</groupId>
-                <artifactId>blog-commons</artifactId>
+                <artifactId>blog-framework-mq</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.mrqinzh</groupId>
-                <artifactId>blog-auth</artifactId>
+                <artifactId>blog-framework-mybatis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-framework-redis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-framework-rpc</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-framework-security</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-framework-test</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-framework-web</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>

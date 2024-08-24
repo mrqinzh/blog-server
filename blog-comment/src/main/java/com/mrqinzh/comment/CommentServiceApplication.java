@@ -1,6 +1,5 @@
 package com.mrqinzh.comment;
 
-import com.mrqinzh.framework.annotation.BlogServerApplication;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;

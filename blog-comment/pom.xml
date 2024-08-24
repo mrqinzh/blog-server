@@ -29,11 +29,19 @@
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-commons</artifactId>
+            <artifactId>blog-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-apis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-mq</artifactId>
         </dependency>
     </dependencies>
 

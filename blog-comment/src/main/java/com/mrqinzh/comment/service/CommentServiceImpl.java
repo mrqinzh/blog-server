@@ -1,6 +1,6 @@
 package com.mrqinzh.comment.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mrqinzh.comment.mapper.CommentMapper;
 import com.mrqinzh.comment.rpc.CommentServiceProvider;
 import com.mrqinzh.common.domain.entity.Comment;
@@ -17,7 +17,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,12 +35,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getMessageList() {
-        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .eq(Comment::getType, 2)
-                .eq(Comment::getStatus, 0);
-        List<Comment> comments = commentMapper.selectList(queryWrapper);
-        return comments;
+        return commentMapper.selectList(new LambdaQueryWrapper<Comment>().eq(Comment::getType, 2).eq(Comment::getStatus, 0));
     }
 
     @Override
@@ -60,10 +54,8 @@ public class CommentServiceImpl implements CommentService {
             avatar = MyUtil.getRandomAvatarUrl();
         }
 
-        Date now = new Date();
         comment.setAvatar(avatar);
         comment.setIp(ip);
-        comment.setCreateTime(now);
 
         commentMapper.insert(comment);
     }
@@ -72,7 +64,7 @@ public class CommentServiceImpl implements CommentService {
     public Resp getById(String idType, Long id) {
         List<Comment> comments = commentMapper.getById(idType, id);
         // 遍历comments，将子评论添加到对应的父评论下面
-        comments.stream().forEach(comment -> {
+        comments.forEach(comment -> {
             if (comment.getParentId() == 0) {
                 comment.setComments(comments.stream().filter(c -> c.getParentId().equals(comment.getId())).collect(Collectors.toList()));
             }

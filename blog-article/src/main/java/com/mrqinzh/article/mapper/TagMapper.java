@@ -6,8 +6,6 @@ import com.mrqinzh.common.domain.dto.PageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
 @Mapper
 public interface TagMapper extends BaseMapper<Tag> {
 

@@ -1,6 +1,6 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.common.domain.entity.SysConfig;
+import com.mrqinzh.user.domain.entity.SysConfig;
 
 import java.util.List;
 

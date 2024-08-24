@@ -29,11 +29,23 @@
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-commons</artifactId>
+            <artifactId>blog-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-apis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-redis</artifactId>
         </dependency>
     </dependencies>
 

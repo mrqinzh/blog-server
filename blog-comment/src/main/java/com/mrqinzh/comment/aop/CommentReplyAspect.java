@@ -1,7 +1,7 @@
 package com.mrqinzh.comment.aop;
 
-import com.mrqinzh.common.constant.MessageConstant;
-import com.mrqinzh.common.domain.vo.comment.CommentVo;
+import com.mrqinzh.framework.common.constant.MessageConstant;
+import com.mrqinzh.comment.domain.vo.CommentVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -28,14 +28,14 @@ public class CommentReplyAspect {
         Object[] args = joinPoint.getArgs();
 
         for (Object arg : args) {
-            if (arg instanceof CommentVo) {
-                CommentVo commentVo = (CommentVo) arg;
+            if (arg instanceof CommentVO) {
+                CommentVO commentVo = (CommentVO) arg;
                 sendCommentMessage(commentVo);
             }
         }
     }
 
-    private void sendCommentMessage(CommentVo commentVo) {
+    private void sendCommentMessage(CommentVO commentVo) {
         rocketMQTemplate.syncSend(MessageConstant.Comment.COMMENT_REPLY_TOPIC, new GenericMessage<>(commentVo));
     }
 

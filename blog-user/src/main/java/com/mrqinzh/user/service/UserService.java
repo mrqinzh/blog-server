@@ -1,9 +1,9 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.common.domain.entity.User;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.dto.PageDTO;
-import com.mrqinzh.common.domain.vo.user.UserVO;
+import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.user.domain.entity.User;
+import com.mrqinzh.user.domain.vo.UserVO;
 
 import java.util.List;
 import java.util.Map;
