@@ -1,8 +1,7 @@
 package com.mrqinzh.article.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mrqinzh.common.domain.entity.Tag;
-import com.mrqinzh.common.domain.dto.PageDTO;
+import com.mrqinzh.article.domain.entity.Tag;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

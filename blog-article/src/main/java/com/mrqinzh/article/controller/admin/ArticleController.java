@@ -1,15 +1,15 @@
 package com.mrqinzh.article.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.common.domain.entity.Article;
-import com.mrqinzh.common.domain.vo.PageVO;
-import com.mrqinzh.common.domain.enums.AppStatus;
-import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.dto.PageDTO;
-import com.mrqinzh.common.domain.vo.article.ArticleVo;
-import com.mrqinzh.webapp.service.ArticleService;
+import com.mrqinzh.article.domain.entity.Article;
+import com.mrqinzh.article.domain.vo.ArticleVO;
+import com.mrqinzh.article.service.ArticleService;
+import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 @Tag(name = "文章接口")
 @RestController
 @RequestMapping("/article")
-public class ArticleController extends AbstractController {
+public class ArticleController extends BaseController {
 
     @Resource
     private ArticleService articleService;
@@ -36,7 +36,7 @@ public class ArticleController extends AbstractController {
         CompletableFuture.runAsync(() -> {
             articleService.addView(article.getId());
         });
-        return DataResp.ok(new ArticleVo(article));
+        return DataResp.ok(new ArticleVO(article));
     }
 
     @Operation(summary = "分页加载文章列表")
@@ -48,13 +48,13 @@ public class ArticleController extends AbstractController {
 //            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
         Page<Article> page = articleService.list(pageDTO);
-        return DataResp.ok(PageVO.convert(page, ArticleVo::new));
+        return DataResp.ok(PageVO.convert(page, ArticleVO::new));
     }
 
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     @Operation(summary = "添加文章")
     @PostMapping("/add")
-    public Resp add(@RequestBody @Valid ArticleVo articleVo) {
+    public Resp add(@RequestBody @Valid ArticleVO articleVo) {
         articleService.add(articleVo);
         return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
     }
@@ -62,7 +62,7 @@ public class ArticleController extends AbstractController {
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     @Operation(summary = "根据 articleId 更新文章")
     @PostMapping("/update")
-    public Resp update(@RequestBody ArticleVo articleVo){
+    public Resp update(@RequestBody ArticleVO articleVo){
         if (articleVo.getId() == null) {
             throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
         }

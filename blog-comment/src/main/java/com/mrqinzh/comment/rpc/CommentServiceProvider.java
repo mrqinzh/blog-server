@@ -1,45 +1,16 @@
 package com.mrqinzh.comment.rpc;
 
-import com.mrqinzh.apis.comment.CommentService;
-import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
-import com.mrqinzh.common.domain.vo.comment.CommentVo;
+import com.mrqinzh.comment.api.CommentApiService;
+import com.mrqinzh.comment.service.CommentService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @DubboService
-public class CommentServiceProvider implements CommentService {
+public class CommentServiceProvider implements CommentApiService {
 
     @Resource
-    private com.mrqinzh.comment.service.CommentService commentService;
-
-    @Override
-    public List<Comment> list(CommentPageDTO commentPageVo) {
-        return commentService.list(commentPageVo);
-    }
-
-    @Override
-    public List<Comment> getMessageList() {
-        return commentService.getMessageList();
-    }
-
-    @Override
-    public void add(CommentVo commentVo) {
-        commentService.add(commentVo);
-    }
-
-    @Override
-    public Resp getById(String idType, Long id) {
-        return commentService.getById(idType, id);
-    }
-
-    @Override
-    public Resp deleteById(String idType, Long id) {
-        return commentService.deleteById(idType, id);
-    }
+    private CommentService commentService;
 
     @Override
     public void deleteByTypeId(String articleOrCommentId, Long id) {

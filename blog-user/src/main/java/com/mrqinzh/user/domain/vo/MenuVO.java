@@ -8,34 +8,34 @@ public class MenuVO {
 
     private Long id;
 
-    @ApiModelProperty(value = "父菜单id")
+    @Schema(description = "父菜单id")
     private Long parentId;
 
-    @ApiModelProperty(value = "图标")
+    @Schema(description = "图标")
     private String icon;
 
-    @ApiModelProperty(value = "排序等级")
+    @Schema(description = "排序等级")
     private Integer menuSort;
 
-    @ApiModelProperty(value = "菜单名")
+    @Schema(description = "菜单名")
     @NotBlank
     private String menuTitle;
 
-    @ApiModelProperty(value = "菜单路径")
+    @Schema(description = "菜单路径")
     @NotBlank
     private String menuPath;
 
-    @ApiModelProperty(value = "组件名")
+    @Schema(description = "组件名")
     private String componentName;
 
-    @ApiModelProperty(value = "组件路径")
+    @Schema(description = "组件路径")
     @NotBlank
     private String componentPath;
 
-    @ApiModelProperty(value = "是否缓存，默认0，缓存")
+    @Schema(description = "是否缓存，默认0，缓存")
     private Integer cache;
 
-    @ApiModelProperty(value = "是否隐藏，默认1，不隐藏")
+    @Schema(description = "是否隐藏，默认1，不隐藏")
     private Integer hidden;
 
     public Long getId() {

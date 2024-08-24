@@ -1,33 +1,35 @@
 package com.mrqinzh.article.domain.vo;
 
+import com.mrqinzh.article.domain.entity.Article;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 
-@ApiModel(description = "添加/修改文章请求实体")
+@Schema(description = "添加/修改文章请求实体")
 public class ArticleVO {
 
-    @ApiModelProperty(value = "文章id")
+    @Schema(description = "文章id")
     private Long id;
 
-    @ApiModelProperty(value = "文章标题")
+    @Schema(description = "文章标题")
     @NotBlank
     private String articleTitle;
 
-    @ApiModelProperty(value = "文章摘要")
+    @Schema(description = "文章摘要")
     private String articleSummary;
 
-    @ApiModelProperty(value = "文章封面图")
+    @Schema(description = "文章封面图")
     private String articleCoverImg;
 
-    @ApiModelProperty(value = "文章markdown内容")
+    @Schema(description = "文章markdown内容")
     @NotBlank
     private String articleContentMd;
 
-    @ApiModelProperty(value = "文章标签")
+    @Schema(description = "文章标签")
     @NotBlank
     private String articleTag;
 
-    @ApiModelProperty(value = "文章类型： 原创 --- 转载")
+    @Schema(description = "文章类型： 原创 --- 转载")
     @NotBlank
     private String articleType;
 

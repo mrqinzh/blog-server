@@ -31,10 +31,6 @@
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-apis</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

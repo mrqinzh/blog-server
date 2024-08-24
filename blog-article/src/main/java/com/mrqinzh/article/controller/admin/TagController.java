@@ -1,24 +1,24 @@
 package com.mrqinzh.article.controller.admin;
 
-import com.mrqinzh.apis.tag.TagService;
-import com.mrqinzh.common.domain.entity.Tag;
-import com.mrqinzh.common.domain.enums.AppStatus;
-import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.dto.PageDTO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.DubboReference;
+import com.mrqinzh.article.domain.entity.Tag;
+import com.mrqinzh.article.service.TagService;
+import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.web.controller.BaseController;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@Tag(name = "标签接口")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "标签接口")
 @RestController
 @RequestMapping("tag")
-public class TagController {
+public class TagController extends BaseController {
 
-    @DubboReference
+    @Resource
     private TagService tagService;
 
     @Operation(summary = "根据id获取标签信息")

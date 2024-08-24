@@ -16,6 +16,9 @@
         <module>blog-comment</module>
         <module>blog-apis</module>
         <module>blog-framework</module>
+        <module>blog-apis/blog-article-api</module>
+        <module>blog-apis/blog-user-api</module>
+        <module>blog-apis/blog-comment-api</module>
     </modules>
 
     <groupId>com.mrqinzh</groupId>
@@ -160,10 +163,20 @@
                 <version>0.12.0</version>
             </dependency>
 
-            <!--     blog-modules       -->
+            <!--     blog-apis       -->
             <dependency>
                 <groupId>com.mrqinzh</groupId>
-                <artifactId>blog-apis</artifactId>
+                <artifactId>blog-article-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-comment-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mrqinzh</groupId>
+                <artifactId>blog-user-api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

@@ -10,15 +10,15 @@ import javax.validation.constraints.NotNull;
 @ApiModel(description = "添加评论请求实体")
 public class CommentVO implements BaseVO {
 
-    @ApiModelProperty(value = "昵称")
+    @Schema(description = "昵称")
     @NotBlank
     private String nickname;
 
-    @ApiModelProperty(value = "评论内容")
+    @Schema(description = "评论内容")
     @NotBlank
     private String commentContent;
 
-    @ApiModelProperty(value = "类型---1：评论  2：留言")
+    @Schema(description = "类型---1：评论  2：留言")
     @NotNull
     private Integer type;
 

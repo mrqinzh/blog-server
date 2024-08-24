@@ -27,6 +27,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-comment-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-common</artifactId>
@@ -37,11 +42,11 @@
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-apis</artifactId>
+            <artifactId>blog-framework-mq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-framework-mq</artifactId>
+            <artifactId>blog-framework-rpc</artifactId>
         </dependency>
     </dependencies>
 
