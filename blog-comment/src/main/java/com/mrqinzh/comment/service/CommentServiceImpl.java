@@ -1,15 +1,15 @@
 package com.mrqinzh.comment.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.mrqinzh.comment.domain.entity.Comment;
+import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.vo.CommentVO;
 import com.mrqinzh.comment.mapper.CommentMapper;
 import com.mrqinzh.comment.rpc.CommentServiceProvider;
-import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.domain.enums.AppStatus;
-import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.utils.MyUtil;
-import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
-import com.mrqinzh.common.domain.vo.comment.CommentVo;
+import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.common.utils.MyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void add(CommentVo commentVo) {
+    public void add(CommentVO commentVo) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentVo, comment);
         comment.setContent(commentVo.getCommentContent());

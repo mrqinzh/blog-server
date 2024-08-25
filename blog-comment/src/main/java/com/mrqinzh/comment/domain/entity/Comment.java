@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.mrqinzh.framework.common.domain.entity.Article;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;
@@ -30,8 +29,6 @@ public class Comment extends BaseEntity {
     private Long articleId;
     private Long parentId;
 
-    @TableField(exist = false)
-    private Article article;
     @TableField(exist = false)
     private List<Comment> comments;
 
@@ -81,14 +78,6 @@ public class Comment extends BaseEntity {
 
     public void setArticleId(Long articleId) {
         this.articleId = articleId;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
     }
 
     public Long getParentId() {

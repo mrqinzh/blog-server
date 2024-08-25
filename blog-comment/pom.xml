@@ -48,6 +48,14 @@
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-framework-rpc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

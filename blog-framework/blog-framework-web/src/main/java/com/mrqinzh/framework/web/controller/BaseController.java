@@ -1,5 +1,6 @@
 package com.mrqinzh.framework.web.controller;
 
+import com.mrqinzh.framework.web.utils.WebFrameworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,6 +21,10 @@ public abstract class BaseController {
     protected final HttpServletResponse getResponse() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         return attributes.getResponse();
+    }
+
+    protected String getClientIp() {
+        return WebFrameworkUtils.getClientIp(getRequest());
     }
 
 }

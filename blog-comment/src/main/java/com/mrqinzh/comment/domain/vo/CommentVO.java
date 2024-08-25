@@ -1,13 +1,12 @@
 package com.mrqinzh.comment.domain.vo;
 
 import com.mrqinzh.framework.common.domain.vo.BaseVO;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@ApiModel(description = "添加评论请求实体")
+@Schema(description = "添加评论请求实体")
 public class CommentVO implements BaseVO {
 
     @Schema(description = "昵称")

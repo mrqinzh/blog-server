@@ -36,8 +36,8 @@ public class BizException extends RuntimeException {
 
     public Resp sendExceptionMsg() {
         return StrUtil.isBlank(this.msg) ?
-                Resp.sendErrorMsg(code == null ? status.getCode() : code, status.getMsg()) :
-                Resp.sendErrorMsg(code, msg);
+                Resp.error(code == null ? status.getCode() : code, status.getMsg()) :
+                Resp.error(code, msg);
     }
 
     public AppStatus getStatus() {

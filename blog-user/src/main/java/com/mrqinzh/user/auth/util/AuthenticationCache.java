@@ -1,6 +1,6 @@
-package com.mrqinzh.framework.security.utils;
+package com.mrqinzh.user.auth.util;
 
-import com.mrqinzh.framework.common.utils.RedisUtil;
+import com.mrqinzh.framework.redis.utils.RedisUtil;
 
 public class AuthenticationCache {
 

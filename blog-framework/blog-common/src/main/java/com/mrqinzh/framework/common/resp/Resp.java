@@ -1,12 +1,16 @@
 package com.mrqinzh.framework.common.resp;
 
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 /**
  * 统一返回数据类型
  */
+@Setter
+@Getter
 public class Resp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,30 +24,6 @@ public class Resp implements Serializable {
     public Resp() {
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public Resp(AppStatus status) {
         this.code = status.getCode();
         this.success = status.getSuccess();
@@ -54,7 +34,7 @@ public class Resp implements Serializable {
         return Resp.sendMsg(AppStatus.SUCCESS);
     }
 
-    public static Resp sendSuccessMsg(String msg) {
+    public static Resp success(String msg) {
         return sendMsg(AppStatus.SUCCESS, msg);
     }
 
@@ -76,7 +56,7 @@ public class Resp implements Serializable {
         return resp;
     }
 
-    public static Resp sendErrorMsg(Integer code, String msg) {
+    public static Resp error(Integer code, String msg) {
         Resp resp = new Resp();
         resp.setCode(code);
         resp.setSuccess(false);

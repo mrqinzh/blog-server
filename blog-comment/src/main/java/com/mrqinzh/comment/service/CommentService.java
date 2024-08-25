@@ -1,9 +1,9 @@
 package com.mrqinzh.comment.service;
 
-import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
-import com.mrqinzh.common.domain.vo.comment.CommentVo;
+import com.mrqinzh.comment.domain.entity.Comment;
+import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.vo.CommentVO;
+import com.mrqinzh.framework.common.resp.Resp;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface CommentService {
 
     List<Comment> getMessageList();
 
-    void add(CommentVo commentVo);
+    void add(CommentVO commentVo);
 
     Resp getById(String idType, Long id);
 

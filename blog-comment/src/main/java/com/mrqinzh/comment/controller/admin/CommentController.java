@@ -1,14 +1,15 @@
 package com.mrqinzh.comment.controller.admin;
 
-import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.domain.enums.AppStatus;
-import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
-import com.mrqinzh.common.domain.vo.comment.CommentVo;
-import com.mrqinzh.gateway.service.CommentService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.mrqinzh.comment.domain.entity.Comment;
+import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.vo.CommentVO;
+import com.mrqinzh.comment.service.CommentService;
+import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.web.controller.BaseController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ import java.util.List;
 @Tag(name = "评论接口")
 @RestController
 @RequestMapping("comment")
-public class CommentController extends AbstractController {
+public class CommentController extends BaseController {
 
     @Resource
     private CommentService commentService;
@@ -32,7 +33,7 @@ public class CommentController extends AbstractController {
 
     @Operation(summary = "添加一条评论/留言，任何人均可添加")
     @PostMapping("add")
-    public Resp add(@RequestBody @Valid CommentVo commentVo) {
+    public Resp add(@RequestBody @Valid CommentVO commentVo) {
         commentVo.setCommentIp(getClientIp());
         commentService.add(commentVo);
         return Resp.sendMsg(AppStatus.INSERT_SUCCESS);

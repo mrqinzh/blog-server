@@ -8,6 +8,7 @@ import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Tag(name = "文章接口")
 @RestController
@@ -48,7 +50,7 @@ public class ArticleController extends BaseController {
 //            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
         Page<Article> page = articleService.list(pageDTO);
-        return DataResp.ok(PageVO.convert(page, ArticleVO::new));
+        return new PageResp<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords().stream().map(ArticleVO::new).collect(Collectors.toList()));
     }
 
 //    @AccessPermission(RoleType.SUPER_ADMIN)

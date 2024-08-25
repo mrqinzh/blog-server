@@ -13,6 +13,8 @@ import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.utils.BizAssert;
 import com.mrqinzh.framework.common.utils.MyUtil;
+import com.mrqinzh.framework.redis.utils.RedisUtil;
+import com.mrqinzh.user.domain.UserDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -72,7 +74,7 @@ public class ArticleServiceImpl implements ArticleService {
         BizAssert.notNull(articleVo, "文章添加失败，文章信息为空");
         articleVo.setArticleSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
 
-        User user = RedisUtil.get("user");
+        UserDTO user = RedisUtil.get("user");
 
         BizAssert.notNull(user, "用户异常。！");
         Article article = new Article();
@@ -95,7 +97,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void update(ArticleVO articleVo) {
-// 判断传入文章的Id是否存在
+        // 判断传入文章的Id是否存在
         if (articleVo == null || articleVo.getId() == null) {
             throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
         }

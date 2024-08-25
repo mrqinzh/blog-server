@@ -13,8 +13,8 @@ public class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat();
         try {
             return sdf.parse(dateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException ignored) {
+
         }
         return null;
     }

@@ -1,6 +1,5 @@
 package com.mrqinzh.article.domain.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
 
 import java.util.Date;
@@ -30,8 +29,6 @@ public class Article extends BaseEntity {
     private Integer status;
 
     private Long userId;
-    @TableField(exist = false)
-    private User user;
 
     public Integer getStatus() {
         return status;
@@ -47,14 +44,6 @@ public class Article extends BaseEntity {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getAuthor() {
