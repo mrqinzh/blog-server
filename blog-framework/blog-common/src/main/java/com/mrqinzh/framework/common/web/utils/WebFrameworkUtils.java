@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.web.utils;
+package com.mrqinzh.framework.common.web.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

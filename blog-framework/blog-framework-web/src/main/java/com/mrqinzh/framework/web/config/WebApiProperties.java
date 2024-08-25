@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Data
-public class ApiConfiguration {
+public class WebApiProperties {
 
     private Api adminApi = new Api("/admin-api", "**.controller.admin.**");
     private Api appApi = new Api("/app-api", "**.controller.app.**");

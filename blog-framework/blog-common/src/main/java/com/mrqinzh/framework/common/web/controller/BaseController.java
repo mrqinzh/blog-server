@@ -1,6 +1,6 @@
-package com.mrqinzh.framework.web.controller;
+package com.mrqinzh.framework.common.web.controller;
 
-import com.mrqinzh.framework.web.utils.WebFrameworkUtils;
+import com.mrqinzh.framework.common.web.utils.WebFrameworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
