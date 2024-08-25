@@ -1,13 +1,13 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.common.domain.entity.User;
-import com.mrqinzh.common.domain.enums.AppStatus;
-import com.mrqinzh.common.exception.BizException;
-import com.mrqinzh.common.resp.DataResp;
-import com.mrqinzh.common.resp.Resp;
-import com.mrqinzh.common.domain.dto.PageDTO;
-import com.mrqinzh.common.domain.vo.user.UserVO;
-import com.mrqinzh.framework.utils.RedisUtil;
+import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.redis.utils.RedisUtil;
+import com.mrqinzh.user.domain.entity.User;
+import com.mrqinzh.user.domain.vo.UserVO;
 import com.mrqinzh.user.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

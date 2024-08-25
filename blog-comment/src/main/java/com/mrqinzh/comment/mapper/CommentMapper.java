@@ -1,8 +1,8 @@
 package com.mrqinzh.comment.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mrqinzh.common.domain.entity.Comment;
-import com.mrqinzh.common.domain.vo.comment.CommentPageDTO;
+import com.mrqinzh.comment.domain.entity.Comment;
+import com.mrqinzh.comment.domain.vo.CommentPageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
