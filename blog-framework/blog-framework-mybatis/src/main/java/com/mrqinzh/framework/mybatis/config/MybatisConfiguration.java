@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.mrqinzh.framework.mybatis.entity.BlogTypeAliases;
 import com.mrqinzh.framework.mybatis.interceptor.BaseEntityFieldInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,8 @@ public class MybatisConfiguration {
         properties.setConfiguration(configuration());
         properties.setGlobalConfig(globalConfig());
 
-        properties.setTypeAliasesPackage("com.mrqinzh.common.domain.entity");
+        properties.setTypeAliasesSuperType(BlogTypeAliases.class);
+        properties.setTypeAliasesPackage("com.mrqinzh.*.domain");
 
         return properties;
     }

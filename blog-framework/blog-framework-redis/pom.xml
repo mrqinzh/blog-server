@@ -19,8 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson-spring-boot-starter</artifactId>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

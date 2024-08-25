@@ -1,25 +1,13 @@
 package com.mrqinzh.user.rpc.provider;
 
-import com.mrqinzh.apis.config.SysConfigService;
-import com.mrqinzh.common.domain.entity.SysConfig;
+import com.mrqinzh.user.api.SysConfigApiService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @DubboService
-public class SysConfigServiceProvider implements SysConfigService {
+public class SysConfigServiceProvider implements SysConfigApiService {
 
-    @Resource
-    private com.mrqinzh.user.service.SysConfigService sysConfigService;
 
-    @Override
-    public void setting(SysConfig sysConfig) {
-        sysConfigService.setting(sysConfig);
-    }
-
-    @Override
-    public List<SysConfig> getByConfigKey(String[] configKeys) {
-        return sysConfigService.getByConfigKey(configKeys);
-    }
 }

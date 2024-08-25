@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BaseEntity implements Serializable {
+public class BaseEntity implements BlogTypeAliases, Serializable {
 
     private static final long serialVersionUID = 1L;
 

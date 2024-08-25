@@ -10,7 +10,7 @@
         <version>2021.1</version>
     </parent>
     <modules>
-        <module>blog-webapp</module>
+        <module>blog-gateway</module>
         <module>blog-user</module>
         <module>blog-article</module>
         <module>blog-comment</module>
@@ -29,6 +29,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
+        <spring.cloud.version>2020.0.5</spring.cloud.version>
         <spring.boot.version>2.4.3</spring.boot.version>
         <mybatis.plus.version>3.3.0</mybatis.plus.version>
         <redisson.version>3.32.0</redisson.version>
@@ -47,6 +48,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -89,18 +97,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.redisson</groupId>
-                        <!-- 使用 redisson-spring-data-27 替代，解决 Tuple NoClassDefFoundError 报错 -->
-                        <artifactId>redisson-spring-data-33</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
