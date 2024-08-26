@@ -1,4 +1,4 @@
-package com.mrqinzh.user.domain;
+package com.mrqinzh.user.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

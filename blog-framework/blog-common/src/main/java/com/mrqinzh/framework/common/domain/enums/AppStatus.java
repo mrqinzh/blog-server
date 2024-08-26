@@ -1,9 +1,14 @@
 package com.mrqinzh.framework.common.domain.enums;
 
+/**
+ * todo use com.mrqinzh.framework.common.exception.ErrorCode
+ */
+@Deprecated
 public enum AppStatus {
 
     LOGOUT(200, true, "退出成功了"),
     LOGIN_FAILURE(30001, true, "账号或密码错误了哦，请重新输入一下哦。。.>_>"),
+    ACCOUNT_LOCKED(30002, false, "账户被锁定了"),
 
     /**
      * 请求成功

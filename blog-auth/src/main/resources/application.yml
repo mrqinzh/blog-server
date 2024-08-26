@@ -1,0 +1,23 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: blog-auth
+  cloud:
+    nacos:
+      server-addr: nacos:8848
+      username: nacos
+      password: nacos
+
+dubbo:
+  protocol:
+    port: 20884
+    name: dubbo
+  cloud:
+    subscribed-services: user-service
+  registry:
+    check: false
+    address: nacos://${spring.cloud.nacos.server-addr}
+  consumer:
+    check: false

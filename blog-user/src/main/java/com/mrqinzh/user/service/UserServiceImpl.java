@@ -1,5 +1,6 @@
 package com.mrqinzh.user.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
@@ -96,4 +97,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectById(id);
     }
 
+    @Override
+    public User getByUsername(String username) {
+        return userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
+    }
 }

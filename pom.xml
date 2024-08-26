@@ -19,6 +19,7 @@
         <module>blog-comment</module>
         <module>blog-apis</module>
         <module>blog-framework</module>
+        <module>blog-auth</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
         <springdoc.version>1.7.0</springdoc.version>
         <commons.lang3.version>3.1</commons.lang3.version>
         <commons-pool2.version>2.9.0</commons-pool2.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <rocketmq-springboot.version>2.3.0</rocketmq-springboot.version>
     </properties>
 
@@ -104,6 +106,21 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <!--     blog-apis       -->

@@ -15,8 +15,14 @@ public class BizException extends RuntimeException {
 
     private String msg;
 
+    @Deprecated
     public BizException(AppStatus status) {
         this.status = status;
+    }
+
+    public BizException(ErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMsg();
     }
 
     public BizException(String msg) {

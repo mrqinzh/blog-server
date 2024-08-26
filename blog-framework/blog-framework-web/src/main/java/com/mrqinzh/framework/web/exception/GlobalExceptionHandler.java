@@ -3,6 +3,8 @@ package com.mrqinzh.framework.web.exception;
 import cn.hutool.core.util.StrUtil;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
+import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
 import com.mrqinzh.framework.common.resp.Resp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +46,7 @@ public class GlobalExceptionHandler {
             stringBuilder.append(error.getField()).append("(").append(error.getDefaultMessage()).append("); ");
         }
         String errMsg = StrUtil.removeSuffix(stringBuilder.toString(), ";");
-        return Resp.sendMsg(AppStatus.BAD_PARAMETER_REQUEST, errMsg);
+        return Resp.error(ErrorCodeConstants.BAD_PARAMETER.getCode(), errMsg);
     }
 
     /**

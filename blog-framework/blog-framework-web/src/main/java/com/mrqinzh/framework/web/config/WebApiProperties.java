@@ -1,5 +1,6 @@
 package com.mrqinzh.framework.web.config;
 
+import com.mrqinzh.framework.common.web.WebConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class WebApiProperties {
 
-    private Api adminApi = new Api("/admin-api", "**.controller.admin.**");
-    private Api appApi = new Api("/app-api", "**.controller.app.**");
+    private Api adminApi = new Api(WebConstant.ADMIN_API_PREFIX, "**.controller.admin.**");
+    private Api appApi = new Api(WebConstant.APP_API_PREFIX, "**.controller.app.**");
 
     @Data
     @AllArgsConstructor
