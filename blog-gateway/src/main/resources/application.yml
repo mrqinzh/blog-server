@@ -16,6 +16,11 @@ spring:
         group: DEFAULT_GROUP
     gateway:
       routes:
+        - id: auth-service
+          uri: lb://blog-auth
+          predicates:
+            - Path=/auth/**
+
         ## user-service 服务
         - id: user-admin-api # 路由的编号
           uri: lb://user-service
@@ -26,7 +31,7 @@ spring:
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
             - Path=/app-api/user/**
 
-        ## comment-server 服务
+        ## comment-service 服务
         - id: comment-admin-api # 路由的编号
           uri: lb://comment-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
@@ -36,7 +41,7 @@ spring:
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
             - Path=/app-api/comment/**
 
-        ## article-server 服务
+        ## article-service 服务
         - id: article-admin-api # 路由的编号
           uri: lb://article-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组

@@ -1,9 +1,10 @@
 package com.mrqinzh.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mrqinzh.auth.session.SessionManager;
+import com.mrqinzh.auth.token.AuthenticationTokenManager;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
+import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
@@ -24,12 +25,12 @@ import java.util.Optional;
 public class DefaultAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
 
     @Resource
-    private SessionManager sessionManager;
+    private AuthenticationTokenManager authenticationTokenManager;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String sessionId = sessionManager.start(request, response, authentication);
-        writeResponse(request, response, authentication);
+        String tokenId = authenticationTokenManager.save(request, response, authentication);
+        writeResponse(request, response, DataResp.ok(tokenId));
     }
 
     @Override

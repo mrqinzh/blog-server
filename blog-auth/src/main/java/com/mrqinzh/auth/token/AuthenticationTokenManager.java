@@ -1,7 +1,8 @@
-package com.mrqinzh.auth.session;
+package com.mrqinzh.auth.token;
 
 import cn.hutool.core.util.IdUtil;
-import com.mrqinzh.framework.common.security.SecurityProperties;
+import com.mrqinzh.framework.common.constant.CacheKeyConstant;
+import com.mrqinzh.framework.security.config.SecurityProperties;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
@@ -13,29 +14,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class SessionManager {
+public class AuthenticationTokenManager {
 
     public String generateTokenId(Authentication authentication) {
         return IdUtil.fastSimpleUUID();
     }
 
-    public String start(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    public String save(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         String tokenId = generateTokenId(authentication);
 
         Cookie cookie = new Cookie(SecurityProperties.COOKIE_NAME, tokenId);
         response.addCookie(cookie);
 
-        RedisUtil.set(tokenId, authentication, 60);
+        RedisUtil.set(getCacheKey(tokenId), authentication, 60);
 
         return tokenId;
     }
 
     public Authentication getToken(HttpServletRequest request) {
-        return RedisUtil.get(getTokenId(request));
+        return RedisUtil.get(getCacheKey(getTokenId(request)));
     }
 
-    public Authentication getToken(String sessionId) {
-        return RedisUtil.get(sessionId);
+    public Authentication getToken(String tokenId) {
+        return RedisUtil.get(getCacheKey(tokenId));
     }
 
     public String getTokenId(HttpServletRequest request) {
@@ -53,11 +54,12 @@ public class SessionManager {
         return tokenId;
     }
 
-    public boolean checkTokenId(String tokenId) {
-        return tokenId == null;
+    public void expire(String tokenId) {
+        RedisUtil.expire(getCacheKey(tokenId), 0);
     }
 
-    public void expire(String tokenId) {
-        RedisUtil.expire(tokenId, 0);
+
+    private String getCacheKey(String tokenId) {
+        return CacheKeyConstant.Auth.AUTH_TOKEN_PREFIX + tokenId;
     }
 }

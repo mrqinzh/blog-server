@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.security;
+package com.mrqinzh.framework.security.config;
 
 import com.mrqinzh.framework.common.web.WebConstant;
 
