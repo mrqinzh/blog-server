@@ -38,10 +38,6 @@
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.mrqinzh</groupId>
-            <artifactId>blog-framework-security</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

@@ -1,11 +1,14 @@
 package com.mrqinzh.framework.redis.utils;
 
-import com.mrqinzh.framework.common.utils.SpringContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,16 +18,15 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class RedisUtil {
+@Component
+public class RedisUtil implements ApplicationContextAware {
 
 	private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
 	@SuppressWarnings("unchecked")
-	private static final RedisTemplate<String, Object> REDIS_TEMPLATE = SpringContextHolder.getBean("redisTemplate",
-			RedisTemplate.class);
+	private static RedisTemplate<String, Object> REDIS_TEMPLATE;
 
-	public static final StringRedisTemplate STRING_REDIS_TEMPLATE = SpringContextHolder.getBean("stringRedisTemplate",
-			StringRedisTemplate.class);
+	public static StringRedisTemplate STRING_REDIS_TEMPLATE;
 
 	// =============================common============================
 	/**
@@ -218,4 +220,9 @@ public class RedisUtil {
 		return !Objects.equals(result, 0L);
 	}
 
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		REDIS_TEMPLATE = applicationContext.getBean("redisTemplate", RedisTemplate.class);
+		STRING_REDIS_TEMPLATE = applicationContext.getBean("stringRedisTemplate", StringRedisTemplate.class);
+	}
 }

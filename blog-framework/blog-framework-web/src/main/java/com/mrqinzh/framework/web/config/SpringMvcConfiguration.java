@@ -18,6 +18,7 @@ public class SpringMvcConfiguration implements WebMvcConfigurer {
     public void configurePathMatch(PathMatchConfigurer configurer) {
         configurePathMatch(configurer, webApiProperties.getAdminApi());
         configurePathMatch(configurer, webApiProperties.getAppApi());
+        configurePathMatch(configurer, webApiProperties.getAuthApi());
     }
 
     /**

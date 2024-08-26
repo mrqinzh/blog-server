@@ -1,19 +1,20 @@
 package com.mrqinzh.auth.service;
 
 import com.mrqinzh.auth.domain.UserDetailsImpl;
-import com.mrqinzh.user.api.UserApiService;
+import com.mrqinzh.user.api.UserApi;
 import com.mrqinzh.user.domain.user.UserRespDTO;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @DubboReference
-    private UserApiService userApiService;
+    @Resource
+    private UserApi userApiService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

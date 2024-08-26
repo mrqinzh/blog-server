@@ -1,6 +1,5 @@
 package com.mrqinzh.gateway.filter.security;
 
-import com.mrqinzh.framework.security.utils.SecurityFrameworkUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -16,13 +15,6 @@ public class TokenAuthenticationFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = SecurityFrameworkUtils.obtainAuthorization(exchange);
-        // 获取不到 token 直接放行
-        if (StringUtils.isBlank(token)) {
-            return chain.filter(exchange);
-        }
-
-        // 有token 进行解析
         return chain.filter(exchange);
     }
 

@@ -1,13 +1,13 @@
 package com.mrqinzh.comment.rpc;
 
-import com.mrqinzh.comment.api.CommentApiService;
+import com.mrqinzh.comment.api.CommentApi;
 import com.mrqinzh.comment.service.CommentService;
-import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@DubboService
-public class CommentServiceProvider implements CommentApiService {
+@RestController
+public class CommentServiceProvider implements CommentApi {
 
     @Resource
     private CommentService commentService;
