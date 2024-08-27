@@ -6,9 +6,6 @@
 
     <resultMap id="baseMap" type="Comment" autoMapping="true">
         <id property="id" column="id" />
-        <association property="article" javaType="Article">
-            <result property="title" column="title" />
-        </association>
     </resultMap>
     
     <select id="list" parameterType="com.mrqinzh.comment.domain.vo.CommentPageDTO" resultType="Comment">

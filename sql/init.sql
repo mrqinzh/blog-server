@@ -11,7 +11,7 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 18/08/2024 18:32:22
+ Date: 27/08/2024 20:55:33
 */
 
 SET NAMES utf8mb4;
@@ -114,7 +114,7 @@ CREATE TABLE `comment` (
                            `type` int NOT NULL COMMENT '1：评论    2：留言',
                            `updateTime` datetime DEFAULT NULL COMMENT '修改时间',
                            PRIMARY KEY (`id`,`parentId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=1825125158267916290 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -124,6 +124,17 @@ INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `sta
 INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (2, 'http://mrqinzh.info:9090/img/random-avatars/avatar7.png', '陈博', '牛牛牛', '2021-10-13 17:02:18', 0, NULL, 0, '202.98.63.138', 2, NULL);
 INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (3, 'http://mrqinzh.info:9090/img/random-avatars/avatar10.png', '世界无敌美少女', '秦志宏是猪猪', '2021-10-13 17:02:19', 0, NULL, 0, '183.226.63.12', 2, NULL);
 INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (10, 'http://mrqinzh.info:9090/img/avatar.jpg', 'mrqinzh', '分布式系统中的CAP理论', '2022-03-16 14:36:28', 0, 129, 0, '127.0.0.1', 1, NULL);
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (11, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试', NULL, '2024-08-18 07:40:54', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 07:40:54');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (12, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试', NULL, '2024-08-18 07:41:21', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 07:41:21');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (13, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试', NULL, '2024-08-18 07:41:21', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 07:41:21');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (14, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试12', NULL, '2024-08-18 10:04:19', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:04:37');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (15, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试12', NULL, '2024-08-18 10:04:38', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:04:50');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (16, 'http://mrqinzh.info:9090/img/avatar.jpg', '试试12', NULL, '2024-08-18 10:04:38', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:04:44');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (17, 'http://mrqinzh.info:9090/img/avatar.jpg', '5346', NULL, '2024-08-18 10:41:05', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:41:05');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (18, 'http://mrqinzh.info:9090/img/avatar.jpg', '657567', NULL, '2024-08-18 10:42:11', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:42:11');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (1825125154870530050, 'http://mrqinzh.info:9090/img/avatar.jpg', '124', NULL, '2024-08-18 10:58:38', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:58:38');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (1825125158238556162, 'http://mrqinzh.info:9090/img/avatar.jpg', '124', NULL, '2024-08-18 10:58:41', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:58:41');
+INSERT INTO `comment` (`id`, `avatar`, `nickname`, `content`, `createTime`, `status`, `articleId`, `parentId`, `ip`, `type`, `updateTime`) VALUES (1825125158267916289, 'http://mrqinzh.info:9090/img/avatar.jpg', '124', NULL, '2024-08-18 10:58:41', 0, NULL, 0, '127.0.0.1', 2, '2024-08-18 10:58:41');
 COMMIT;
 
 -- ----------------------------
@@ -244,9 +255,9 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
                             `id` bigint NOT NULL AUTO_INCREMENT,
-                            `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '角色名称',
-                            `create_time` datetime DEFAULT NULL,
-                            `update_time` datetime DEFAULT NULL,
+                            `roleName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '角色名称',
+                            `createTime` datetime DEFAULT NULL,
+                            `updateTime` datetime DEFAULT NULL,
                             `status` int NOT NULL DEFAULT '0',
                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
@@ -255,9 +266,9 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_role` (`id`, `role_name`, `create_time`, `update_time`, `status`) VALUES (1, 'super-admin', '2021-10-20 20:52:51', '2021-10-20 20:52:54', 0);
-INSERT INTO `sys_role` (`id`, `role_name`, `create_time`, `update_time`, `status`) VALUES (2, 'admin', '2021-10-20 20:53:03', '2021-10-20 20:53:00', 0);
-INSERT INTO `sys_role` (`id`, `role_name`, `create_time`, `update_time`, `status`) VALUES (3, 'user', '2021-10-20 20:53:06', '2021-10-20 20:53:09', 0);
+INSERT INTO `sys_role` (`id`, `roleName`, `createTime`, `updateTime`, `status`) VALUES (1, 'super-admin', '2021-10-20 20:52:51', '2021-10-20 20:52:54', 0);
+INSERT INTO `sys_role` (`id`, `roleName`, `createTime`, `updateTime`, `status`) VALUES (2, 'admin', '2021-10-20 20:53:03', '2021-10-20 20:53:00', 0);
+INSERT INTO `sys_role` (`id`, `roleName`, `createTime`, `updateTime`, `status`) VALUES (3, 'user', '2021-10-20 20:53:06', '2021-10-20 20:53:09', 0);
 COMMIT;
 
 -- ----------------------------

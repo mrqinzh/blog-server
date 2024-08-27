@@ -6,22 +6,10 @@
 
     <resultMap id="baseMap" type="Article" autoMapping="true">
         <id property="id" column="id" />
-        <association property="user" javaType="User">
-            <id property="id" column="id" />
-            <result property="userAvatar" column="user_avatar" />
-            <result property="userNickname" column="user_nickname" />
-            <result property="userEmail" column="user_email" />
-            <result property="userName" column="user_name" />
-        </association>
     </resultMap>
 
     <resultMap id="listMap" type="Article" autoMapping="true">
         <id property="id" column="id" />
-        <association property="user" javaType="User">
-            <id property="id" column="id" />
-            <result property="userAvatar" column="user_avatar" />
-            <result property="userNickname" column="user_nickname" />
-        </association>
     </resultMap>
 
     <select id="pageCount" resultType="long">

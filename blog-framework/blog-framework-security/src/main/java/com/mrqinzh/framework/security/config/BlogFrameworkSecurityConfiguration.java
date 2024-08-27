@@ -33,8 +33,6 @@ public class BlogFrameworkSecurityConfiguration {
 
     @Autowired(required = false)
     private List<AuthorizeRequestsCustomizer> authorizeRequestsCustomizers;
-    @Autowired
-    private ObjectProvider<AuthenticationSuccessHandler> successHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -6,11 +6,11 @@
 
     <select id="getRolesByUserId" resultType="Role">
         SELECT
-            sr.id, sr.role_name
+            sr.id, sr.roleName
         FROM sys_user_role sur
-        LEFT JOIN sys_role sr ON sur.role_id = sr.id
+        LEFT JOIN sys_role sr ON sur.roleId = sr.id
         WHERE sur.`status` = 0
-        AND sur.user_id = #{userId}
+        AND sur.userId = #{userId}
     </select>
 
 </mapper>

@@ -1,24 +1,25 @@
 package com.mrqinzh.framework.web.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
-
 @Configuration
 public class SpringMvcConfiguration implements WebMvcConfigurer {
 
-    @Resource
-    private WebApiProperties webApiProperties;
+    @Bean
+    public WebApiProperties webApiProperties() {
+        return new WebApiProperties();
+    }
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
+        WebApiProperties webApiProperties = webApiProperties();
         configurePathMatch(configurer, webApiProperties.getAdminApi());
         configurePathMatch(configurer, webApiProperties.getAppApi());
-        configurePathMatch(configurer, webApiProperties.getAuthApi());
     }
 
     /**
