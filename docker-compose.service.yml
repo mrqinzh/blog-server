@@ -1,21 +1,31 @@
 version: '3'
 services:
-  blog-app:
-    container_name: blog-app
+  blog-auth:
+    container_name: blog-auth
     build:
-      context: ./blog-webapp
+      context: ./blog-auth
+      dockerfile: Dockerfile
+    ports:
+      - "10000:10000"
+    depends_on:
+      - blog-user
+    networks:
+      - 1panel-network
+
+  blog-gateway:
+    container_name: blog-gateway
+    build:
+      context: ./blog-gateway
       dockerfile: Dockerfile
     ports:
       - "9999:9999"
-    depends_on:
-      - blog-article
     networks:
       - 1panel-network
 
   blog-article:
     container_name: blog-article-service
     build:
-      context: ./service-article
+      context: ./blog-article
       dockerfile: Dockerfile
     ports:
       - "11111:11111"
@@ -28,7 +38,7 @@ services:
   blog-comment:
     container_name: blog-comment-service
     build:
-      context: ./service-comment
+      context: ./blog-comment
       dockerfile: Dockerfile
     ports:
       - "12221:12221"
@@ -38,7 +48,7 @@ services:
   blog-user:
     container_name: blog-user-service
     build:
-      context: ./service-user
+      context: ./blog-user
       dockerfile: Dockerfile
     ports:
       - "10001:10001"

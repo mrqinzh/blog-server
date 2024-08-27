@@ -4,8 +4,8 @@ FROM openjdk:8-jdk-alpine
 # 工作目录
 VOLUME /app
 
-ADD target/blog-webapp-0.0.1-SNAPSHOT.jar /app/
+ADD target/blog-gateway-0.0.1-SNAPSHOT.jar /app/
 
 EXPOSE 9999
 
-ENTRYPOINT ["java","-jar","/app/blog-webapp-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-jar","/app/blog-gateway-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]
