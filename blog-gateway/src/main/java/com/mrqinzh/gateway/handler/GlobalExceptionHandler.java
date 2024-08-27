@@ -1,7 +1,6 @@
-package com.mrqinzh.framework.web.exception;
+package com.mrqinzh.gateway.handler;
 
 import cn.hutool.core.util.StrUtil;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -16,7 +15,7 @@ import java.util.List;
 
 /**
  * @author mrqinzh
- * @Description 全局异常处理器
+ * @Description 全局异常处理器 gateway 模块暂未引入 blog-framework-web
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {

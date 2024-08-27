@@ -2,10 +2,12 @@ package com.mrqinzh.framework.common.security;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Data
 public class UserDetailsImpl implements UserDetails {
@@ -15,10 +17,11 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private String avatar;
+    private List<SimpleGrantedAuthority> authorities = Collections.emptyList();
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+    public Collection<SimpleGrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     @Override

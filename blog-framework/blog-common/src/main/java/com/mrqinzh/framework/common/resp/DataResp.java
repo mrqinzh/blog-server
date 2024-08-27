@@ -1,6 +1,6 @@
 package com.mrqinzh.framework.common.resp;
 
-import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,7 @@ public final class DataResp<T> extends Resp {
     private T data;
 
     private DataResp(T data){
-        super(ErrorCodeConstants.SUCCESS);
+        super(ErrorCode.SUCCESS);
         this.data = data;
     }
 

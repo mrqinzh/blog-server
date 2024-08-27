@@ -1,13 +1,13 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.vo.BaseVO;
+import com.mrqinzh.framework.common.domain.vo.VO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Schema(description = "添加评论请求实体")
-public class CommentVO implements BaseVO {
+public class CommentVO implements VO {
 
     @Schema(description = "昵称")
     @NotBlank

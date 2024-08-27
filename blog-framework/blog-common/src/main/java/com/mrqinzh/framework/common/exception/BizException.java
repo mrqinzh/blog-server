@@ -20,9 +20,9 @@ public class BizException extends RuntimeException {
         this.status = status;
     }
 
-    public BizException(ErrorCode errorCode) {
-        this.code = errorCode.getCode();
-        this.msg = errorCode.getMsg();
+    public BizException(ErrorCode.CodeEntity codeEntity) {
+        this.code = codeEntity.getCode();
+        this.msg = codeEntity.getMsg();
     }
 
     public BizException(String msg) {

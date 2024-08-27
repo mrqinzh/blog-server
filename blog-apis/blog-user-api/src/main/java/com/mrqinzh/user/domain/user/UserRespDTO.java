@@ -1,15 +1,20 @@
 package com.mrqinzh.user.domain.user;
 
-import com.mrqinzh.framework.common.domain.dto.BaseDTO;
+import com.mrqinzh.framework.common.domain.dto.DTO;
+import com.mrqinzh.user.domain.role.RoleRespDTO;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class UserRespDTO implements BaseDTO {
+public class UserRespDTO implements DTO {
 
     private Long id;
     private String username;
     private String nickname;
     private String avatar;
     private String password;
+
+    private List<RoleRespDTO> roles;
 
 }

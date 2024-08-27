@@ -1,7 +1,7 @@
 package com.mrqinzh.framework.common.domain.enums;
 
 /**
- * todo use com.mrqinzh.framework.common.exception.ErrorCode
+ * todo use com.mrqinzh.framework.common.exception.ErrorCodeConstants.ErrorCode
  */
 @Deprecated
 public enum AppStatus {

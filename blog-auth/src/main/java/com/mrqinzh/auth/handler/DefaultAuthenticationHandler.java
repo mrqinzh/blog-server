@@ -6,7 +6,6 @@ import com.mrqinzh.framework.common.security.TokenStoreBO;
 import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.common.exception.ErrorCode;
-import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import org.springframework.security.authentication.LockedException;
@@ -49,12 +48,12 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
     }
 
     private Resp getResp(AuthenticationException e) {
-        ErrorCode code = null;
+        ErrorCode.CodeEntity code = null;
         if (e instanceof LockedException) {
-            code = ErrorCodeConstants.ACCOUNT_LOCKED;
+            code = ErrorCode.ACCOUNT_LOCKED;
         }
         // todo 完善其他情况
-        return Optional.ofNullable(code).map(Resp::new).orElse(new Resp(ErrorCodeConstants.USERNAME_PASSWORD_ERROR));
+        return Optional.ofNullable(code).map(Resp::new).orElse(new Resp(ErrorCode.USERNAME_PASSWORD_ERROR));
     }
 
     public static void writeResponse(HttpServletRequest request, HttpServletResponse response, Object data) {

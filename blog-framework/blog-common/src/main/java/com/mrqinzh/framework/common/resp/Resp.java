@@ -2,7 +2,6 @@ package com.mrqinzh.framework.common.resp;
 
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.ErrorCode;
-import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,7 @@ public class Resp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final Resp SUCCESS = new Resp(ErrorCodeConstants.SUCCESS);
+    public static final Resp SUCCESS = new Resp(ErrorCode.SUCCESS);
 
     private Integer code;
     private Boolean success;
@@ -27,10 +26,10 @@ public class Resp implements Serializable {
     public Resp() {
     }
 
-    public Resp(ErrorCode errorCode) {
-        this.code = errorCode.getCode();
-        this.success = Objects.equals(ErrorCodeConstants.SUCCESS.getCode(), errorCode.getCode());
-        this.msg = errorCode.getMsg();
+    public Resp(ErrorCode.CodeEntity codeEntity) {
+        this.code = codeEntity.getCode();
+        this.success = Objects.equals(ErrorCode.SUCCESS.getCode(), codeEntity.getCode());
+        this.msg = codeEntity.getMsg();
     }
 
     public Resp(AppStatus status) {
@@ -40,7 +39,7 @@ public class Resp implements Serializable {
     }
 
     public static Resp success(String msg) {
-        Resp resp = new Resp(ErrorCodeConstants.SUCCESS);
+        Resp resp = new Resp(ErrorCode.SUCCESS);
         resp.setMsg(msg);
         return resp;
     }
@@ -66,11 +65,11 @@ public class Resp implements Serializable {
         return resp;
     }
 
-    public static Resp error(ErrorCode errorCode) {
+    public static Resp error(ErrorCode.CodeEntity codeEntity) {
         Resp resp = new Resp();
-        resp.setCode(errorCode.getCode());
+        resp.setCode(codeEntity.getCode());
         resp.setSuccess(false);
-        resp.setMsg(errorCode.getMsg());
+        resp.setMsg(codeEntity.getMsg());
         return resp;
     }
 
