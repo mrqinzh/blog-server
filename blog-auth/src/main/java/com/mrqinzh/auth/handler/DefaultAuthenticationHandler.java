@@ -45,7 +45,7 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
 
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-
+        writeResponse(httpServletRequest, httpServletResponse, Resp.success("退出成功了。"));
     }
 
     private Resp getResp(AuthenticationException e) {

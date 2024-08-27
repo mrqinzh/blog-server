@@ -27,7 +27,7 @@ spring:
         - id: auth-api
           uri: lb://blog-auth
           predicates:
-            - Path=/app-api/login
+            - Path=/app-api/login,/admin-api/logout
 
         ## user-service 服务
         - id: user-admin-api # 路由的编号

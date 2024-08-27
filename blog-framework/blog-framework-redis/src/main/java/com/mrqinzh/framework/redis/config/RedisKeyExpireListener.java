@@ -31,9 +31,8 @@ public class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
 
     @Override
     public void onMessage(Message message, byte[] pattern) {
-        logger.info("message ==> key " + message);
+        logger.info("expire key ==> " + message);
         String value = new String(message.getBody(), StandardCharsets.UTF_8);
-        logger.info("partten " + value); // __keyevent@*__:expired
 
         if (!CollectionUtils.isEmpty(handlers)) {
             handlers.stream().filter(h -> h.support(value)).forEach(h -> h.onExpired(value));

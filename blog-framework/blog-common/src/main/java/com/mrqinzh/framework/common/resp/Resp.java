@@ -39,6 +39,12 @@ public class Resp implements Serializable {
         this.msg = status.getMsg();
     }
 
+    public static Resp success(String msg) {
+        Resp resp = new Resp(ErrorCodeConstants.SUCCESS);
+        resp.setMsg(msg);
+        return resp;
+    }
+
     public static Resp success() {
         return SUCCESS;
     }
