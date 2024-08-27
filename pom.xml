@@ -38,6 +38,7 @@
         <commons-pool2.version>2.9.0</commons-pool2.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <rocketmq-springboot.version>2.3.0</rocketmq-springboot.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
