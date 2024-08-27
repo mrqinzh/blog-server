@@ -20,11 +20,9 @@ public class RedisUtil {
 	private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
 	@SuppressWarnings("unchecked")
-	private static final RedisTemplate<String, Object> REDIS_TEMPLATE = SpringContextHolder.getBean("redisTemplate",
-			RedisTemplate.class);
+	private static final RedisTemplate<String, Object> REDIS_TEMPLATE = SpringContextHolder.getBean("redisTemplate", RedisTemplate.class);
 
-	public static final StringRedisTemplate STRING_REDIS_TEMPLATE = SpringContextHolder.getBean("stringRedisTemplate",
-			StringRedisTemplate.class);
+	public static StringRedisTemplate STRING_REDIS_TEMPLATE = SpringContextHolder.getBean("stringRedisTemplate", StringRedisTemplate.class);
 
 	// =============================common============================
 	/**

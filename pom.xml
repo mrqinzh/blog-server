@@ -19,13 +19,14 @@
         <module>blog-comment</module>
         <module>blog-apis</module>
         <module>blog-framework</module>
+        <module>blog-auth</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
-        <spring.cloud.version>2020.0.5</spring.cloud.version>
-        <spring.boot.version>2.4.3</spring.boot.version>
+        <spring.cloud.alibaba.version>2021.0.6.1</spring.cloud.alibaba.version>
+        <spring.cloud.version>2021.0.8</spring.cloud.version>
+        <spring.boot.version>2.6.15</spring.boot.version>
         <mybatis.plus.version>3.3.0</mybatis.plus.version>
         <redisson.version>3.32.0</redisson.version>
         <hutool.version>5.5.8</hutool.version>
@@ -35,6 +36,7 @@
         <springdoc.version>1.7.0</springdoc.version>
         <commons.lang3.version>3.1</commons.lang3.version>
         <commons-pool2.version>2.9.0</commons-pool2.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <rocketmq-springboot.version>2.3.0</rocketmq-springboot.version>
     </properties>
 
@@ -69,11 +71,6 @@
                 <version>${rocketmq-springboot.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-pool2</artifactId>
-                <version>${commons-pool2.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
@@ -104,6 +101,21 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <!--     blog-apis       -->

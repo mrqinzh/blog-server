@@ -14,7 +14,7 @@ import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.utils.BizAssert;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
-import com.mrqinzh.user.domain.UserDTO;
+import com.mrqinzh.user.domain.user.UserDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.mrqinzh.framework.security.config.BlogFrameworkSecurityConfiguration
+com.mrqinzh.framework.security.config.RpcSecurityConfiguration

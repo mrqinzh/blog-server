@@ -18,7 +18,7 @@ public class PageResp<T> extends Resp {
 
     @Data
     @AllArgsConstructor
-    public static class Response<T> {
+    private static class Response<T> {
         private long pageNum;
         private long pageSize;
         private long total;

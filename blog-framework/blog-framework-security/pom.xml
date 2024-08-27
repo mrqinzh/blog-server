@@ -19,6 +19,22 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-rpc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.mrqinzh</groupId>
             <artifactId>blog-common</artifactId>
         </dependency>

@@ -3,7 +3,7 @@ package com.mrqinzh.user.controller.admin;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
-import com.mrqinzh.framework.web.controller.BaseController;
+import com.mrqinzh.framework.common.web.controller.BaseController;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.vo.UserVO;
 import com.mrqinzh.user.service.MenuService;

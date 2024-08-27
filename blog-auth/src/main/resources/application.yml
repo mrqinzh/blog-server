@@ -1,0 +1,14 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: blog-auth
+  cloud:
+    nacos:
+      server-addr: nacos:8848
+      username: nacos
+      password: nacos
+
+  config:
+    additional-location: ./config/

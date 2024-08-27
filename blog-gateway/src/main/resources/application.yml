@@ -5,6 +5,14 @@ spring:
   application:
     name: gateway-service
 
+  profiles:
+    active: dev
+
+  config:
+    import:
+      - optional:classpath:application-${spring.profiles.active}.yaml # 加载【本地】配置
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml # 加载【Nacos】的配置
+
   cloud:
     nacos:
       server-addr: nacos:8848
@@ -16,6 +24,11 @@ spring:
         group: DEFAULT_GROUP
     gateway:
       routes:
+        - id: auth-api
+          uri: lb://blog-auth
+          predicates:
+            - Path=/app-api/login,/admin-api/logout
+
         ## user-service 服务
         - id: user-admin-api # 路由的编号
           uri: lb://user-service
@@ -24,9 +37,9 @@ spring:
         - id: user-app-api # 路由的编号
           uri: lb://user-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/app-api/user/**
+            - Path=/app-api/user/**,/app-api/menu/**
 
-        ## comment-server 服务
+        ## comment-service 服务
         - id: comment-admin-api # 路由的编号
           uri: lb://comment-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
@@ -36,7 +49,7 @@ spring:
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
             - Path=/app-api/comment/**
 
-        ## article-server 服务
+        ## article-service 服务
         - id: article-admin-api # 路由的编号
           uri: lb://article-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
