@@ -1,5 +1,6 @@
 package com.mrqinzh.framework.security.config;
 
+import com.mrqinzh.framework.common.constant.RpcConstant;
 import com.mrqinzh.framework.common.web.WebConstant;
 
 public class SecurityProperties {
@@ -16,9 +17,8 @@ public class SecurityProperties {
     public static final String COOKIE_NAME = "Token";
 
     public static final String[] withoutAuthApis = {
-            LOGIN_URL,
-            LOGOUT_URL,
-            WebConstant.APP_API_PREFIX + "/**"
+            WebConstant.APP_API_PREFIX + "/**",
+            RpcConstant.RPC_API_PREFIX + "/**"
     };
 
 

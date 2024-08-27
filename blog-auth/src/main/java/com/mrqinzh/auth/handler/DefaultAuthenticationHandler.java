@@ -1,7 +1,10 @@
 package com.mrqinzh.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mrqinzh.auth.token.AuthenticationTokenManager;
+import com.mrqinzh.framework.common.security.LoginUser;
+import com.mrqinzh.framework.common.security.TokenStoreBO;
+import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.exception.ErrorCodeConstants;
 import com.mrqinzh.framework.common.resp.DataResp;
@@ -13,7 +16,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,13 +26,16 @@ import java.util.Optional;
 
 public class DefaultAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
 
-    @Resource
-    private AuthenticationTokenManager authenticationTokenManager;
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String tokenId = authenticationTokenManager.save(request, response, authentication);
+        String tokenId = AuthenticationTokenCacheUtils.save(request, response, token2BO(authentication));
         writeResponse(request, response, DataResp.ok(tokenId));
+    }
+
+    public TokenStoreBO token2BO(Authentication authentication) {
+        TokenStoreBO bo = new TokenStoreBO();
+        bo.setUser(new LoginUser((UserDetailsImpl) authentication.getPrincipal()));
+        return bo;
     }
 
     @Override

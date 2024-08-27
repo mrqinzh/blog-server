@@ -1,6 +1,7 @@
 package com.mrqinzh.auth.service;
 
-import com.mrqinzh.auth.domain.UserDetailsImpl;
+import com.mrqinzh.auth.domain.convert.UserConvert;
+import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.user.api.UserApi;
 import com.mrqinzh.user.domain.user.UserRespDTO;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +19,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetailsImpl details = new UserDetailsImpl();
         UserRespDTO userDTO = userApiService.getByUsername(username);
-
-        details.setUsername(userDTO.getUsername());
-        details.setPassword(userDTO.getPassword());
-
-        return details;
+        UserDetailsImpl userDetails = UserConvert.INSTANCE.convert(userDTO);
+        return userDetails;
     }
 
 }
