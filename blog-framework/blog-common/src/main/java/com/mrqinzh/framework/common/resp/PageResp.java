@@ -3,13 +3,16 @@ package com.mrqinzh.framework.common.resp;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class PageResp<T> extends Resp {
 
@@ -30,12 +33,12 @@ public class PageResp<T> extends Resp {
 
     @Data
     @AllArgsConstructor
-    private static class Response<T> {
+    private static class Response<E> {
         private long pageNum;
         private long pageSize;
         private long total;
 
-        private List<T> list;
+        private List<E> list;
     }
 
 }

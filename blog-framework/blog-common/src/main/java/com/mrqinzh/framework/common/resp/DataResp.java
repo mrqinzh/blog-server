@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public final class DataResp<T> extends Resp {
+public class DataResp<T> extends Resp {
 
     private T data;
 
-    private DataResp(T data){
+    public DataResp(T data) {
         super(ErrorCode.SUCCESS);
         this.data = data;
     }

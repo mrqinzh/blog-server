@@ -1,7 +1,8 @@
 package com.mrqinzh.user.controller.app;
 
-import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.CollectionDataResp;
 import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.user.domain.convert.MenuConvert;
 import com.mrqinzh.user.domain.entity.Menu;
 import com.mrqinzh.user.service.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +24,7 @@ public class AppMenuController {
     @GetMapping("list")
     public Resp findList() {
         List<Menu> menus = menuService.findAll();
-        return DataResp.ok(menus);
+        return CollectionDataResp.ok(menus, MenuConvert.INSTANCE::convert);
     }
 
 }

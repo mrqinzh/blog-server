@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class UserServiceProvider implements UserApi {
+public class UserApiProviderClient implements UserApi {
 
     @Resource
     private UserService userService;
