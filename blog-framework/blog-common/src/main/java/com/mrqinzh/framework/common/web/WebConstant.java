@@ -6,6 +6,4 @@ public interface WebConstant {
 
     String APP_API_PREFIX = "/app-api";
 
-    String AUTH_API_PREFIX = "/auth-api";
-
 }

@@ -3,8 +3,10 @@ package com.mrqinzh.user.controller.admin;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
+import com.mrqinzh.user.domain.convert.RoleConvert;
 import com.mrqinzh.user.domain.entity.Role;
 import com.mrqinzh.user.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +35,7 @@ public class RoleController extends BaseController {
     @GetMapping("page")
     public Resp findPage(PageDTO pageDTO) {
         Page<Role> roles = roleService.findPage(pageDTO);
-        return DataResp.ok(roles);
+        return PageResp.ok(roles.getCurrent(), roles.getSize(), roles.getTotal(), roles.getRecords(), RoleConvert.INSTANCE::convert2VO);
     }
 
     @Operation(summary = "根据id获取指定角色信息")

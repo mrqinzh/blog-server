@@ -33,6 +33,7 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
 
     public TokenStoreBO token2BO(Authentication authentication) {
         TokenStoreBO bo = new TokenStoreBO();
+        bo.setAuthenticated(authentication.isAuthenticated());
         bo.setUser(new LoginUser((UserDetailsImpl) authentication.getPrincipal()));
         return bo;
     }

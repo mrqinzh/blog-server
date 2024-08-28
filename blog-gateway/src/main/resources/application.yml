@@ -33,11 +33,11 @@ spring:
         - id: user-admin-api # 路由的编号
           uri: lb://user-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/admin-api/user/**
+            - Path=/admin-api/user/**,/admin-api/menu/**,/admin-api/role/**,/admin-api/sys/config/**
         - id: user-app-api # 路由的编号
           uri: lb://user-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/app-api/user/**,/app-api/menu/**
+            - Path=/app-api/user/**,/app-api/menu/**,/app-api/role/**
 
         ## comment-service 服务
         - id: comment-admin-api # 路由的编号
@@ -53,8 +53,8 @@ spring:
         - id: article-admin-api # 路由的编号
           uri: lb://article-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/admin-api/article/**
+            - Path=/admin-api/article/**,/admin-api/tag/**
         - id: article-app-api # 路由的编号
           uri: lb://article-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/app-api/article/**
+            - Path=/app-api/article/**,/app-api/tag/**

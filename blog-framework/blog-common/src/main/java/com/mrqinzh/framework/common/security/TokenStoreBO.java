@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public class TokenStoreBO implements BO {
 
     private LoginUser user;
+    private boolean authenticated;
 
     public TokenStoreBO(UserDetailsImpl userDetails) {
         this.user = new LoginUser(userDetails);
