@@ -2,10 +2,14 @@ package com.mrqinzh.user.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.mrqinzh.framework.mybatis.entity.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
+@Setter
+@Getter
 public class User extends BaseEntity {
 
     private String mobile;
@@ -46,91 +50,4 @@ public class User extends BaseEntity {
         return pwd;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Date getLoginLastTime() {
-        return loginLastTime;
-    }
-
-    public void setLoginLastTime(Date loginLastTime) {
-        this.loginLastTime = loginLastTime;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getQqNo() {
-        return qqNo;
-    }
-
-    public void setQqNo(String qqNo) {
-        this.qqNo = qqNo;
-    }
-
-    public String getWxNo() {
-        return wxNo;
-    }
-
-    public void setWxNo(String wxNo) {
-        this.wxNo = wxNo;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 }

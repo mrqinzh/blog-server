@@ -7,6 +7,7 @@ import com.mrqinzh.article.service.ArticleService;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -50,34 +51,31 @@ public class ArticleController extends BaseController {
 //            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
         Page<Article> page = articleService.list(pageDTO);
-        return new PageResp<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords().stream().map(ArticleVO::new).collect(Collectors.toList()));
+        return PageResp.ok(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords(), ArticleVO::new);
     }
 
-//    @AccessPermission(RoleType.SUPER_ADMIN)
     @Operation(summary = "添加文章")
     @PostMapping("/add")
     public Resp add(@RequestBody @Valid ArticleVO articleVo) {
         articleService.add(articleVo);
-        return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
+        return Resp.success();
     }
 
-//    @AccessPermission(RoleType.SUPER_ADMIN)
     @Operation(summary = "根据 articleId 更新文章")
     @PostMapping("/update")
     public Resp update(@RequestBody ArticleVO articleVo){
         if (articleVo.getId() == null) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
+            return Resp.error(ErrorCode.BAD_PARAMETER);
         }
         articleService.update(articleVo);
-        return Resp.sendMsg(AppStatus.UPDATE_SUCCESS);
+        return Resp.success();
     }
 
-//    @AccessPermission(RoleType.SUPER_ADMIN)
     @Operation(summary = "根据 id 删除文章")
     @DeleteMapping("/{articleId}")
     public Resp delete(@PathVariable("articleId") Long articleId){
         articleService.delete(articleId);
-        return Resp.sendMsg(AppStatus.DELETE_SUCCESS);
+        return Resp.success();
     }
 
 }

@@ -10,7 +10,10 @@ public class DataResp<T> extends Resp {
 
     private T data;
 
-    public DataResp(T data) {
+    protected DataResp() {
+    }
+
+    protected DataResp(T data) {
         super(ErrorCode.SUCCESS);
         this.data = data;
     }

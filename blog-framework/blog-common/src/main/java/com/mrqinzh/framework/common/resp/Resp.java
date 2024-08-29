@@ -1,6 +1,5 @@
 package com.mrqinzh.framework.common.resp;
 
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,46 +14,42 @@ import java.util.Objects;
 @Getter
 public class Resp implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     public static final Resp SUCCESS = new Resp(ErrorCode.SUCCESS);
+    public static final Resp NULL = new Resp();
 
-    private Integer code;
-    private Boolean success;
+    private int code;
+    private boolean success;
     private String msg;
 
-    public Resp() {
+    protected Resp() {
     }
 
-    public Resp(ErrorCode.CodeEntity codeEntity) {
-        this.code = codeEntity.getCode();
-        this.success = Objects.equals(ErrorCode.SUCCESS.getCode(), codeEntity.getCode());
-        this.msg = codeEntity.getMsg();
+    private Resp(int code, boolean success, String msg) {
+        this.code = code;
+        this.success = success;
+        this.msg = msg;
     }
 
-    public Resp(AppStatus status) {
-        this.code = status.getCode();
-        this.success = status.getSuccess();
-        this.msg = status.getMsg();
-    }
-
-    public static Resp success(String msg) {
-        Resp resp = new Resp(ErrorCode.SUCCESS);
-        resp.setMsg(msg);
-        return resp;
+    protected Resp(ErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.success = Objects.equals(ErrorCode.SUCCESS.getCode(), errorCode.getCode());
+        this.msg = errorCode.getMsg();
     }
 
     public static Resp success() {
         return SUCCESS;
     }
 
-    @Deprecated
-    public static Resp sendMsg(AppStatus status) {
-        Resp resp = new Resp();
-        resp.setCode(status.getCode());
-        resp.setSuccess(status.getSuccess());
-        resp.setMsg(status.getMsg());
-        return resp;
+    public static Resp success(String msg) {
+        return new Resp(SUCCESS.getCode(), true, msg);
+    }
+
+    public static Resp error(String msg) {
+        return error(ErrorCode.UNKNOWN_ERROR_CODE.getCode(), msg);
+    }
+
+    public static Resp error(ErrorCode errorCode) {
+        return error(errorCode.getCode(), errorCode.getMsg());
     }
 
     public static Resp error(Integer code, String msg) {
@@ -64,14 +59,5 @@ public class Resp implements Serializable {
         resp.setMsg(msg);
         return resp;
     }
-
-    public static Resp error(ErrorCode.CodeEntity codeEntity) {
-        Resp resp = new Resp();
-        resp.setCode(codeEntity.getCode());
-        resp.setSuccess(false);
-        resp.setMsg(codeEntity.getMsg());
-        return resp;
-    }
-
 
 }

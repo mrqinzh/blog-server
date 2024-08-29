@@ -54,7 +54,7 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
             code = ErrorCode.ACCOUNT_LOCKED;
         }
         // todo 完善其他情况
-        return Optional.ofNullable(code).map(Resp::new).orElse(new Resp(ErrorCode.USERNAME_PASSWORD_ERROR));
+        return Optional.ofNullable(code).map(Resp::error).orElse(Resp.error(ErrorCode.USERNAME_PASSWORD_ERROR));
     }
 
     public static void writeResponse(HttpServletRequest request, HttpServletResponse response, Object data) {

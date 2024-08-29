@@ -36,7 +36,7 @@ public class CommentController extends BaseController {
     public Resp add(@RequestBody @Valid CommentVO commentVo) {
         commentVo.setCommentIp(getClientIp());
         commentService.add(commentVo);
-        return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
+        return Resp.success();
     }
 
     /**

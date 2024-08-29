@@ -3,6 +3,7 @@ package com.mrqinzh.framework.common.exception;
 import cn.hutool.core.util.StrUtil;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.resp.Resp;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author mrqinzh
@@ -20,9 +21,14 @@ public class BizException extends RuntimeException {
         this.status = status;
     }
 
-    public BizException(ErrorCode.CodeEntity codeEntity) {
+    public BizException(ErrorCode codeEntity) {
         this.code = codeEntity.getCode();
         this.msg = codeEntity.getMsg();
+    }
+
+    public BizException(ErrorCode codeEntity, String msg) {
+        this.code = codeEntity.getCode();
+        this.msg = StringUtils.isBlank(msg) ? codeEntity.getMsg() : msg;
     }
 
     public BizException(String msg) {

@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
         userMapper.updateById(user);
 
-        return Resp.sendMsg(AppStatus.UPDATE_SUCCESS);
+        return Resp.success();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userVO, user);
         userMapper.insert(user);
 
-        return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
+        return Resp.success();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Resp list(PageDTO pageDTO) {
         if (pageDTO == null) {
-            return new Resp();
+            return Resp.NULL;
         }
         List<User> users = userMapper.list();
         return DataResp.ok(users);

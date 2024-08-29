@@ -3,7 +3,6 @@ package com.mrqinzh.article.controller.admin;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.service.TagService;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
@@ -30,10 +29,9 @@ public class TagController extends BaseController {
 
     @Operation(summary = "添加标签")
     @PostMapping("add")
-//    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp add(@RequestBody Tag tag) {
         tagService.add(tag);
-        return Resp.sendMsg(AppStatus.INSERT_SUCCESS);
+        return Resp.success();
     }
 
     @Operation(summary = "分页查询 tags")
@@ -51,7 +49,6 @@ public class TagController extends BaseController {
 
     @Operation(summary = "根据 tagId 删除标签")
     @DeleteMapping("{id}")
-//    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp delete(@PathVariable Integer id) {
         return tagService.delete(id);
     }
@@ -60,7 +57,7 @@ public class TagController extends BaseController {
     @PostMapping("update")
     public Resp update(@RequestBody Tag tag) {
         tagService.update(tag);
-        return Resp.sendMsg(AppStatus.SUCCESS);
+        return Resp.success();
     }
 
 }

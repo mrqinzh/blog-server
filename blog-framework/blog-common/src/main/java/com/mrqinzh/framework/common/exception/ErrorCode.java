@@ -1,11 +1,11 @@
 package com.mrqinzh.framework.common.exception;
 
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
-import lombok.Data;
 
 public interface ErrorCode {
 
     CodeEntity SUCCESS = new CodeEntity(0, "请求成功");
+    CodeEntity UNKNOWN_ERROR_CODE = new CodeEntity(60000, "未标注code码的异常");
 
     CodeEntity USERNAME_PASSWORD_ERROR = new CodeEntity(30100, "账号或密码错误！");
     CodeEntity ACCOUNT_LOCKED = new CodeEntity(30101, "账户被锁定了");
@@ -21,16 +21,15 @@ public interface ErrorCode {
     CodeEntity NULL_PRINTER_EXCEPTION = new CodeEntity(500, "服务器出现了空指针异常。。。");
     CodeEntity SERVICE_ERROR = new CodeEntity(50000, "业务异常，可能是bug，也可能不是。。。-_-");
 
-    Integer getCode();
+    int getCode();
     String getMsg();
 
-    @Data
     class CodeEntity implements ErrorCode {
 
-        private final Integer code;
+        private final int code;
         private final String msg;
 
-        public CodeEntity(Integer code, String message) {
+        public CodeEntity(int code, String message) {
             this.code = code;
             this.msg = message;
         }
@@ -41,5 +40,14 @@ public interface ErrorCode {
             this.msg = appStatus.getMsg();
         }
 
+        @Override
+        public int getCode() {
+            return code;
+        }
+
+        @Override
+        public String getMsg() {
+            return msg;
+        }
     }
 }

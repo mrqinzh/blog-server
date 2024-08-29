@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Schema(description = "分页信息类")
 @Data
-public class PageDTO implements Serializable {
+public class PageDTO implements DTO {
 
     private Integer currentPage = 1;
 

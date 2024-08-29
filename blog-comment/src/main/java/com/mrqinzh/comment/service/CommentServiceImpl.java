@@ -82,7 +82,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Resp deleteById(String idType, Long id) {
         commentMapper.deleteByTypeId(idType, id);
-        return Resp.sendMsg(AppStatus.DELETE_SUCCESS);
+        return Resp.success();
     }
 
     @Override

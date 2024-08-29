@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public final class CollectionDataResp<T extends Collection<?>> extends DataResp<T> {
 
-    public CollectionDataResp(T data) {
+    private CollectionDataResp(T data) {
         super(data);
     }
 
@@ -17,7 +17,7 @@ public final class CollectionDataResp<T extends Collection<?>> extends DataResp<
      */
     public static <E, C extends Collection<E>> CollectionDataResp<?> ok(C data, Function<E, ?> mapping) {
         if (data == null) {
-            throw new NullPointerException("data is null");
+            return ok(null);
         }
         return new CollectionDataResp<>(data.stream().map(mapping).collect(Collectors.toList()));
     }

@@ -40,7 +40,7 @@ public class AppArticleController {
     @GetMapping("/list")
     public Resp list(PageDTO pageDTO) {
         Page<Article> page = articleService.list(pageDTO);
-        return new PageResp<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords().stream().map(ArticleVO::new).collect(Collectors.toList()));
+        return PageResp.ok(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords(), ArticleVO::new);
     }
 
 }

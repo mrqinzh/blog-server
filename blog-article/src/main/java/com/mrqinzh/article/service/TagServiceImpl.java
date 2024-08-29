@@ -7,6 +7,7 @@ import com.mrqinzh.article.mapper.TagMapper;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +37,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public void add(Tag tag) {
         if (StringUtils.isBlank(tag.getCoverImg())) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "必须上传标签对应图片！");
+            throw new BizException(ErrorCode.BAD_PARAMETER, "必须上传标签对应图片！");
         }
         tagMapper.insert(tag);
     }
@@ -44,7 +45,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Resp delete(Integer id) {
         tagMapper.deleteById(id);
-        return Resp.sendMsg(AppStatus.DELETE_SUCCESS);
+        return Resp.success();
     }
 
     @Override
