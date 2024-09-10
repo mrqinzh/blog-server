@@ -9,12 +9,12 @@ import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 

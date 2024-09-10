@@ -7,9 +7,9 @@ import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @io.swagger.v3.oas.annotations.tags.Tag(name = "标签接口")

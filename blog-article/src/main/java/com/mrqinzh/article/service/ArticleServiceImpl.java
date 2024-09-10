@@ -15,12 +15,12 @@ import com.mrqinzh.framework.common.utils.BizAssert;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
 import com.mrqinzh.user.domain.user.UserDTO;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

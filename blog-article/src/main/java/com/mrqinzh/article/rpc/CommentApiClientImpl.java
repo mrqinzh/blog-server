@@ -1,9 +1,8 @@
 package com.mrqinzh.article.rpc;
 
 import com.mrqinzh.comment.api.CommentApi;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 @Component
 public class CommentApiClientImpl implements CommentApiClient {

@@ -5,13 +5,13 @@ import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.user.api.UserApi;
 import com.mrqinzh.user.domain.user.UserRespDTO;
+import jakarta.annotation.Resource;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.stream.Collectors;
 
 @Service

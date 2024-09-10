@@ -10,10 +10,10 @@ import com.mrqinzh.framework.redis.utils.RedisUtil;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.vo.UserVO;
 import com.mrqinzh.user.mapper.UserMapper;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

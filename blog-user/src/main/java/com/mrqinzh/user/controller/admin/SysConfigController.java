@@ -7,9 +7,8 @@ import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import com.mrqinzh.user.domain.entity.SysConfig;
 import com.mrqinzh.user.service.SysConfigService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 @RequestMapping("/sys/config")
 @RestController

@@ -9,9 +9,9 @@ import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.user.UserRespDTO;
 import com.mrqinzh.user.service.RoleService;
 import com.mrqinzh.user.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
