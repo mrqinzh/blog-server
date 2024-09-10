@@ -1,13 +1,12 @@
 package com.mrqinzh.framework.common.web.controller;
 
 import com.mrqinzh.framework.common.web.utils.WebFrameworkUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public abstract class BaseController {
 

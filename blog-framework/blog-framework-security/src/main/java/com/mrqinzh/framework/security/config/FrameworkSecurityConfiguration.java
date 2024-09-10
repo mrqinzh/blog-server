@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,7 +29,7 @@ import java.util.Optional;
 
 @AutoConfigureOrder(Integer.MIN_VALUE) // 目的：先于 Spring Security 自动配置，避免一键改包后，org.* 基础包无法生效
 @EnableMethodSecurity(securedEnabled = true)
-public class BlogFrameworkSecurityConfiguration {
+public class FrameworkSecurityConfiguration {
 
     @Autowired(required = false)
     private List<AuthorizeRequestsCustomizer> authorizeRequestsCustomizers;
@@ -57,7 +55,7 @@ public class BlogFrameworkSecurityConfiguration {
                 .logoutSuccessHandler(logoutSuccessHandler());
 
         http.authorizeRequests()
-                .antMatchers(SecurityProperties.withoutAuthApis).permitAll()
+                .requestMatchers(SecurityProperties.withoutAuthApis).permitAll()
                 .and()
                 // 添加各个模块的自定义过滤规则
                 .authorizeRequests(registry -> Optional.ofNullable(authorizeRequestsCustomizers).orElseGet(ArrayList::new).forEach(customizer -> customizer.customize(registry)))

@@ -2,6 +2,7 @@ package com.mrqinzh.comment.aop;
 
 import com.mrqinzh.framework.common.constant.MessageConstant;
 import com.mrqinzh.comment.domain.vo.CommentVO;
+import jakarta.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -9,8 +10,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 @Aspect
 @Component

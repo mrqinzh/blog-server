@@ -5,12 +5,12 @@ import com.mrqinzh.framework.common.constant.CacheKeyConstant;
 import com.mrqinzh.framework.common.security.TokenStoreBO;
 import com.mrqinzh.framework.security.config.SecurityProperties;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
+import jakarta.servlet.http.Cookie;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class AuthenticationTokenCacheUtils {
 

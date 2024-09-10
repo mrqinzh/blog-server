@@ -1,3 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.mrqinzh.framework.security.config.FrameworkSecurityConfiguration
 com.mrqinzh.framework.security.config.RpcSecurityConfiguration

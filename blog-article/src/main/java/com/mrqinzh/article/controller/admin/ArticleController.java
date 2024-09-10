@@ -5,8 +5,6 @@ import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.service.ArticleService;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
-import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
@@ -14,10 +12,10 @@ import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 

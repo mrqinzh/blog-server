@@ -2,8 +2,7 @@ package com.mrqinzh.article.domain.vo;
 
 import com.mrqinzh.article.domain.entity.Article;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "添加/修改文章请求实体")
 public class ArticleVO {

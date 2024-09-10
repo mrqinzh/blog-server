@@ -9,10 +9,10 @@ import com.mrqinzh.user.domain.vo.MenuVO;
 import com.mrqinzh.user.service.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "菜单接口")

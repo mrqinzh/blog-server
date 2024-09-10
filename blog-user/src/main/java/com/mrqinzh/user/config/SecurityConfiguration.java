@@ -20,7 +20,7 @@ public class SecurityConfiguration {
             public void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
                 // TODO 这个每个项目都需要重复配置，得捉摸有没通用的方案
                 // RPC 服务的安全配置
-                registry.antMatchers(ApiConstant.PREFIX + "/**").permitAll();
+                registry.requestMatchers(ApiConstant.PREFIX + "/**").permitAll();
             }
 
         };
