@@ -9,7 +9,7 @@ import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.vo.UserVO;
-import com.mrqinzh.user.mapper.UserMapper;
+import com.mrqinzh.user.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

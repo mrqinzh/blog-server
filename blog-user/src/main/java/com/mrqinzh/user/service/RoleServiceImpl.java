@@ -7,7 +7,7 @@ import com.mrqinzh.framework.common.domain.dto.PageDTO;
 import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.user.domain.entity.Role;
-import com.mrqinzh.user.mapper.RoleMapper;
+import com.mrqinzh.user.dal.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

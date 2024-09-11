@@ -1,4 +1,4 @@
-package com.mrqinzh.user.mapper;
+package com.mrqinzh.user.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mrqinzh.user.domain.entity.SysConfig;

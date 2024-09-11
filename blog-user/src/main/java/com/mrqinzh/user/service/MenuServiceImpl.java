@@ -6,7 +6,7 @@ import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.user.domain.entity.Menu;
 import com.mrqinzh.user.domain.vo.MenuVO;
-import com.mrqinzh.user.mapper.MenuMapper;
+import com.mrqinzh.user.dal.mapper.MenuMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
