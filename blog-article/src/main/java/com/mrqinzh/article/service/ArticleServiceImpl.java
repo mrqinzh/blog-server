@@ -9,8 +9,8 @@ import com.mrqinzh.article.mapper.ArticleMapper;
 import com.mrqinzh.article.mapper.TagMapper;
 import com.mrqinzh.article.rpc.CommentApiClient;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
@@ -99,12 +99,12 @@ public class ArticleServiceImpl implements ArticleService {
     public void update(ArticleVO articleVo) {
         // 判断传入文章的Id是否存在
         if (articleVo == null || articleVo.getId() == null) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
+            throw new BizException(ErrorCode.BAD_PARAMETER);
         }
 
         Article origin = articleMapper.getById(articleVo.getId());
         if (origin == null) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "当前文章错误。");
+            throw new BizException(ErrorCode.BAD_PARAMETER, "当前文章错误。");
         }
 
         origin.setTitle(articleVo.getArticleTitle());
@@ -137,7 +137,7 @@ public class ArticleServiceImpl implements ArticleService {
                 return tagList.get(0).getCoverImg();
             }
             if (threshold++ > 4) {
-                throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "对不起，系统里好像没有选择标签的相关图片，请重新选择标签，或者上传自己的封面图！！！");
+                throw new BizException(ErrorCode.BAD_PARAMETER, "对不起，系统里好像没有选择标签的相关图片，请重新选择标签，或者上传自己的封面图！！！");
             }
         }
     }

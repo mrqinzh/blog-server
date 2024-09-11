@@ -1,0 +1,19 @@
+server:
+  port: 10001
+
+spring:
+  application:
+    name: user-service
+
+  config:
+    additional-location: ./config/
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      id-type: assign_id
+    banner: false
+  type-aliases-package: com.mrqinzh.*.domain
+  type-aliases-super-type: com.mrqinzh.framework.mybatis.entity.BlogTypeAliases

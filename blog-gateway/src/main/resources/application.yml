@@ -37,7 +37,7 @@ spring:
         - id: user-app-api # 路由的编号
           uri: lb://user-service
           predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
-            - Path=/app-api/user/**,/app-api/menu/**,/app-api/role/**
+            - Path=/app-api/user/**,/app-api/menu/**,/app-api/role/**,/app-api/sys/config/**
 
         ## comment-service 服务
         - id: comment-admin-api # 路由的编号

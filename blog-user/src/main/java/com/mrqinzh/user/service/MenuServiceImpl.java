@@ -2,8 +2,8 @@ package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.user.domain.entity.Menu;
 import com.mrqinzh.user.domain.vo.MenuVO;
 import com.mrqinzh.user.dal.mapper.MenuMapper;
@@ -60,7 +60,7 @@ public class MenuServiceImpl implements MenuService {
         if (menuVO.getParentId() != null && menuVO.getParentId() != 0) {
             parentMenu = menuMapper.selectById(menuVO.getParentId());
             if (parentMenu == null) {
-                throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "上级菜单选择错误");
+                throw new BizException(ErrorCode.BAD_PARAMETER, "上级菜单选择错误");
             }
         }
         Menu menu = new Menu();
@@ -75,7 +75,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void update(MenuVO menuVO) {
         if (menuVO.getId() == null || menuVO.getId() == 0) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "参数校验错误，缺少菜单id");
+            throw new BizException(ErrorCode.BAD_PARAMETER, "参数校验错误，缺少菜单id");
         }
         Menu menu = menuMapper.selectById(menuVO.getId());
         BeanUtils.copyProperties(menuVO, menu);

@@ -2,9 +2,8 @@ package com.mrqinzh.comment.controller.admin;
 
 import com.mrqinzh.comment.domain.entity.Comment;
 import com.mrqinzh.comment.domain.vo.CommentPageDTO;
-import com.mrqinzh.comment.domain.vo.CommentVO;
+import com.mrqinzh.comment.domain.vo.CommentReqVO;
 import com.mrqinzh.comment.service.CommentService;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
@@ -33,9 +32,9 @@ public class CommentController extends BaseController {
 
     @Operation(summary = "添加一条评论/留言，任何人均可添加")
     @PostMapping("add")
-    public Resp add(@RequestBody @Valid CommentVO commentVo) {
-        commentVo.setCommentIp(getClientIp());
-        commentService.add(commentVo);
+    public Resp add(@RequestBody @Valid CommentReqVO commentReqVo) {
+        commentReqVo.setCommentIp(getClientIp());
+        commentService.add(commentReqVo);
         return Resp.success();
     }
 

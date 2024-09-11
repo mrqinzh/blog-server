@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.mrqinzh.framework.mybatis.config.MybatisConfiguration
+com.mrqinzh.framework.mybatis.config.BlogMybatisConfiguration

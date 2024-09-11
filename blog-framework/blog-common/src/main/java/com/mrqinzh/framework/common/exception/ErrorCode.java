@@ -1,7 +1,5 @@
 package com.mrqinzh.framework.common.exception;
 
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
-
 public interface ErrorCode {
 
     CodeEntity SUCCESS = new CodeEntity(0, "请求成功");
@@ -32,12 +30,6 @@ public interface ErrorCode {
         public CodeEntity(int code, String message) {
             this.code = code;
             this.msg = message;
-        }
-
-        // todo 暂时保留，适配 appStatus ，后续删除
-        public CodeEntity(AppStatus appStatus) {
-            this.code = appStatus.getCode();
-            this.msg = appStatus.getMsg();
         }
 
         @Override

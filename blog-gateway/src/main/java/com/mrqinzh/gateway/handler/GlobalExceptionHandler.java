@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
     public Resp bizExceptionHandler(BizException e) {
         log.error(e.getMessage(), e);
-        return e.sendExceptionMsg();
+        return e.sendExpResp();
     }
 
     /**

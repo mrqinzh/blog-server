@@ -1,12 +1,12 @@
 package com.mrqinzh.comment.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.mrqinzh.comment.dal.repo.CommentRepository;
+import com.mrqinzh.comment.domain.convert.CommentConvert;
 import com.mrqinzh.comment.domain.entity.Comment;
 import com.mrqinzh.comment.domain.vo.CommentPageDTO;
-import com.mrqinzh.comment.domain.vo.CommentVO;
-import com.mrqinzh.comment.mapper.CommentMapper;
-import com.mrqinzh.comment.rpc.CommentServiceProvider;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
+import com.mrqinzh.comment.domain.vo.CommentReqVO;
+import com.mrqinzh.comment.dal.mapper.CommentMapper;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.utils.MyUtil;
@@ -14,7 +14,6 @@ import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +22,12 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommentServiceProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
 
     @Resource
     private CommentMapper commentMapper;
+    @Resource
+    private CommentRepository commentRepository;
 
     @Override
     public List<Comment> list(CommentPageDTO commentPageVo) {
@@ -39,14 +40,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void add(CommentVO commentVo) {
-        Comment comment = new Comment();
-        BeanUtils.copyProperties(commentVo, comment);
-        comment.setContent(commentVo.getCommentContent());
+    public void add(CommentReqVO commentReqVO) {
+        Comment comment = CommentConvert.INSTANCE.convert(commentReqVO);
+        comment.setContent(commentReqVO.getCommentContent());
 
-        String ip = commentVo.getCommentIp();
+        String ip = commentReqVO.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论
-        List<Comment> commentsByIp = commentMapper.getByIpOrNickname(ip, commentVo.getNickname());
+        List<Comment> commentsByIp = commentMapper.getByIpOrNickname(ip, commentReqVO.getNickname());
         String avatar;
         if (!commentsByIp.isEmpty() && StringUtils.isNotBlank(commentsByIp.get(0).getAvatar())) {
             avatar = commentsByIp.get(0).getAvatar();
@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setAvatar(avatar);
         comment.setIp(ip);
 
-        commentMapper.insert(comment);
+        commentRepository.insert(comment);
     }
 
     @Override

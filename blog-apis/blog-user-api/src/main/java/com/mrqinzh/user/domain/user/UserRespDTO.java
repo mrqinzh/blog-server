@@ -1,6 +1,6 @@
 package com.mrqinzh.user.domain.user;
 
-import com.mrqinzh.framework.common.domain.dto.DTO;
+import com.mrqinzh.framework.common.domain.pojo.DTO;
 import com.mrqinzh.user.domain.role.RoleRespDTO;
 import lombok.Data;
 

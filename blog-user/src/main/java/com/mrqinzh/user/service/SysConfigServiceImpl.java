@@ -1,7 +1,6 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mrqinzh.user.dal.repo.SysConfigRepository;
 import com.mrqinzh.user.domain.entity.SysConfig;
 import com.mrqinzh.user.dal.mapper.SysConfigMapper;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements SysConfigService, InitializingBean {
+public class SysConfigServiceImpl implements SysConfigService, InitializingBean {
 
     @Resource
     private SysConfigMapper sysConfigMapper;

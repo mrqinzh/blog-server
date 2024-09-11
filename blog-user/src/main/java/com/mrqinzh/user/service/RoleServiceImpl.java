@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.user.domain.entity.Role;
 import com.mrqinzh.user.dal.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void add(Role role) {
         if (role.getRoleName() == null) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "请输入角色名称");
+            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
         }
         role.setCreateTime(new Date());
         role.setUpdateTime(new Date());
@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void update(Role role) {
         if (role.getId() == null || role.getRoleName() == null) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST, "请输入角色名称");
+            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
         }
         role.setUpdateTime(new Date());
         roleMapper.updateById(role);

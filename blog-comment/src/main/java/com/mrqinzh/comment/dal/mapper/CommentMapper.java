@@ -1,4 +1,4 @@
-package com.mrqinzh.comment.mapper;
+package com.mrqinzh.comment.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mrqinzh.comment.domain.entity.Comment;

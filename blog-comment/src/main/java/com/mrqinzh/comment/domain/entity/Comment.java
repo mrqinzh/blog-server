@@ -18,8 +18,6 @@ public class Comment extends BaseEntity {
 
     private String content;
 
-    private Date createTime;
-
     private String ip;
 
     /**

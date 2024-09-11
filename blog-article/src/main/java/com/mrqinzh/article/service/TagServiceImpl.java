@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.mapper.TagMapper;
 import com.mrqinzh.framework.common.domain.dto.PageDTO;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
@@ -51,7 +50,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public void update(Tag tag) {
         if (tag.getId() == null || StringUtils.isBlank(tag.getCoverImg())) {
-            throw new BizException(AppStatus.BAD_PARAMETER_REQUEST);
+            throw new BizException(ErrorCode.BAD_PARAMETER);
         }
         tagMapper.updateById(tag);
     }

@@ -1,6 +1,6 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.vo.VO;
+import com.mrqinzh.framework.common.domain.pojo.VO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Schema(description = "添加评论请求实体")
-public class CommentVO implements VO {
+public class CommentReqVO implements VO {
 
     @Schema(description = "昵称")
     @NotBlank

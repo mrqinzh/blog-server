@@ -1,9 +1,8 @@
 package com.mrqinzh.framework.common.domain.dto;
 
+import com.mrqinzh.framework.common.domain.pojo.DTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
-import java.io.Serializable;
 
 @Schema(description = "分页信息类")
 @Data

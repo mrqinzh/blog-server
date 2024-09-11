@@ -1,7 +1,6 @@
 package com.mrqinzh.framework.web.exception;
 
 import cn.hutool.core.util.StrUtil;
-import com.mrqinzh.framework.common.domain.enums.AppStatus;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -30,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
     public Resp bizExceptionHandler(BizException e) {
         log.error(e.getMessage(), e);
-        return e.sendExceptionMsg();
+        return e.sendExpResp();
     }
 
     /**
