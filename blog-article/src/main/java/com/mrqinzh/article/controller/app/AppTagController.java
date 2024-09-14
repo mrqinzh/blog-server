@@ -2,7 +2,7 @@ package com.mrqinzh.article.controller.app;
 
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.service.TagService;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import io.swagger.v3.oas.annotations.Operation;

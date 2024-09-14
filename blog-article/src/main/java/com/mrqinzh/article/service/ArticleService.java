@@ -3,7 +3,7 @@ package com.mrqinzh.article.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.vo.ArticleVO;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 
 public interface ArticleService {
 

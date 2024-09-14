@@ -7,7 +7,7 @@ import com.mrqinzh.comment.domain.entity.Comment;
 import com.mrqinzh.comment.domain.vo.CommentPageDTO;
 import com.mrqinzh.comment.domain.vo.CommentReqVO;
 import com.mrqinzh.comment.dal.mapper.CommentMapper;
-import com.mrqinzh.framework.common.resp.DataResp;
+import com.mrqinzh.framework.common.resp.CollectionDataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import jakarta.annotation.Resource;
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -31,7 +30,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> list(CommentPageDTO commentPageVo) {
-        return commentMapper.list(commentPageVo);
+        return commentRepository.list(commentPageVo);
     }
 
     @Override
@@ -62,15 +61,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Resp getById(String idType, Long id) {
-        List<Comment> comments = commentMapper.getById(idType, id);
+
+        List<Comment> comments = commentRepository.queryByTypeId(idType, id);
         // 遍历comments，将子评论添加到对应的父评论下面
         comments.forEach(comment -> {
             if (comment.getParentId() == 0) {
-                comment.setComments(comments.stream().filter(c -> c.getParentId().equals(comment.getId())).collect(Collectors.toList()));
+                comment.setComments(comments.stream().filter(c -> c.getParentId().equals(comment.getId())).toList());
             }
         });
-        List<Comment> list = comments.stream().filter(c -> c.getParentId() == 0).collect(Collectors.toList());
-        return DataResp.ok(list);
+        List<Comment> list = comments.stream().filter(c -> c.getParentId() == 0).toList();
+        return CollectionDataResp.ok(list, CommentConvert.INSTANCE::convert);
     }
 
     /**
@@ -81,12 +81,12 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public Resp deleteById(String idType, Long id) {
-        commentMapper.deleteByTypeId(idType, id);
+        commentRepository.deleteByTypeId(idType, id);
         return Resp.success();
     }
 
     @Override
     public void deleteByTypeId(String articleOrCommentId, Long id) {
-        commentMapper.deleteByTypeId(articleOrCommentId, id);
+        deleteById(articleOrCommentId, id);
     }
 }

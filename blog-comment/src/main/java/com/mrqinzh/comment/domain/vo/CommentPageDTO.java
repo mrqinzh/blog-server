@@ -1,6 +1,6 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

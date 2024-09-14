@@ -8,7 +8,7 @@ import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.mapper.ArticleMapper;
 import com.mrqinzh.article.mapper.TagMapper;
 import com.mrqinzh.article.rpc.CommentApiClient;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;

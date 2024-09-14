@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;

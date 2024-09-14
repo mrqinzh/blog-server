@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.service.ArticleService;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 @Tag(name = "文章接口")
 @RestController

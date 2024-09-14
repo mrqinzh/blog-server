@@ -1,6 +1,6 @@
 package com.mrqinzh.user.domain.role;
 
-import com.mrqinzh.framework.common.domain.pojo.DTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.DTO;
 import com.mrqinzh.framework.common.domain.enums.RoleType;
 import lombok.Data;
 

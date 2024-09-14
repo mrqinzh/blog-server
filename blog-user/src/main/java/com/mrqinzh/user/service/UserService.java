@@ -1,6 +1,6 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.vo.UserVO;

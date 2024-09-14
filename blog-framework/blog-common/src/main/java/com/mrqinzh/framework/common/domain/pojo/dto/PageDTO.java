@@ -1,6 +1,5 @@
-package com.mrqinzh.framework.common.domain.dto;
+package com.mrqinzh.framework.common.domain.pojo.dto;
 
-import com.mrqinzh.framework.common.domain.pojo.DTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

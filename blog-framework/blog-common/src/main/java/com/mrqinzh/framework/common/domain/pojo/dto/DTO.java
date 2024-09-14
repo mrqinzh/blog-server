@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.domain.pojo;
+package com.mrqinzh.framework.common.domain.pojo.dto;
 
 import java.io.Serializable;
 

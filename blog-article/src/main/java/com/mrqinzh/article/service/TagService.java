@@ -1,7 +1,7 @@
 package com.mrqinzh.article.service;
 
 import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.framework.common.domain.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
 import com.mrqinzh.framework.common.resp.Resp;
 
 import java.util.List;
