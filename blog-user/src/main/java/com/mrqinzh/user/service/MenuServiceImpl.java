@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.user.domain.entity.Menu;
@@ -43,7 +43,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> findPage(PageDTO pageDTO) {
+    public List<Menu> findPage(BasePageReq pageReq) {
         List<Menu> menus = menuMapper.selectList(new QueryWrapper<Menu>().lambda().eq(Menu::getStatus, 0));
         return menus;
     }

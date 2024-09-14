@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.user.domain.entity.Role;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public interface RoleService {
 
     List<Role> findAll();
 
-    Page<Role> findPage(PageDTO pageDTO);
+    Page<Role> findPage(BasePageReq pageReq);
 
     Role getById(Long id);
 

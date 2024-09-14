@@ -1,12 +1,18 @@
 package com.mrqinzh.comment.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.mrqinzh.comment.dal.repo.CommentRepository;
 import com.mrqinzh.comment.domain.bo.CommentBO;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
+import com.mrqinzh.comment.domain.dto.ApplyCommentReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentRespDTO;
-import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.enums.CommentStatus;
+import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
+import com.mrqinzh.comment.utils.PageUtils;
 import com.mrqinzh.framework.common.utils.BeanUtils;
+import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +31,13 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
     @Override
-    public List<CommentRespDTO> list(CommentPageDTO commentPageVo) {
+    public Page<CommentRespDTO> page(CommentPageReqDTO commentPageReqDTO) {
+        Page<CommentBO> res = commentRepository.page(commentPageReqDTO);
+        return PageUtils.convert(res, CommentConvert.INSTANCE::convert2RespDTO);
+    }
+
+    @Override
+    public List<CommentRespDTO> list(CommentPageReqDTO commentPageVo) {
         List<CommentBO> list = commentRepository.list(commentPageVo);
 
         return BeanUtils.convertList(list, CommentConvert.INSTANCE::convert2RespDTO);
@@ -44,14 +56,14 @@ public class CommentServiceImpl implements CommentService {
 
         String ip = commentReqDTO.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论
-        List<CommentBO> commentsByIp = commentRepository.getByIpOrNickname(ip, commentReqDTO.getNickname());
+        List<CommentBO> commentsByIp = commentRepository.queryByIpOrNickname(ip, commentReqDTO.getNickname());
         String avatar;
         if (!commentsByIp.isEmpty() && StringUtils.isNotBlank(commentsByIp.get(0).getAvatar())) {
             avatar = commentsByIp.get(0).getAvatar();
         } else {
             avatar = MyUtil.getRandomAvatarUrl();
         }
-
+        comment.setStatus(CommentStatus.APPLYING);
         comment.setAvatar(avatar);
         comment.setIp(ip);
 
@@ -83,4 +95,27 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteByTypeId(idType, id);
     }
 
+    @Override
+    public void applyComments(ApplyCommentReqDTO applyCommentReqDTO) {
+        List<Long> commentIds = applyCommentReqDTO.getCommentIds();
+        if (CollectionUtils.isEmpty(commentIds)) {
+            return;
+        }
+        List<CommentBO> commentBOS = commentRepository.queryByIds(commentIds);
+        if (CollectionUtils.isEmpty(commentBOS)) {
+            return;
+        }
+
+        commentBOS.stream()
+                .filter(commentBO -> commentBO.getStatus() == CommentStatus.APPLYING)
+                .forEach(commentBO -> {
+                    if (applyCommentReqDTO.isApprove()) {
+                        commentBO.setStatus(CommentStatus.NORMAL);
+                    } else {
+                        commentBO.setStatus(CommentStatus.REJECT);
+                    }
+                });
+
+        commentRepository.update(commentBOS);
+    }
 }

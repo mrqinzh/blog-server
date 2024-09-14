@@ -2,7 +2,7 @@ package com.mrqinzh.comment.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mrqinzh.comment.domain.entity.Comment;
-import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -30,5 +30,5 @@ public interface CommentMapper extends BaseMapper<Comment> {
      */
     Boolean deleteByTypeId(@Param("idType") String idType, @Param("id") Long id);
 
-    List<Comment> list(CommentPageDTO commentPageVo);
+    List<Comment> list(CommentPageReqDTO commentPageVo);
 }

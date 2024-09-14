@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Resp list(PageDTO pageDTO) {
-        if (pageDTO == null) {
+    public Resp list(BasePageReq pageReq) {
+        if (pageReq == null) {
             return Resp.NULL;
         }
         List<User> users = userMapper.list();

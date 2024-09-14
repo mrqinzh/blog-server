@@ -2,7 +2,7 @@ package com.mrqinzh.article.controller.app;
 
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.service.TagService;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,8 +30,8 @@ public class AppTagController {
 
     @Operation(summary = "分页查询 tags")
     @GetMapping("page")
-    public Resp page(PageDTO pageDTO) {
-        return tagService.page(pageDTO);
+    public Resp page(BasePageReq pageReq) {
+        return tagService.page(pageReq);
     }
 
     @Operation(summary = "查询所有标签，limit 20")

@@ -3,7 +3,7 @@ package com.mrqinzh.comment.controller.app;
 import com.mrqinzh.comment.controller.BaseCommentController;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
 import com.mrqinzh.comment.domain.dto.CommentRespDTO;
-import com.mrqinzh.comment.domain.vo.CommentPageDTO;
+import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
 import com.mrqinzh.comment.domain.vo.CommentReqVO;
 import com.mrqinzh.comment.service.CommentService;
 import com.mrqinzh.framework.common.resp.CollectionDataResp;
@@ -35,7 +35,7 @@ public class AppCommentController extends BaseCommentController {
     }
 
     @GetMapping("list")
-    public Resp list(CommentPageDTO commentPageVo) {
+    public Resp list(CommentPageReqDTO commentPageVo) {
         List<CommentRespDTO> comments = commentService.list(commentPageVo);
         return CollectionDataResp.ok(comments, CommentConvert.INSTANCE::convert2RespVO);
     }

@@ -26,11 +26,11 @@ public class PageResp<T> extends Resp {
         this.data = new Response<>(pageNum, pageSize, total, data);
     }
 
-    public static <T> PageResp<?> ok(long pageNum, long pageSize, long total, List<T> data) {
+    public static <T> PageResp<T> ok(long pageNum, long pageSize, long total, List<T> data) {
         return new PageResp<>(pageNum, pageSize, total, data);
     }
 
-    public static <T> PageResp<?> ok(long pageNum, long pageSize, long total, List<T> data, Function<T, ?> mapping) {
+    public static <T, R> PageResp<R> ok(long pageNum, long pageSize, long total, List<T> data, Function<T, R> mapping) {
         return new PageResp<>(pageNum, pageSize, total, data.stream().map(mapping).collect(Collectors.toList()));
     }
 

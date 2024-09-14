@@ -1,7 +1,7 @@
 package com.mrqinzh.article.service;
 
 import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.resp.Resp;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface TagService {
     /**
      * 分页查询 tag
      */
-    Resp page(PageDTO pageDTO);
+    Resp page(BasePageReq pageReq);
 
     /**
      * 查询 tags limit 20

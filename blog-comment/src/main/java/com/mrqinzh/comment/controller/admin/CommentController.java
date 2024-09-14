@@ -1,20 +1,23 @@
 package com.mrqinzh.comment.controller.admin;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
+import com.mrqinzh.comment.controller.BaseCommentController;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
+import com.mrqinzh.comment.domain.dto.ApplyCommentReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentRespDTO;
-import com.mrqinzh.comment.domain.entity.Comment;
-import com.mrqinzh.comment.domain.vo.CommentPageDTO;
-import com.mrqinzh.comment.domain.vo.CommentReqVO;
+import com.mrqinzh.comment.domain.vo.ApplyCommentReqVO;
+import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
+import com.mrqinzh.comment.domain.vo.CommentPageReqVO;
+import com.mrqinzh.comment.domain.vo.CommentRespVO;
 import com.mrqinzh.comment.service.CommentService;
 import com.mrqinzh.framework.common.resp.CollectionDataResp;
-import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,24 +25,22 @@ import java.util.List;
 @Tag(name = "评论接口")
 @RestController
 @RequestMapping("comment")
-public class CommentController extends BaseController {
+public class CommentController extends BaseCommentController {
 
     @Resource
     private CommentService commentService;
 
-    @Operation(summary = "分页获取所有评论信息")
-    @GetMapping("list")
-    public Resp list(CommentPageDTO commentPageVo) {
-        List<CommentRespDTO> comments = commentService.list(commentPageVo);
-        return CollectionDataResp.ok(comments, CommentConvert.INSTANCE::convert2RespVO);
+    @GetMapping("page")
+    public PageResp<CommentRespVO> page(CommentPageReqVO pageReqVO) {
+        Page<CommentRespDTO> page = commentService.page(CommentConvert.INSTANCE.convert2PageVO(pageReqVO));
+        return pageResp(page, CommentConvert.INSTANCE::convert2RespVO);
     }
 
-    @Operation(summary = "添加一条评论/留言，任何人均可添加")
-    @PostMapping("add")
-    public Resp add(@RequestBody @Valid CommentReqVO commentReqVo) {
-        commentReqVo.setCommentIp(getClientIp());
-        commentService.add(CommentConvert.INSTANCE.convert2ReqDTO(commentReqVo));
-        return Resp.success();
+    @Operation(summary = "分页获取所有评论信息")
+    @GetMapping("list")
+    public Resp list(CommentPageReqDTO commentPageVo) {
+        List<CommentRespDTO> comments = commentService.list(commentPageVo);
+        return CollectionDataResp.ok(comments, CommentConvert.INSTANCE::convert2RespVO);
     }
 
     /**
@@ -65,6 +66,13 @@ public class CommentController extends BaseController {
     public Resp getMessageList() {
         List<CommentRespDTO> comments = commentService.getMessageList();
         return CollectionDataResp.ok(comments, CommentConvert.INSTANCE::convert2RespVO);
+    }
+
+    @Operation(summary = "审批评论")
+    @PostMapping()
+    public Resp applyComments(@RequestBody ApplyCommentReqVO applyCommentReqVO) {
+        commentService.applyComments(new ApplyCommentReqDTO(applyCommentReqVO.getCommentIds(), applyCommentReqVO.isApprove()));
+        return Resp.success();
     }
 
 }

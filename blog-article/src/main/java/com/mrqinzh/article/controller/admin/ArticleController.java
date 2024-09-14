@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.service.ArticleService;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
@@ -41,13 +41,13 @@ public class ArticleController extends BaseController {
 
     @Operation(summary = "分页加载文章列表")
     @GetMapping("/list")
-    public Resp list(PageDTO pageDTO) {
+    public Resp list(BasePageReq pageReq) {
 //        if (user != null) {
 //            String message = user.getName() + "刚刚浏览了文章列表，请注意查收。";
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);
 //            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
-        Page<Article> page = articleService.list(pageDTO);
+        Page<Article> page = articleService.list(pageReq);
         return PageResp.ok(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords(), ArticleVO::new);
     }
 

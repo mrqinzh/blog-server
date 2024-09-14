@@ -1,6 +1,6 @@
 package com.mrqinzh.user.controller.admin;
 
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
@@ -32,8 +32,8 @@ public class MenuController extends BaseController {
 
     @Operation(summary = "分页获取菜单信息")
     @GetMapping("page")
-    public Resp findPage(PageDTO pageDTO) {
-        List<Menu> menus = menuService.findPage(pageDTO);
+    public Resp findPage(BasePageReq pageReq) {
+        List<Menu> menus = menuService.findPage(pageReq);
         return DataResp.ok(menus);
     }
 

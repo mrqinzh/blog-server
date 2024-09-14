@@ -1,11 +1,15 @@
-package com.mrqinzh.framework.common.domain.pojo.dto;
+package com.mrqinzh.framework.common.domain.pojo.page;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Schema(description = "分页信息类")
-@Data
-public class PageDTO implements DTO {
+import java.io.Serializable;
+
+@Setter
+@Getter
+@Schema(description = "分页信息基类")
+public class BasePageReq implements Serializable {
 
     private Integer currentPage = 1;
 
@@ -20,4 +24,5 @@ public class PageDTO implements DTO {
      * 排序
      */
     private String orderBy;
+
 }

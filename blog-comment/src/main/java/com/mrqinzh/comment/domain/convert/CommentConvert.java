@@ -1,11 +1,13 @@
 package com.mrqinzh.comment.domain.convert;
 
 import com.mrqinzh.comment.domain.bo.CommentBO;
+import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentRespDTO;
 import com.mrqinzh.comment.domain.entity.Comment;
 import com.mrqinzh.comment.domain.enums.BusinessType;
 import com.mrqinzh.comment.domain.enums.CommentStatus;
+import com.mrqinzh.comment.domain.vo.CommentPageReqVO;
 import com.mrqinzh.comment.domain.vo.CommentReqVO;
 import com.mrqinzh.comment.domain.vo.CommentRespVO;
 import org.mapstruct.Mapper;
@@ -18,6 +20,11 @@ import org.mapstruct.factory.Mappers;
 public interface CommentConvert {
 
     CommentConvert INSTANCE = Mappers.getMapper(CommentConvert.class);
+
+    /**
+     * pageReqVo -> pageReqDto
+     */
+    CommentPageReqDTO convert2PageVO(CommentPageReqVO commentPageReqVO);
 
     /**
      * reqDto -> bo

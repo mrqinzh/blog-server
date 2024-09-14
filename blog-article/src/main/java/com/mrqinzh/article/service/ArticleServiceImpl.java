@@ -8,7 +8,7 @@ import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.mapper.ArticleMapper;
 import com.mrqinzh.article.mapper.TagMapper;
 import com.mrqinzh.article.rpc.CommentApiClient;
-import com.mrqinzh.framework.common.domain.pojo.dto.PageDTO;
+import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;
@@ -46,8 +46,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> list(PageDTO pageDTO) {
-        Page<Article> page = new Page<>(pageDTO.getCurrentPage(), pageDTO.getPageSize());
+    public Page<Article> list(BasePageReq pageReq) {
+        Page<Article> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
         articleMapper.selectPage(page, null);
         return page;
     }
