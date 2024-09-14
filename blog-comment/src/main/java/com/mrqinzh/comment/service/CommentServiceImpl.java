@@ -1,14 +1,12 @@
 package com.mrqinzh.comment.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mrqinzh.comment.dal.repo.CommentRepository;
+import com.mrqinzh.comment.domain.bo.CommentBO;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
-import com.mrqinzh.comment.domain.entity.Comment;
+import com.mrqinzh.comment.domain.dto.CommentReqDTO;
+import com.mrqinzh.comment.domain.dto.CommentRespDTO;
 import com.mrqinzh.comment.domain.vo.CommentPageDTO;
-import com.mrqinzh.comment.domain.vo.CommentReqVO;
-import com.mrqinzh.comment.dal.mapper.CommentMapper;
-import com.mrqinzh.framework.common.resp.CollectionDataResp;
-import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -24,28 +22,29 @@ public class CommentServiceImpl implements CommentService {
     private static final Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
 
     @Resource
-    private CommentMapper commentMapper;
-    @Resource
     private CommentRepository commentRepository;
 
     @Override
-    public List<Comment> list(CommentPageDTO commentPageVo) {
-        return commentRepository.list(commentPageVo);
+    public List<CommentRespDTO> list(CommentPageDTO commentPageVo) {
+        List<CommentBO> list = commentRepository.list(commentPageVo);
+
+        return BeanUtils.convertList(list, CommentConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
-    public List<Comment> getMessageList() {
-        return commentMapper.selectList(new LambdaQueryWrapper<Comment>().eq(Comment::getType, 2).eq(Comment::getStatus, 0));
+    public List<CommentRespDTO> getMessageList() {
+        List<CommentBO> commentBOS = commentRepository.queryMessages();
+        return BeanUtils.convertList(commentBOS, CommentConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
-    public void add(CommentReqVO commentReqVO) {
-        Comment comment = CommentConvert.INSTANCE.convert(commentReqVO);
-        comment.setContent(commentReqVO.getCommentContent());
+    public void add(CommentReqDTO commentReqDTO) {
+        CommentBO comment = CommentConvert.INSTANCE.convert2BO(commentReqDTO);
+        comment.setCommentContent(commentReqDTO.getCommentContent());
 
-        String ip = commentReqVO.getCommentIp();
+        String ip = commentReqDTO.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论
-        List<Comment> commentsByIp = commentMapper.getByIpOrNickname(ip, commentReqVO.getNickname());
+        List<CommentBO> commentsByIp = commentRepository.getByIpOrNickname(ip, commentReqDTO.getNickname());
         String avatar;
         if (!commentsByIp.isEmpty() && StringUtils.isNotBlank(commentsByIp.get(0).getAvatar())) {
             avatar = commentsByIp.get(0).getAvatar();
@@ -60,17 +59,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Resp getById(String idType, Long id) {
+    public List<CommentRespDTO> getById(String idType, Long id) {
 
-        List<Comment> comments = commentRepository.queryByTypeId(idType, id);
+        List<CommentRespDTO> commentRespDTOS = BeanUtils.convertList(commentRepository.queryByTypeId(idType, id), CommentConvert.INSTANCE::convert2RespDTO);
         // 遍历comments，将子评论添加到对应的父评论下面
-        comments.forEach(comment -> {
+        commentRespDTOS.forEach(comment -> {
             if (comment.getParentId() == 0) {
-                comment.setComments(comments.stream().filter(c -> c.getParentId().equals(comment.getId())).toList());
+                comment.setComments(commentRespDTOS.stream().filter(c -> c.getParentId().equals(comment.getId())).toList());
             }
         });
-        List<Comment> list = comments.stream().filter(c -> c.getParentId() == 0).toList();
-        return CollectionDataResp.ok(list, CommentConvert.INSTANCE::convert);
+        List<CommentRespDTO> list = commentRespDTOS.stream().filter(c -> c.getParentId() == 0).toList();
+        return list;
     }
 
     /**
@@ -80,13 +79,8 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     @Override
-    public Resp deleteById(String idType, Long id) {
+    public void deleteById(String idType, Long id) {
         commentRepository.deleteByTypeId(idType, id);
-        return Resp.success();
     }
 
-    @Override
-    public void deleteByTypeId(String articleOrCommentId, Long id) {
-        deleteById(articleOrCommentId, id);
-    }
 }

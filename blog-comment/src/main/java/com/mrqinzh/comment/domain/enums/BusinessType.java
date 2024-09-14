@@ -6,7 +6,7 @@ public enum BusinessType {
     MESSAGE // 留言
     ;
 
-    public BusinessType getByCode(Integer code) {
+    public static BusinessType getByCode(Integer code) {
         if (code == null) {
             return null;
         }

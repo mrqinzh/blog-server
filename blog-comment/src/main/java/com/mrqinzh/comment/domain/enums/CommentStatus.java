@@ -17,4 +17,27 @@ public enum CommentStatus {
 
     private final String desc;
 
+    public static CommentStatus getByCode(Integer code) {
+        if (code == null) {
+            return null;
+        }
+        switch (code) {
+            case 0 -> {
+                return APPLYING;
+            }
+            case 1 -> {
+                return NORMAL;
+            }
+            case 2 -> {
+                return REJECT;
+            }
+            case 3 -> {
+                return DELETE;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
 }

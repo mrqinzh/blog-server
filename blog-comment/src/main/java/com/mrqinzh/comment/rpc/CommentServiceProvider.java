@@ -13,6 +13,6 @@ public class CommentServiceProvider implements CommentApi {
 
     @Override
     public void deleteByTypeId(String articleOrCommentId, Long id) {
-        commentService.deleteByTypeId(articleOrCommentId, id);
+        commentService.deleteById(articleOrCommentId, id);
     }
 }

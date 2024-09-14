@@ -1,6 +1,7 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.vo.VO;
+import com.mrqinzh.comment.domain.enums.BusinessType;
+import com.mrqinzh.framework.common.domain.pojo.vo.RespVO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,13 +9,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CommentRespVO implements VO {
+public class CommentRespVO implements RespVO {
 
     private String nickname;
 
     private String commentContent;
 
-    private Integer type;
+    private BusinessType type;
 
     private Long parentId;
     private Long articleId;

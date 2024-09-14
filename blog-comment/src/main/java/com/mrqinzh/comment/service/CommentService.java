@@ -1,5 +1,7 @@
 package com.mrqinzh.comment.service;
 
+import com.mrqinzh.comment.domain.dto.CommentReqDTO;
+import com.mrqinzh.comment.domain.dto.CommentRespDTO;
 import com.mrqinzh.comment.domain.entity.Comment;
 import com.mrqinzh.comment.domain.vo.CommentPageDTO;
 import com.mrqinzh.comment.domain.vo.CommentReqVO;
@@ -9,13 +11,13 @@ import java.util.List;
 
 public interface CommentService {
 
-    List<Comment> list(CommentPageDTO commentPageVo);
+    List<CommentRespDTO> list(CommentPageDTO commentPageVo);
 
-    List<Comment> getMessageList();
+    List<CommentRespDTO> getMessageList();
 
-    void add(CommentReqVO commentReqVo);
+    void add(CommentReqDTO commentReqVo);
 
-    Resp getById(String idType, Long id);
+    List<CommentRespDTO> getById(String idType, Long id);
 
     /**
      * 根据id 删除评论
@@ -23,7 +25,6 @@ public interface CommentService {
      * @param id id 值
      * @return
      */
-    Resp deleteById(String idType, Long id);
+    void deleteById(String idType, Long id);
 
-    void deleteByTypeId(String articleOrCommentId, Long id);
 }

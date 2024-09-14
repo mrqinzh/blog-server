@@ -1,6 +1,7 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.vo.VO;
+import com.mrqinzh.comment.domain.enums.BusinessType;
+import com.mrqinzh.framework.common.domain.pojo.vo.ReqVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Schema(description = "添加评论请求实体")
-public class CommentReqVO implements VO {
+public class CommentReqVO implements ReqVO {
 
     @Schema(description = "昵称")
     @NotBlank
@@ -22,10 +23,14 @@ public class CommentReqVO implements VO {
 
     @Schema(description = "类型---1：评论  2：留言")
     @NotNull
-    private Integer type;
+    private BusinessType type;
 
     private Long parentId;
     private Long articleId;
     private String commentIp;
+
+    public void setType(Integer code) {
+        this.type = BusinessType.getByCode(code);
+    }
 
 }
