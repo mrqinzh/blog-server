@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 
 @Configuration("userSecurityConfiguration")
@@ -17,7 +18,7 @@ public class SecurityConfiguration {
         return new AuthorizeRequestsCustomizer() {
 
             @Override
-            public void customize(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry) {
+            public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
                 // TODO 这个每个项目都需要重复配置，得捉摸有没通用的方案
                 // RPC 服务的安全配置
                 registry.requestMatchers(ApiConstant.PREFIX + "/**").permitAll();

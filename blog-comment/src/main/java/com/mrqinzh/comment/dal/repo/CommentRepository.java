@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.dal.repo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.comment.dal.mapper.CommentMapper;
 import com.mrqinzh.comment.domain.bo.CommentBO;

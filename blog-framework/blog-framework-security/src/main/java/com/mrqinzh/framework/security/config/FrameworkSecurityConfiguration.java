@@ -3,12 +3,14 @@ package com.mrqinzh.framework.security.config;
 import com.mrqinzh.framework.security.filter.AuthenticationTokenFilter;
 import com.mrqinzh.framework.security.handler.AccessDeniedHandlerImpl;
 import com.mrqinzh.framework.security.handler.AuthenticationEntryPointImpl;
+import com.mrqinzh.framework.security.handler.DefaultAuthenticationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AutoConfigureOrder(Integer.MIN_VALUE) // 目的：先于 Spring Security 自动配置，避免一键改包后，org.* 基础包无法生效
+@AutoConfigureOrder(-1) // 目的：先于 Spring Security 自动配置，避免一键改包后，org.* 基础包无法生效
 @EnableMethodSecurity(securedEnabled = true)
 public class FrameworkSecurityConfiguration {
 
@@ -36,31 +38,38 @@ public class FrameworkSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.cors().disable();
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable);
         // 基于 token 机制，所以不需要 Session
         http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.exceptionHandling(c -> c.authenticationEntryPoint(authenticationEntryPoint()).accessDeniedHandler(accessDeniedHandler()));
+        http.exceptionHandling(c ->
+                c
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        .accessDeniedHandler(accessDeniedHandler())
+        );
 
         // use .and()
-        http.formLogin()
-                .loginProcessingUrl(SecurityProperties.LOGIN_URL)
-                .usernameParameter(SecurityProperties.USERNAME)
-                .passwordParameter(SecurityProperties.PASSWORD)
-                .successHandler(successHandler())
-                .failureHandler(failureHandler());
+        http.formLogin(formLogin ->
+                formLogin
+                        .loginProcessingUrl(SecurityProperties.LOGIN_URL)
+                        .usernameParameter(SecurityProperties.USERNAME)
+                        .passwordParameter(SecurityProperties.PASSWORD)
+                        .successHandler(successHandler())
+                        .failureHandler(failureHandler()));
 
-        http.logout()
-                .logoutUrl(SecurityProperties.LOGOUT_URL)
-                .logoutSuccessHandler(logoutSuccessHandler());
+        http.logout(logout ->
+                logout
+                        .logoutUrl(SecurityProperties.LOGOUT_URL)
+                        .logoutSuccessHandler(logoutSuccessHandler()));
 
-        http.authorizeRequests()
-                .requestMatchers(SecurityProperties.withoutAuthApis).permitAll()
-                .and()
-                // 添加各个模块的自定义过滤规则
-                .authorizeRequests(registry -> Optional.ofNullable(authorizeRequestsCustomizers).orElseGet(ArrayList::new).forEach(customizer -> customizer.customize(registry)))
-                .authorizeRequests()
-                .anyRequest().authenticated();
+        // 添加各个模块的自定义过滤规则
+        http.authorizeHttpRequests(authorize -> Optional.ofNullable(authorizeRequestsCustomizers).orElseGet(ArrayList::new).forEach(consumer -> consumer.customize(authorize)));
+        // .anyRequest().authenticated() 跟上一行自定义配置 存在顺序问题
+        http.authorizeHttpRequests(authorize ->
+                authorize
+                        .requestMatchers(SecurityProperties.withoutAuthApis).permitAll()
+                        .anyRequest().authenticated()
+        );
 
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
@@ -68,7 +77,6 @@ public class FrameworkSecurityConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
@@ -79,21 +87,18 @@ public class FrameworkSecurityConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public AuthenticationSuccessHandler successHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler();
+        return new DefaultAuthenticationHandler();
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public AuthenticationFailureHandler failureHandler() {
-        return new SimpleUrlAuthenticationFailureHandler();
+        return new DefaultAuthenticationHandler();
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public LogoutSuccessHandler logoutSuccessHandler() {
-        return new SimpleUrlLogoutSuccessHandler();
+        return new DefaultAuthenticationHandler();
     }
 
     /**

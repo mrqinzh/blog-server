@@ -1,4 +1,4 @@
-package com.mrqinzh.auth.handler;
+package com.mrqinzh.framework.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrqinzh.framework.common.security.LoginUser;
