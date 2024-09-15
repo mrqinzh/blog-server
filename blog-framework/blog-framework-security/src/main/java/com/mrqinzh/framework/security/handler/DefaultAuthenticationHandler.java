@@ -49,7 +49,7 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
     }
 
     private Resp getResp(AuthenticationException e) {
-        ErrorCode.CodeEntity code = null;
+        ErrorCode code = null;
         if (e instanceof LockedException) {
             code = ErrorCode.ACCOUNT_LOCKED;
         }

@@ -1,45 +1,47 @@
 package com.mrqinzh.framework.common.exception;
 
-public interface ErrorCode {
+import lombok.Getter;
 
-    CodeEntity SUCCESS = new CodeEntity(0, "请求成功");
-    CodeEntity UNKNOWN_ERROR_CODE = new CodeEntity(60000, "未标注code码的异常");
+@Getter
+public enum ErrorCode {
 
-    CodeEntity USERNAME_PASSWORD_ERROR = new CodeEntity(30100, "账号或密码错误！");
-    CodeEntity ACCOUNT_LOCKED = new CodeEntity(30101, "账户被锁定了");
+    // 成功相关
+    SUCCESS(0, "请求成功"),
+    UNKNOWN_ERROR_CODE(60000, "未标注code码的异常"),
 
-    CodeEntity NO_PERMISSION = new CodeEntity(40002, "对不起，你的权限不足，请充值。。.>_>");
-    CodeEntity TOKEN_EXPIRED = new CodeEntity(40003, "会话失效了，请重新登录哦。。.>_>");
-    CodeEntity TOKEN_EXPIRE_NO_REDIRECT = new CodeEntity(40013, "会话失效了，删掉cookie就好了。。。-_-");
-    CodeEntity TOKEN_ILLEGAL = new CodeEntity(40004, "这个token好像有点不正常啊。。。-_-");
+    // 用户登录相关
+    USERNAME_PASSWORD_ERROR(30100, "账号或密码错误！"),
+    ACCOUNT_LOCKED(30101, "账户被锁定了"),
 
-    CodeEntity BAD_PARAMETER = new CodeEntity(400, "参数校验失败");
+    // 权限相关
+    NO_PERMISSION(40002, "对不起，你的权限不足，请充值。。.>_>"),
+    TOKEN_EXPIRED(40003, "会话失效了，请重新登录哦。。.>_>"),
+    TOKEN_EXPIRE_NO_REDIRECT(40013, "会话失效了，删掉cookie就好了。。。-_-"),
+    TOKEN_ILLEGAL(40004, "这个token好像有点不正常啊。。。-_-"),
 
-    CodeEntity UNKNOWN_SERVER_ERROR = new CodeEntity(500, "不好意思，服务端出现了未知的错误，赶快通知管理员修改BUG吧。。。-_-");
-    CodeEntity NULL_PRINTER_EXCEPTION = new CodeEntity(500, "服务器出现了空指针异常。。。");
-    CodeEntity SERVICE_ERROR = new CodeEntity(50000, "业务异常，可能是bug，也可能不是。。。-_-");
+    // 参数相关
+    BAD_PARAMETER(400, "参数校验失败"),
 
-    int getCode();
-    String getMsg();
+    // 服务器相关
+    UNKNOWN_SERVER_ERROR(500, "不好意思，服务端出现了未知的错误，赶快通知管理员修改BUG吧。。。-_-"),
+    NULL_PRINTER_EXCEPTION(500, "服务器出现了空指针异常。。。"),
+    SERVICE_ERROR(50000, "业务异常，可能是bug，也可能不是。。。-_-");
 
-    class CodeEntity implements ErrorCode {
+    // 获取code
+    // 属性
+    private final int code;
+    // 获取msg
+    private final String msg;
 
-        private final int code;
-        private final String msg;
+    // 构造函数
+    ErrorCode(int code, String message) {
+        this.code = code;
+        this.msg = message;
+    }
 
-        public CodeEntity(int code, String message) {
-            this.code = code;
-            this.msg = message;
-        }
-
-        @Override
-        public int getCode() {
-            return code;
-        }
-
-        @Override
-        public String getMsg() {
-            return msg;
-        }
+    // 覆盖toString方法（可选）
+    @Override
+    public String toString() {
+        return String.format("ErrorCode{code=%d, msg='%s'}", code, msg);
     }
 }
