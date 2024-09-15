@@ -31,6 +31,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Resource
     private TagService tagService;
     @Resource
+    private ArticleTagService articleTagService;
+    @Resource
     private CommentApiClient commentApiClient;
     @Resource
     private ArticleRepository articleRepository;
@@ -84,7 +86,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         // 如果添加文章时，没有上传文章的封面图，系统将从选择的标签中，随机选择一个标签所对应的图片为其设置为封面。
         if (StringUtils.isBlank(articleBO.getCoverImg())) {
-            articleBO.setCoverImg(getArticleCoverImgByTag(articleBO.getTag()));
+            articleBO.setCoverImg(computeArticleCoverImgByTag(articleBO.getTag()));
         }
 
         // 初始化文章的固定信息
@@ -125,8 +127,10 @@ public class ArticleServiceImpl implements ArticleService {
         commentApiClient.deleteByTypeId("articleId", articleId);
     }
 
-    private String getArticleCoverImgByTag(String articleTag) {
-        if (StringUtils.isBlank(articleTag)) return null;
+    private String computeArticleCoverImgByTag(String articleTag) {
+        if (StringUtils.isBlank(articleTag)) {
+            return null;
+        }
         String[] tags = articleTag.split(",");
         int threshold = 0; // 定义随机阈值
         while (true) {
@@ -140,5 +144,22 @@ public class ArticleServiceImpl implements ArticleService {
                 throw new BizException(ErrorCode.BAD_PARAMETER, "对不起，系统里好像没有选择标签的相关图片，请重新选择标签，或者上传自己的封面图！！！");
             }
         }
+    }
+
+    @Override
+    public void upgradeArticleTag() {
+        List<ArticleBO> allArticles = articleRepository.queryAll();
+
+        for (ArticleBO articleBO : allArticles) {
+            String tags = articleBO.getTag();
+            if (StringUtils.isNotBlank(tags)) {
+                String[] tagArray = tags.split(",");
+                for (String tag : tagArray) {
+                    List<TagRespDTO> tagRespDTOS = tagService.queryByName(tag);
+                    tagRespDTOS.forEach(t -> articleTagService.add(articleBO.getId(), t.getId()));
+                }
+            }
+        }
+
     }
 }

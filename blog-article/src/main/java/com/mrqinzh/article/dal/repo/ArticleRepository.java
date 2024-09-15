@@ -6,15 +6,32 @@ import com.mrqinzh.article.domain.bo.ArticleBO;
 import com.mrqinzh.article.domain.convert.ArticleConvert;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ArticleRepository {
 
     @Resource
     private ArticleMapper articleMapper;
+
+    public long count(PageCondition pageCondition) {
+        return articleMapper.pageCount(pageCondition);
+    }
+
+    public List<ArticleBO> queryAll() {
+        List<Article> list = articleMapper.selectList(null);
+        return BeanUtils.convertList(list, ArticleConvert.INSTANCE::convert2BO);
+    }
+
+    public List<ArticleBO> list(PageCondition pageCondition) {
+        List<Article> list = articleMapper.list(pageCondition);
+        return BeanUtils.convertList(list, ArticleConvert.INSTANCE::convert2BO);
+    }
 
     public Page<ArticleBO> page(PageCondition pageReq) {
         Page<Article> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());

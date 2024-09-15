@@ -42,4 +42,10 @@ public class AppArticleController {
         return PageUtils.resp(page);
     }
 
+//    @GetMapping("/upgrade/articleTag")
+    public Resp upgradeArticleTag() {
+        articleService.upgradeArticleTag();
+        return Resp.success();
+    }
+
 }

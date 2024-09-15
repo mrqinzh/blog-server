@@ -23,4 +23,6 @@ public interface ArticleService {
 
     void delete(Long articleId); // 删除一篇文章
 
+    void upgradeArticleTag();
+
 }
