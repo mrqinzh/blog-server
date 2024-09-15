@@ -1,7 +1,7 @@
 package com.mrqinzh.comment.domain.vo;
 
 import com.mrqinzh.comment.domain.enums.BusinessType;
-import com.mrqinzh.framework.common.domain.pojo.vo.ReqVO;
+import com.mrqinzh.framework.common.domain.vo.ReqVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;

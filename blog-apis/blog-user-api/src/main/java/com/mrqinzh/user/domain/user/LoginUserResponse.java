@@ -1,13 +1,17 @@
 package com.mrqinzh.user.domain.user;
 
-import com.mrqinzh.framework.common.domain.pojo.dto.DTO;
+import com.mrqinzh.framework.common.domain.rpc.RpcResponse;
 import com.mrqinzh.user.domain.role.RoleRespDTO;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
-public class UserRespDTO implements DTO {
+@Getter
+@Setter
+@NoArgsConstructor
+public class LoginUserResponse implements RpcResponse {
 
     private Long id;
     private String username;

@@ -1,7 +1,7 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
-import com.mrqinzh.framework.common.domain.pojo.vo.ReqVO;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.vo.ReqVO;
 import lombok.Getter;
 import lombok.Setter;
 

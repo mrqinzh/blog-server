@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.domain.dto;
 
-import com.mrqinzh.framework.common.domain.pojo.dto.ReqDTO;
-import lombok.Data;
+import com.mrqinzh.framework.common.domain.dto.ReqDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

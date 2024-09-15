@@ -1,6 +1,6 @@
 package com.mrqinzh.user.controller.admin;
 
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;

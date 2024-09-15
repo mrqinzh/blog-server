@@ -3,8 +3,7 @@ package com.mrqinzh.article.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.dto.TagReqDTO;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
-import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 
 import java.util.List;
 

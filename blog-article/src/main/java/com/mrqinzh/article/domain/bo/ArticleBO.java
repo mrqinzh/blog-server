@@ -1,6 +1,6 @@
 package com.mrqinzh.article.domain.bo;
 
-import com.mrqinzh.framework.common.domain.pojo.BO;
+import com.mrqinzh.framework.common.domain.bo.BO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

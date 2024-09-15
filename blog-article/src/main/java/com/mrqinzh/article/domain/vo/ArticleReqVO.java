@@ -1,7 +1,7 @@
 package com.mrqinzh.article.domain.vo;
 
 import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.framework.common.domain.pojo.vo.ReqVO;
+import com.mrqinzh.framework.common.domain.vo.ReqVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

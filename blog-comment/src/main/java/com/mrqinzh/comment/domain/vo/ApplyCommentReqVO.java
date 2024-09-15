@@ -1,6 +1,6 @@
 package com.mrqinzh.comment.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.vo.ReqVO;
+import com.mrqinzh.framework.common.domain.vo.ReqVO;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

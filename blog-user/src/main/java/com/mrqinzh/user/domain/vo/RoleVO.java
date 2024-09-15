@@ -1,6 +1,6 @@
 package com.mrqinzh.user.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.vo.VO;
+import com.mrqinzh.framework.common.domain.vo.VO;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.domain.pojo.page;
+package com.mrqinzh.framework.common.domain.page;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

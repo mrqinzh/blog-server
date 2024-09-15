@@ -1,7 +1,7 @@
 package com.mrqinzh.user.domain.role;
 
 import com.mrqinzh.framework.common.domain.enums.RoleType;
-import com.mrqinzh.framework.common.domain.pojo.dto.RespDTO;
+import com.mrqinzh.framework.common.domain.dto.RespDTO;
 import lombok.Data;
 
 @Data

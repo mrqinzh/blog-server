@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.domain.pojo.vo;
+package com.mrqinzh.framework.common.domain.vo;
 
 /**
  * controller 层响应前端参数

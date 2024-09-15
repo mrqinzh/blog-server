@@ -1,8 +1,8 @@
 package com.mrqinzh.comment.domain.dto;
 
 import com.mrqinzh.comment.domain.enums.BusinessType;
-import com.mrqinzh.framework.common.domain.pojo.dto.ReqDTO;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.dto.ReqDTO;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import lombok.Getter;
 import lombok.Setter;
 

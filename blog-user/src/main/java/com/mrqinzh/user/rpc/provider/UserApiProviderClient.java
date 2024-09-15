@@ -6,7 +6,8 @@ import com.mrqinzh.user.domain.convert.RoleConvert;
 import com.mrqinzh.user.domain.convert.UserConvert;
 import com.mrqinzh.user.domain.entity.Role;
 import com.mrqinzh.user.domain.entity.User;
-import com.mrqinzh.user.domain.user.UserRespDTO;
+import com.mrqinzh.user.domain.user.LoginUserResponse;
+import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.service.RoleService;
 import com.mrqinzh.user.service.UserService;
 import jakarta.annotation.Resource;
@@ -24,12 +25,18 @@ public class UserApiProviderClient implements UserApi {
     private RoleService roleService;
 
     @Override
-    public UserRespDTO getByUsername(String username) {
-        User user = userService.getByUsername(username);
+    public LoginUserResponse getByUsername(String username) {
+        UserRespDTO user = userService.getByUsername(username);
         if (user == null) {
             return null;
         }
-        UserRespDTO resp = UserConvert.INSTANCE.convert(user);
+        LoginUserResponse resp = new LoginUserResponse();
+        resp.setId(user.getId());
+        resp.setUsername(user.getUsername());
+        resp.setNickname(user.getNickname());
+        resp.setAvatar(user.getAvatar());
+        resp.setPassword(user.getPwd());
+
         List<Role> userRoles = roleService.getRolesByUserId(user.getId());
         if (CollectionUtils.isNotEmpty(userRoles)) {
             resp.setRoles(userRoles.stream().map(RoleConvert.INSTANCE::convert).collect(Collectors.toList()));

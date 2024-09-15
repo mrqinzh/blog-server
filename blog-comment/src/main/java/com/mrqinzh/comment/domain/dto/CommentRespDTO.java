@@ -2,7 +2,7 @@ package com.mrqinzh.comment.domain.dto;
 
 import com.mrqinzh.comment.domain.enums.BusinessType;
 import com.mrqinzh.comment.domain.enums.CommentStatus;
-import com.mrqinzh.framework.common.domain.pojo.dto.RespDTO;
+import com.mrqinzh.framework.common.domain.dto.RespDTO;
 import lombok.Data;
 
 import java.util.List;

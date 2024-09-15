@@ -1,6 +1,6 @@
 package com.mrqinzh.framework.common.security;
 
-import com.mrqinzh.framework.common.domain.pojo.BO;
+import com.mrqinzh.framework.common.domain.bo.BO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

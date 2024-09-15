@@ -6,7 +6,7 @@ import com.mrqinzh.article.dal.mapper.TagMapper;
 import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
 import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;

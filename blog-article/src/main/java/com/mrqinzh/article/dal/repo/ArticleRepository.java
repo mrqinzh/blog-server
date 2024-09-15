@@ -5,7 +5,7 @@ import com.mrqinzh.article.dal.mapper.ArticleMapper;
 import com.mrqinzh.article.domain.bo.ArticleBO;
 import com.mrqinzh.article.domain.convert.ArticleConvert;
 import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.mrqinzh.comment.domain.bo;
 
 import com.mrqinzh.comment.domain.enums.BusinessType;
 import com.mrqinzh.comment.domain.enums.CommentStatus;
-import com.mrqinzh.framework.common.domain.pojo.BO;
+import com.mrqinzh.framework.common.domain.bo.BO;
 import lombok.Data;
 
 import java.util.Date;

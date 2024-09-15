@@ -1,10 +1,10 @@
 package com.mrqinzh.auth.service;
 
-import com.mrqinzh.auth.domain.convert.UserConvert;
+import com.mrqinzh.auth.domain.convert.LoginUserConvert;
 import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.user.api.UserApi;
-import com.mrqinzh.user.domain.user.UserRespDTO;
+import com.mrqinzh.user.domain.user.LoginUserResponse;
 import jakarta.annotation.Resource;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,13 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserRespDTO userDTO = userApiService.getByUsername(username);
-        if (userDTO == null) {
+        LoginUserResponse loginUser = userApiService.getByUsername(username);
+        if (loginUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        UserDetailsImpl userDetails = UserConvert.INSTANCE.convert(userDTO);
-        if (CollectionUtils.isNotEmpty(userDTO.getRoles())) {
-            userDetails.setAuthorities(userDTO.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getRoleName().name())).collect(Collectors.toList()));
+        UserDetailsImpl userDetails = LoginUserConvert.INSTANCE.convert(loginUser);
+        if (CollectionUtils.isNotEmpty(loginUser.getRoles())) {
+            userDetails.setAuthorities(loginUser.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getRoleName().name())).collect(Collectors.toList()));
         }
 
         return userDetails;

@@ -1,7 +1,7 @@
 package com.mrqinzh.comment.domain.dto;
 
 import com.mrqinzh.comment.domain.enums.BusinessType;
-import com.mrqinzh.framework.common.domain.pojo.dto.ReqDTO;
+import com.mrqinzh.framework.common.domain.dto.ReqDTO;
 import lombok.Data;
 
 import java.util.Objects;

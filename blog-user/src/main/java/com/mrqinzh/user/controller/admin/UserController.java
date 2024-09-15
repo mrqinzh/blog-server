@@ -1,10 +1,13 @@
 package com.mrqinzh.user.controller.admin;
 
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import com.mrqinzh.user.domain.entity.User;
+import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.domain.vo.UserVO;
 import com.mrqinzh.user.service.MenuService;
 import com.mrqinzh.user.service.UserService;
@@ -27,13 +30,14 @@ public class UserController extends BaseController {
     @Operation(summary = "获取所有用户信息")
     @GetMapping("list")
     public Resp list(PageCondition pageReq) {
-        return userService.list(pageReq);
+        Page<UserRespDTO> list = userService.page(pageReq);
+        return PageUtils.resp(list);
     }
 
     @Operation(summary = "根据id获取指定用户")
     @GetMapping("{id}")
-    public Resp getById(@PathVariable Integer id) {
-        User user = userService.getById(id);
+    public Resp getById(@PathVariable("id") Long id) {
+        UserRespDTO user = userService.getById(id);
         return DataResp.ok(user);
     }
 
@@ -41,14 +45,16 @@ public class UserController extends BaseController {
     @PostMapping("add")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp add(@RequestBody UserVO userVO) {
-        return userService.add(userVO);
+        userService.add(userVO);
+        return Resp.success();
     }
 
     @Operation(summary = "修改用户信息")
     @PostMapping("update")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp update(@RequestBody UserVO userVO) {
-        return userService.update(userVO);
+        userService.update(userVO);
+        return Resp.success();
     }
 
     @Operation(summary = "获取用户信息")

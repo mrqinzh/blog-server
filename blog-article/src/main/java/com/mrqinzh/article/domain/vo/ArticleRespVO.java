@@ -1,6 +1,6 @@
 package com.mrqinzh.article.domain.vo;
 
-import com.mrqinzh.framework.common.domain.pojo.vo.RespVO;
+import com.mrqinzh.framework.common.domain.vo.RespVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

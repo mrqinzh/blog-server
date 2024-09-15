@@ -1,13 +1,16 @@
 package com.mrqinzh.user.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
-import com.mrqinzh.framework.common.resp.DataResp;
-import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
+import com.mrqinzh.user.dal.repo.UserRepository;
+import com.mrqinzh.user.domain.bo.UserBO;
+import com.mrqinzh.user.domain.convert.UserConvert;
 import com.mrqinzh.user.domain.entity.User;
+import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.domain.vo.UserVO;
 import com.mrqinzh.user.dal.mapper.UserMapper;
 import jakarta.annotation.Resource;
@@ -23,6 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserRepository userRepository;
 
     @Override
     public List<User> test() {
@@ -30,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Resp update(UserVO userVO) {
+    public void update(UserVO userVO) {
 
         User securityUser = RedisUtil.get("user"); // 当前登录的用户
 
@@ -50,17 +55,13 @@ public class UserServiceImpl implements UserService {
         }
 
         userMapper.updateById(user);
-
-        return Resp.success();
     }
 
     @Override
-    public Resp add(UserVO userVO) {
+    public void add(UserVO userVO) {
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
         userMapper.insert(user);
-
-        return Resp.success();
     }
 
     @Override
@@ -84,21 +85,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Resp list(PageCondition pageReq) {
-        if (pageReq == null) {
-            return Resp.NULL;
-        }
-        List<User> users = userMapper.list();
-        return DataResp.ok(users);
+    public Page<UserRespDTO> page(PageCondition pageReq) {
+        Page<UserBO> page = userRepository.page(pageReq);
+        return PageUtils.convert(page, UserConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
-    public User getById(Integer id) {
-        return userMapper.selectById(id);
+    public UserRespDTO getById(Long id) {
+        UserBO userBO = userRepository.queryById(id);
+        return UserConvert.INSTANCE.convert2DTO(userBO);
     }
 
     @Override
-    public User getByUsername(String username) {
-        return userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
+    public UserRespDTO getByUsername(String username) {
+        UserBO userBO = userRepository.queryByUsername(username);
+        return UserConvert.INSTANCE.convert2DTO(userBO);
     }
 }

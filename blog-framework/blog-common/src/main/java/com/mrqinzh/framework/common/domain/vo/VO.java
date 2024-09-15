@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.domain.pojo.vo;
+package com.mrqinzh.framework.common.domain.vo;
 
 import java.io.Serializable;
 

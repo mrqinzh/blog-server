@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.user.domain.entity.Role;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.mrqinzh.article.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
