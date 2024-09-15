@@ -1,23 +1,24 @@
 package com.mrqinzh.article.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.article.domain.vo.ArticleVO;
-import com.mrqinzh.article.dal.mapper.ArticleMapper;
-import com.mrqinzh.article.dal.mapper.TagMapper;
+import com.mrqinzh.article.dal.repo.ArticleRepository;
+import com.mrqinzh.article.domain.bo.ArticleBO;
+import com.mrqinzh.article.domain.convert.ArticleConvert;
+import com.mrqinzh.article.domain.dto.ArticleReqDTO;
+import com.mrqinzh.article.domain.dto.ArticleRespDTO;
+import com.mrqinzh.article.domain.dto.TagRespDTO;
+import com.mrqinzh.article.domain.vo.ArticleReqVO;
 import com.mrqinzh.article.rpc.CommentApiClient;
 import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;
 import com.mrqinzh.framework.common.utils.MyUtil;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
 import com.mrqinzh.user.domain.user.UserDTO;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -29,99 +30,99 @@ import java.util.Optional;
 public class ArticleServiceImpl implements ArticleService {
 
     @Resource
-    private ArticleMapper articleMapper;
-    @Resource
-    private TagMapper tagMapper;
+    private TagService tagService;
     @Resource
     private CommentApiClient commentApiClient;
+    @Resource
+    private ArticleRepository articleRepository;
 
     @Override
-    public Article safeGet(Long id) {
-        return Optional.ofNullable(articleMapper.selectById(id)).orElseThrow(() -> new BizException("获取指定文章失败"));
+    public ArticleRespDTO safeGet(Long id) {
+        return Optional.ofNullable(get(id)).orElseThrow(() -> new BizException("获取指定文章失败"));
     }
 
     @Override
-    public Article get(Long id) {
-        return articleMapper.selectById(id);
+    public ArticleRespDTO get(Long id) {
+        ArticleBO articleBO = articleRepository.queryById(id);
+        return ArticleConvert.INSTANCE.convert2RespDTO(articleBO);
     }
 
     @Override
-    public Page<Article> list(PageCondition pageReq) {
-        Page<Article> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
-        articleMapper.selectPage(page, null);
-        return page;
+    public Page<ArticleRespDTO> Page(PageCondition pageReq) {
+        Page<ArticleBO> page = articleRepository.page(pageReq);
+
+        return PageUtils.convert(page, ArticleConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
-    public Article getDetail(Long articleId) {
-        Article article = articleMapper.getById(articleId);
-        BizAssert.notNull(articleId, "文章查询失败，查询id为空");
-        return article;
+    public ArticleRespDTO getDetail(Long articleId) {
+        ArticleBO articleBO = articleRepository.queryById(articleId);
+        BizAssert.notNull(articleBO, "文章查询失败，查询id为空");
+        return ArticleConvert.INSTANCE.convert2RespDTO(articleBO);
     }
 
     @Override
     public void addView(Long articleId) {
-        Article article = get(articleId);
-        if (article == null) {
+        ArticleBO articleBO = articleRepository.queryById(articleId);
+        if (articleBO == null) {
             return;
         }
-        article.setViews(article.getViews() + 1);
-        articleMapper.updateById(article);
+        articleBO.setViews(articleBO.getViews() + 1);
+        articleRepository.updateById(articleBO);
     }
 
     @Override
-    public void add(ArticleVO articleVo) {
-        BizAssert.notNull(articleVo, "文章添加失败，文章信息为空");
-        articleVo.setArticleSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
+    public void add(ArticleReqDTO articleReqDTO) {
+        BizAssert.notNull(articleReqDTO, "文章添加失败，文章信息为空");
 
         UserDTO user = RedisUtil.get("user");
 
         BizAssert.notNull(user, "用户异常。！");
-        Article article = new Article();
-        BeanUtils.copyProperties(articleVo, article);
+        ArticleBO articleBO = ArticleConvert.INSTANCE.convert2BO(articleReqDTO);
 
         // 设置文章作者，优先为realName
-        article.setAuthor(StringUtils.isNotBlank(user.getRealName()) ? user.getRealName() : user.getNickname());
+        articleBO.setAuthor(StringUtils.isNotBlank(user.getRealName()) ? user.getRealName() : user.getNickname());
 
         // 如果添加文章时，没有上传文章的封面图，系统将从选择的标签中，随机选择一个标签所对应的图片为其设置为封面。
-        if (StringUtils.isBlank(article.getCoverImg())) {
-            article.setCoverImg(getArticleCoverImgByTag(article.getTag()));
+        if (StringUtils.isBlank(articleBO.getCoverImg())) {
+            articleBO.setCoverImg(getArticleCoverImgByTag(articleBO.getTag()));
         }
 
         // 初始化文章的固定信息
-        article.setViews(0);
-        article.setUserId(user.getId());
+        articleBO.setViews(0);
+        articleBO.setUserId(user.getId());
 
-        articleMapper.insert(article);
+        articleRepository.insert(articleBO);
     }
 
     @Override
-    public void update(ArticleVO articleVo) {
+    public void update(ArticleReqDTO articleReqDTO) {
         // 判断传入文章的Id是否存在
-        if (articleVo == null || articleVo.getId() == null) {
+        if (articleReqDTO == null || articleReqDTO.getId() == null) {
             throw new BizException(ErrorCode.BAD_PARAMETER);
         }
 
-        Article origin = articleMapper.getById(articleVo.getId());
+        ArticleBO origin = articleRepository.queryById(articleReqDTO.getId());
         if (origin == null) {
             throw new BizException(ErrorCode.BAD_PARAMETER, "当前文章错误。");
         }
 
-        origin.setTitle(articleVo.getArticleTitle());
+        origin.setTitle(articleReqDTO.getArticleTitle());
         // 获取文章摘要，截取内容的前100
-        origin.setSummary(MyUtil.stripHtml(articleVo.getArticleSummary()));
-        origin.setCoverImg(articleVo.getArticleCoverImg());
-        origin.setContentMd(articleVo.getArticleContentMd());
-        origin.setTag(articleVo.getArticleTag());
-        origin.setType(articleVo.getArticleType());
+        origin.setSummary(MyUtil.stripHtml(articleReqDTO.getArticleSummary()));
+        origin.setCoverImg(articleReqDTO.getArticleCoverImg());
+        origin.setContentMd(articleReqDTO.getArticleContentMd());
+        origin.setTag(articleReqDTO.getArticleTag());
+        origin.setType(articleReqDTO.getArticleType());
         // 设置更新时间
         origin.setUpdateTime(new Date());
-        articleMapper.updateById(origin);
+
+        articleRepository.updateById(origin);
     }
 
     @Override
     public void delete(Long articleId) {
-        articleMapper.deleteStatus(articleId);
+        articleRepository.delete(articleId);
         commentApiClient.deleteByTypeId("articleId", articleId);
     }
 
@@ -132,7 +133,7 @@ public class ArticleServiceImpl implements ArticleService {
         while (true) {
             int i = MyUtil.randomInt(tags.length);
             String currTag = tags[i];
-            List<Tag> tagList = tagMapper.selectList(new LambdaQueryWrapper<Tag>().eq(Tag::getName, currTag));
+            List<TagRespDTO> tagList = tagService.queryByName(currTag);
             if (!CollectionUtils.isEmpty(tagList) && StringUtils.isNotBlank(tagList.get(0).getCoverImg())) {
                 return tagList.get(0).getCoverImg();
             }

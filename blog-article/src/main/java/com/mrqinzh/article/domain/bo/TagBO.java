@@ -1,4 +1,4 @@
-package com.mrqinzh.article.domain;
+package com.mrqinzh.article.domain.bo;
 
 import com.mrqinzh.framework.common.domain.pojo.BO;
 import lombok.Getter;

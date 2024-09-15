@@ -1,13 +1,15 @@
 package com.mrqinzh.article.controller.app;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.article.domain.convert.ArticleConvert;
+import com.mrqinzh.article.domain.dto.ArticleRespDTO;
 import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.article.domain.vo.ArticleVO;
+import com.mrqinzh.article.domain.vo.ArticleReqVO;
 import com.mrqinzh.article.service.ArticleService;
 import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.resp.DataResp;
-import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,19 +29,19 @@ public class AppArticleController {
     @Operation(summary = "根据 articleId 查询文章具体信息")
     @GetMapping("/{articleId}")
     public Resp getById(@PathVariable("articleId") Long articleId) {
-        Article article = articleService.getDetail(articleId);
+        ArticleRespDTO article = articleService.getDetail(articleId);
 
         CompletableFuture.runAsync(() -> {
             articleService.addView(article.getId());
         });
-        return DataResp.ok(new ArticleVO(article));
+        return DataResp.ok(ArticleConvert.INSTANCE.convert2RespVO(article));
     }
 
     @Operation(summary = "分页加载文章列表")
     @GetMapping("/list")
     public Resp list(PageCondition pageReq) {
-        Page<Article> page = articleService.list(pageReq);
-        return PageResp.ok(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords(), ArticleVO::new);
+        Page<ArticleRespDTO> page = articleService.Page(pageReq);
+        return PageUtils.resp(page);
     }
 
 }

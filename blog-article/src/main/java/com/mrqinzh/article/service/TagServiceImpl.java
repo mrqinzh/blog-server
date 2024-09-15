@@ -2,7 +2,7 @@ package com.mrqinzh.article.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.dal.repo.TagRepository;
-import com.mrqinzh.article.domain.TagBO;
+import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.domain.entity.Tag;
@@ -63,5 +63,11 @@ public class TagServiceImpl implements TagService {
     public TagRespDTO getById(Long id) {
         TagBO tagBO = tagRepository.queryById(id);
         return TagConvert.INSTANCE.convert2RespDTO(tagBO);
+    }
+
+    @Override
+    public List<TagRespDTO> queryByName(String name) {
+        List<TagBO> tagBOS = tagRepository.queryByName(name);
+        return BeanUtils.convertList(tagBOS, TagConvert.INSTANCE::convert2RespDTO);
     }
 }

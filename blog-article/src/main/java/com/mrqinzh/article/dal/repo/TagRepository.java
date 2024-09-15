@@ -3,7 +3,7 @@ package com.mrqinzh.article.dal.repo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.dal.mapper.TagMapper;
-import com.mrqinzh.article.domain.TagBO;
+import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
@@ -34,6 +34,11 @@ public class TagRepository {
 
     public List<TagBO> queryByLimit() {
         List<Tag> tags = tagMapper.selectList(new LambdaQueryWrapper<Tag>().last("limit 20"));
+        return BeanUtils.convertList(tags, TagConvert.INSTANCE::convert2BO);
+    }
+
+    public List<TagBO> queryByName(String name) {
+        List<Tag> tags = tagMapper.selectList(new LambdaQueryWrapper<Tag>().eq(Tag::getName, name));
         return BeanUtils.convertList(tags, TagConvert.INSTANCE::convert2BO);
     }
 }

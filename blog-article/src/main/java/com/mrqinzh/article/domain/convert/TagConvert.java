@@ -1,6 +1,6 @@
 package com.mrqinzh.article.domain.convert;
 
-import com.mrqinzh.article.domain.TagBO;
+import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.domain.vo.TagRespVO;
