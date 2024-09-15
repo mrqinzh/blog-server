@@ -5,6 +5,8 @@ import com.mrqinzh.comment.domain.enums.CommentStatus;
 import com.mrqinzh.framework.common.domain.pojo.BO;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class CommentBO implements BO {
 
@@ -13,13 +15,13 @@ public class CommentBO implements BO {
 
     private String nickname;
 
-    private String commentContent;
+    private String content;
 
     private String ip;
 
     private BusinessType type;
-
     private CommentStatus status;
+    private Date createTime;
 
     private Long articleId;
     private Long parentId;

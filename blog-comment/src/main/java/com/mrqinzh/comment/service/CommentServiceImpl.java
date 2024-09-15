@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.mrqinzh.comment.dal.repo.CommentRepository;
 import com.mrqinzh.comment.domain.bo.CommentBO;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
@@ -52,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void add(CommentReqDTO commentReqDTO) {
         CommentBO comment = CommentConvert.INSTANCE.convert2BO(commentReqDTO);
-        comment.setCommentContent(commentReqDTO.getCommentContent());
+        comment.setContent(commentReqDTO.getCommentContent());
 
         String ip = commentReqDTO.getCommentIp();
         // 先根据 ip/昵称 查询当前用户是否已经进行过评论

@@ -1,7 +1,6 @@
 package com.mrqinzh.comment.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.mrqinzh.comment.controller.BaseCommentController;
 import com.mrqinzh.comment.domain.convert.CommentConvert;
 import com.mrqinzh.comment.domain.dto.ApplyCommentReqDTO;
@@ -14,7 +13,6 @@ import com.mrqinzh.comment.service.CommentService;
 import com.mrqinzh.framework.common.resp.CollectionDataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
-import com.mrqinzh.framework.common.web.controller.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

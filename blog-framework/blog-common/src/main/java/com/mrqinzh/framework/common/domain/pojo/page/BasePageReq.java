@@ -18,6 +18,7 @@ public class BasePageReq implements Serializable {
     /**
      * 条件属性
      */
+    @Deprecated
     private String condition;
 
     /**

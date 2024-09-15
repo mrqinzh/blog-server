@@ -26,6 +26,8 @@ public class CommentRespDTO implements RespDTO {
     private Long articleId;
     private Long parentId;
 
+    private String createTime;
+
     private List<CommentRespDTO> comments;
 
 }

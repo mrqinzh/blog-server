@@ -13,6 +13,7 @@ import com.mrqinzh.comment.utils.PageUtils;
 import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -55,8 +56,11 @@ public class CommentRepository {
         Page<Comment> page = new Page<>(pageReqDTO.getCurrentPage(), pageReqDTO.getPageSize());
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper
-                .eq(Comment::getNickname, pageReqDTO.getNickname())
-                .eq(Comment::getType, pageReqDTO.getType().ordinal())
+                .eq(StringUtils.isNotBlank(pageReqDTO.getNickname()), Comment::getNickname, pageReqDTO.getNickname())
+                .eq(pageReqDTO.getType() != null, Comment::getType, BusinessType.getCode(pageReqDTO.getType()))
+                .eq(StringUtils.isNotBlank(pageReqDTO.getIp()), Comment::getIp, pageReqDTO.getIp())
+                .le(pageReqDTO.getEndTime() != null, Comment::getCreateTime, pageReqDTO.getEndTime())
+                .ge(pageReqDTO.getStartTime() != null, Comment::getCreateTime, pageReqDTO.getStartTime())
                 ;
         Page<Comment> commentPage = commentMapper.selectPage(page, queryWrapper);
 

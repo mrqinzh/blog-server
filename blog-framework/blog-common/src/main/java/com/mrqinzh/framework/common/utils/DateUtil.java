@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class DateUtil {
 
+    public static final String TIME_ZONE = "GMT+8";
     public static final String YYYY_MM_DD = "yyyyMMdd";
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 

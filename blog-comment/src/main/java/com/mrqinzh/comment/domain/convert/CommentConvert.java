@@ -50,7 +50,6 @@ public interface CommentConvert {
      * entity -> bo
      */
     @Mappings({
-            @Mapping(source = "content", target = "commentContent"),
             @Mapping(source = "type", target = "type", qualifiedByName = "code2Type"),
             @Mapping(source = "status", target = "status", qualifiedByName = "code2Status")
     })
@@ -60,7 +59,6 @@ public interface CommentConvert {
      * bo -> entity
      */
     @Mappings({
-            @Mapping(source = "commentContent", target = "content"),
             @Mapping(source = "type", target = "type", qualifiedByName = "type2Code"),
             @Mapping(source = "status", target = "status", qualifiedByName = "status2Code")
     })
