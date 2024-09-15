@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.dal.repo.TagRepository;
 import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
+import com.mrqinzh.article.domain.dto.TagReqDTO;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.dal.mapper.TagMapper;
@@ -39,11 +40,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void add(Tag tag) {
+    public void add(TagReqDTO tag) {
         if (StringUtils.isBlank(tag.getCoverImg())) {
             throw new BizException(ErrorCode.BAD_PARAMETER, "必须上传标签对应图片！");
         }
-        tagMapper.insert(tag);
+        tagRepository.insert(TagConvert.INSTANCE.convert2BO(tag));
     }
 
     @Override
@@ -52,11 +53,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void update(Tag tag) {
-        if (tag.getId() == null || StringUtils.isBlank(tag.getCoverImg())) {
-            throw new BizException(ErrorCode.BAD_PARAMETER);
+    public void update(TagReqDTO tag) {
+        if (tag.getId() == null) {
+            return;
         }
-        tagMapper.updateById(tag);
+        tagRepository.updateById(TagConvert.INSTANCE.convert2BO(tag));
     }
 
     @Override

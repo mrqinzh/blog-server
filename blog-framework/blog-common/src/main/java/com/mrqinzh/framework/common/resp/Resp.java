@@ -52,6 +52,10 @@ public class Resp implements Serializable {
         return error(errorCode.getCode(), errorCode.getMsg());
     }
 
+    public static Resp errorParam() {
+        return error(ErrorCode.BAD_PARAMETER);
+    }
+
     public static Resp error(Integer code, String msg) {
         Resp resp = new Resp();
         resp.setCode(code);

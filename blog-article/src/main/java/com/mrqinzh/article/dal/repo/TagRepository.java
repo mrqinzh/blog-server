@@ -41,4 +41,14 @@ public class TagRepository {
         List<Tag> tags = tagMapper.selectList(new LambdaQueryWrapper<Tag>().eq(Tag::getName, name));
         return BeanUtils.convertList(tags, TagConvert.INSTANCE::convert2BO);
     }
+
+    public void updateById(TagBO tagBO) {
+        Tag tag = TagConvert.INSTANCE.convert(tagBO);
+        tagMapper.updateById(tag);
+    }
+
+    public void insert(TagBO tagBO) {
+        Tag tag = TagConvert.INSTANCE.convert(tagBO);
+        tagMapper.insert(tag);
+    }
 }
