@@ -3,7 +3,7 @@ package com.mrqinzh.user.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.user.domain.entity.Role;
@@ -29,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Page<Role> findPage(BasePageReq pageReq) {
+    public Page<Role> findPage(PageCondition pageReq) {
         Page<Role> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
         return roleMapper.selectPage(page, new LambdaQueryWrapper<Role>().eq(Role::getStatus, 0));
     }

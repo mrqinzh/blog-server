@@ -1,6 +1,6 @@
 package com.mrqinzh.user.service;
 
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.vo.UserVO;
@@ -18,7 +18,7 @@ public interface UserService {
 
     Map<String, Object> info(String token);
 
-    Resp list(BasePageReq pageReq);
+    Resp list(PageCondition pageReq);
 
     User getById(Integer id);
 

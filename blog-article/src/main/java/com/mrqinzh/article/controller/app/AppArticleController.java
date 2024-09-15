@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.vo.ArticleVO;
 import com.mrqinzh.article.service.ArticleService;
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -37,7 +37,7 @@ public class AppArticleController {
 
     @Operation(summary = "分页加载文章列表")
     @GetMapping("/list")
-    public Resp list(BasePageReq pageReq) {
+    public Resp list(PageCondition pageReq) {
         Page<Article> page = articleService.list(pageReq);
         return PageResp.ok(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords(), ArticleVO::new);
     }

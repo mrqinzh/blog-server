@@ -9,7 +9,7 @@ import com.mrqinzh.comment.domain.dto.CommentReqDTO;
 import com.mrqinzh.comment.domain.dto.CommentRespDTO;
 import com.mrqinzh.comment.domain.enums.CommentStatus;
 import com.mrqinzh.comment.domain.dto.CommentPageReqDTO;
-import com.mrqinzh.comment.utils.PageUtils;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.framework.common.utils.MyUtil;

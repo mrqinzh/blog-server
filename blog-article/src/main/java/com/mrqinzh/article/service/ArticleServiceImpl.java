@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.entity.Article;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.article.domain.vo.ArticleVO;
-import com.mrqinzh.article.mapper.ArticleMapper;
-import com.mrqinzh.article.mapper.TagMapper;
+import com.mrqinzh.article.dal.mapper.ArticleMapper;
+import com.mrqinzh.article.dal.mapper.TagMapper;
 import com.mrqinzh.article.rpc.CommentApiClient;
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;
@@ -46,7 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> list(BasePageReq pageReq) {
+    public Page<Article> list(PageCondition pageReq) {
         Page<Article> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
         articleMapper.selectPage(page, null);
         return page;

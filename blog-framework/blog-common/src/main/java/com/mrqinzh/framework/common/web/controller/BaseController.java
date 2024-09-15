@@ -14,12 +14,12 @@ public abstract class BaseController {
 
     protected final HttpServletRequest getRequest() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return attributes.getRequest();
+        return attributes == null ? null : attributes.getRequest();
     }
 
     protected final HttpServletResponse getResponse() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return attributes.getResponse();
+        return attributes == null ? null : attributes.getResponse();
     }
 
     protected String getClientIp() {

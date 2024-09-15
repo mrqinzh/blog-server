@@ -1,14 +1,17 @@
 package com.mrqinzh.article.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.article.dal.repo.TagRepository;
+import com.mrqinzh.article.domain.TagBO;
+import com.mrqinzh.article.domain.convert.TagConvert;
+import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.article.mapper.TagMapper;
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.article.dal.mapper.TagMapper;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
-import com.mrqinzh.framework.common.resp.DataResp;
-import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.common.utils.BeanUtils;
+import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -19,18 +22,20 @@ import java.util.List;
 public class TagServiceImpl implements TagService {
 
     @Resource
+    private TagRepository tagRepository;
+    @Resource
     private TagMapper tagMapper;
 
     @Override
-    public Resp page(BasePageReq pageReq) {
-        Page<Tag> tagPage = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
-        tagMapper.selectPage(tagPage, new LambdaQueryWrapper<Tag>().like(Tag::getName, pageReq.getCondition()));
-        return DataResp.ok(tagPage);
+    public Page<TagRespDTO> page(PageCondition pageReq) {
+        Page<TagBO> tagPage = tagRepository.page(pageReq);
+        return PageUtils.convert(tagPage, TagConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
-    public List<Tag> getByLimit() {
-        return tagMapper.selectList(new LambdaQueryWrapper<Tag>().last("limit 20"));
+    public List<TagRespDTO> getByLimit() {
+        List<TagBO> tagBOS = tagRepository.queryByLimit();
+        return BeanUtils.convertList(tagBOS, TagConvert.INSTANCE::convert2RespDTO);
     }
 
     @Override
@@ -42,9 +47,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Resp delete(Integer id) {
+    public void delete(Long id) {
         tagMapper.deleteById(id);
-        return Resp.success();
     }
 
     @Override
@@ -56,7 +60,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag getById(Integer id) {
-        return tagMapper.selectById(id);
+    public TagRespDTO getById(Long id) {
+        TagBO tagBO = tagRepository.queryById(id);
+        return TagConvert.INSTANCE.convert2RespDTO(tagBO);
     }
 }

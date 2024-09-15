@@ -13,16 +13,16 @@ public class WebFrameworkUtils {
         String ip = "";
         if (request != null) {
             ip = request.getHeader("X-FORWARDED-FOR");
-            if(ip==null || ip.length()==0 || "unknown".equalsIgnoreCase(ip)){
+            if(ip==null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)){
                 ip=request.getHeader("Proxy-Client-IP");
             }
-            if(ip==null || ip.length()==0 || "unknown".equalsIgnoreCase(ip)){
+            if(ip==null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)){
                 ip=request.getHeader("WL-Proxy-Client-IP");
             }
-            if(ip==null || ip.length()==0 || "unknown".equalsIgnoreCase(ip)){
+            if(ip==null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)){
                 ip=request.getHeader("X-Real-IP");
             }
-            if(ip==null || ip.length()==0 || "unknown".equalsIgnoreCase(ip)){
+            if(ip==null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)){
                 ip=request.getRemoteAddr();
             }
         }

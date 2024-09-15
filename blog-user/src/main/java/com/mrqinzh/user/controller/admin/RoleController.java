@@ -1,7 +1,7 @@
 package com.mrqinzh.user.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.pojo.page.BasePageReq;
+import com.mrqinzh.framework.common.domain.pojo.page.PageCondition;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -33,7 +33,7 @@ public class RoleController extends BaseController {
 
     @Operation(summary = "分页获取所有角色列表")
     @GetMapping("page")
-    public Resp findPage(BasePageReq pageReq) {
+    public Resp findPage(PageCondition pageReq) {
         Page<Role> roles = roleService.findPage(pageReq);
         return PageResp.ok(roles.getCurrent(), roles.getSize(), roles.getTotal(), roles.getRecords(), RoleConvert.INSTANCE::convert2VO);
     }
