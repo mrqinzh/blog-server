@@ -2,7 +2,7 @@ package com.mrqinzh.framework.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrqinzh.framework.common.security.LoginUser;
-import com.mrqinzh.framework.common.security.TokenStoreBO;
+import com.mrqinzh.framework.common.security.StoreToken;
 import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.common.exception.ErrorCode;
@@ -31,8 +31,8 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
         writeResponse(request, response, DataResp.ok(tokenId));
     }
 
-    public TokenStoreBO token2BO(Authentication authentication) {
-        TokenStoreBO bo = new TokenStoreBO();
+    public StoreToken token2BO(Authentication authentication) {
+        StoreToken bo = new StoreToken();
         bo.setAuthenticated(authentication.isAuthenticated());
         bo.setUser(new LoginUser((UserDetailsImpl) authentication.getPrincipal()));
         return bo;

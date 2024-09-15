@@ -25,23 +25,46 @@ public class ServletUtil {
 
     /**
      * 获取request对象
-     * @return
      */
     public static HttpServletRequest getRequest() {
-        return getRequestAttributes().getRequest();
+        ServletRequestAttributes attributes = getRequestAttributes();
+        return attributes == null ? null : attributes.getRequest();
     }
 
     /**
      * 获取response对象
-     * @return
      */
     public static HttpServletResponse getResponse() {
-        return getRequestAttributes().getResponse();
+        ServletRequestAttributes attributes = getRequestAttributes();
+        return attributes == null ? null : attributes.getResponse();
     }
 
     public static ServletRequestAttributes getRequestAttributes() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         return (ServletRequestAttributes) attributes;
+    }
+
+    /**
+     * 获取客户端的ip
+     */
+    public static String getClientIp(HttpServletRequest request) {
+        String ip = "";
+        if (request != null) {
+            ip = request.getHeader("X-FORWARDED-FOR");
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("Proxy-Client-IP");
+            }
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("WL-Proxy-Client-IP");
+            }
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("X-Real-IP");
+            }
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getRemoteAddr();
+            }
+        }
+        return ip;
     }
 
 }

@@ -2,7 +2,7 @@ package com.mrqinzh.framework.security.utils;
 
 import cn.hutool.core.util.IdUtil;
 import com.mrqinzh.framework.common.constant.CacheKeyConstant;
-import com.mrqinzh.framework.common.security.TokenStoreBO;
+import com.mrqinzh.framework.common.security.StoreToken;
 import com.mrqinzh.framework.security.config.SecurityProperties;
 import com.mrqinzh.framework.redis.utils.RedisUtil;
 import jakarta.servlet.http.Cookie;
@@ -33,7 +33,7 @@ public class AuthenticationTokenCacheUtils {
         return tokenId;
     }
 
-    public static String save(HttpServletRequest request, HttpServletResponse response, TokenStoreBO authentication) {
+    public static String save(HttpServletRequest request, HttpServletResponse response, StoreToken authentication) {
         String tokenId = generateTokenId();
 
         Cookie cookie = new Cookie(SecurityProperties.COOKIE_NAME, tokenId);
@@ -44,12 +44,12 @@ public class AuthenticationTokenCacheUtils {
         return tokenId;
     }
 
-    public static TokenStoreBO getToken(HttpServletRequest request) {
+    public static StoreToken getToken(HttpServletRequest request) {
         String tokenId = getTokenId(request);
         return getToken(tokenId);
     }
 
-    public static TokenStoreBO getToken(String tokenId) {
+    public static StoreToken getToken(String tokenId) {
         String cacheKey = getCacheKey(tokenId);
         return RedisUtil.get(cacheKey);
     }

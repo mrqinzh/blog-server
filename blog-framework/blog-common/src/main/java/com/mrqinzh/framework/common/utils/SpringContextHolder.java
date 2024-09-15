@@ -2,7 +2,7 @@ package com.mrqinzh.framework.common.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 
-public class SpringContextHolder {
+public class SpringContextHolder extends SpringUtil {
 
     public static <T> T getBean(Class<T> clazz) {
         return SpringUtil.getBean(clazz);

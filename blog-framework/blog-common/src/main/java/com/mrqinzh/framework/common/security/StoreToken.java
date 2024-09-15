@@ -1,17 +1,18 @@
 package com.mrqinzh.framework.common.security;
 
-import com.mrqinzh.framework.common.domain.bo.BO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class TokenStoreBO implements BO {
+public class StoreToken implements Serializable {
 
     private LoginUser user;
     private boolean authenticated;
 
-    public TokenStoreBO(UserDetailsImpl userDetails) {
+    public StoreToken(UserDetailsImpl userDetails) {
         this.user = new LoginUser(userDetails);
     }
 
