@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.convert.ArticleConvert;
 import com.mrqinzh.article.domain.dto.ArticleRespDTO;
 import com.mrqinzh.article.domain.vo.ArticleReqVO;
+import com.mrqinzh.article.domain.vo.ArticleRespVO;
+import com.mrqinzh.article.domain.vo.TagRespVO;
 import com.mrqinzh.article.service.ArticleService;
 import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
+import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.framework.common.utils.MyUtil;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
@@ -17,6 +20,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @Tag(name = "文章接口")
 @RestController
@@ -48,7 +53,12 @@ public class ArticleController extends BaseController {
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);
 //            producer.syncSend(WebSocketMessage.TOPIC, new WebSocketMessage(webSocketBean, SecurityProperties.PROJECT_DEVELOPER_ID));
 //        }
-        Page<ArticleRespDTO> page = articleService.Page(pageReq);
+        Page<ArticleRespVO> page = PageUtils.convert(articleService.Page(pageReq), ArticleConvert.INSTANCE::convert2RespVO);
+        page.getRecords().forEach(el -> {
+            if (CollectionUtils.isNotEmpty(el.getTags())) {
+                el.setTag(el.getTags().stream().map(TagRespVO::getName).collect(Collectors.joining(",")));
+            }
+        });
         return PageUtils.resp(page);
     }
 
@@ -75,6 +85,11 @@ public class ArticleController extends BaseController {
     public Resp delete(@PathVariable("articleId") Long articleId){
         articleService.delete(articleId);
         return Resp.success();
+    }
+
+    @GetMapping("count")
+    public Resp count() {
+        return DataResp.ok(articleService.count());
     }
 
 }

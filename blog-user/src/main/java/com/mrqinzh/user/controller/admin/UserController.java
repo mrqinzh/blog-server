@@ -6,6 +6,7 @@ import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
+import com.mrqinzh.user.domain.dto.UserStatisticsDTO;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.domain.vo.UserVO;
@@ -77,6 +78,18 @@ public class UserController extends BaseController {
         map.put("menus", menuService.findAll());
 //        map.put("menus", menuMapper.getByRoleId(user.getRole().getId()));
         return DataResp.ok(map);
+    }
+
+    @GetMapping("count")
+    public Resp count() {
+        long count = userService.count();
+        return DataResp.ok(count);
+    }
+
+    @GetMapping("statistics")
+    public Resp statistics() {
+        UserStatisticsDTO statistics = userService.statistics();
+        return DataResp.ok(statistics);
     }
 
 }

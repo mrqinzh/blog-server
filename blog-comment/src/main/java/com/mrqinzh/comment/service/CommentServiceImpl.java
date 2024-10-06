@@ -117,4 +117,9 @@ public class CommentServiceImpl implements CommentService {
 
         commentRepository.update(commentBOS);
     }
+
+    @Override
+    public long count() {
+        return commentRepository.selectCount();
+    }
 }

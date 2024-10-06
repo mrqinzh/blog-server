@@ -9,6 +9,7 @@ import com.mrqinzh.framework.redis.utils.RedisUtil;
 import com.mrqinzh.user.dal.repo.UserRepository;
 import com.mrqinzh.user.domain.bo.UserBO;
 import com.mrqinzh.user.domain.convert.UserConvert;
+import com.mrqinzh.user.domain.dto.UserStatisticsDTO;
 import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.domain.vo.UserVO;
@@ -28,11 +29,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Resource
     private UserRepository userRepository;
-
-    @Override
-    public List<User> test() {
-        return userMapper.selectAll();
-    }
 
     @Override
     public void update(UserVO userVO) {
@@ -100,5 +96,19 @@ public class UserServiceImpl implements UserService {
     public UserRespDTO getByUsername(String username) {
         UserBO userBO = userRepository.queryByUsername(username);
         return UserConvert.INSTANCE.convert2DTO(userBO);
+    }
+
+    @Override
+    public long count() {
+        return userRepository.selectCount();
+    }
+
+    @Override
+    public UserStatisticsDTO statistics() {
+        UserStatisticsDTO statisticsDTO = new UserStatisticsDTO();
+        long count = userRepository.selectCount();
+
+        statisticsDTO.setCount(count);
+        return statisticsDTO;
     }
 }

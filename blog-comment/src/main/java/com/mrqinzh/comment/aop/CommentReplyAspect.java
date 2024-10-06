@@ -1,15 +1,13 @@
 package com.mrqinzh.comment.aop;
 
 import com.mrqinzh.comment.domain.dto.CommentReqDTO;
-import com.mrqinzh.comment.domain.vo.CommentReqVO;
 import com.mrqinzh.framework.common.constant.MessageConstant;
+import com.mrqinzh.framework.mq.producer.MessageProducer;
 import jakarta.annotation.Resource;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -17,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class CommentReplyAspect {
 
     @Resource
-    private RocketMQTemplate rocketMQTemplate;
+    private MessageProducer messageProducer;
 
     @Pointcut("execution(* com.mrqinzh.comment.service.CommentService.add(..))")
     public void pointCut() {
@@ -35,7 +33,7 @@ public class CommentReplyAspect {
     }
 
     private void sendCommentMessage(CommentReqDTO reqDTO) {
-        rocketMQTemplate.syncSend(MessageConstant.Comment.COMMENT_REPLY_TOPIC, new GenericMessage<>(reqDTO));
+        messageProducer.syncSend(MessageConstant.Comment.COMMENT_REPLY_TOPIC, reqDTO);
     }
 
 }

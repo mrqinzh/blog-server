@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CommentRepository {
@@ -79,5 +80,9 @@ public class CommentRepository {
     public List<CommentBO> queryByIpOrNickname(String ip, String nickname) {
         List<Comment> list = commentMapper.getByIpOrNickname(ip, nickname);
         return BeanUtils.convertList(list, CommentConvert.INSTANCE::convert2BO);
+    }
+
+    public long selectCount() {
+        return Optional.ofNullable(commentMapper.selectCount(null)).orElse(0L);
     }
 }

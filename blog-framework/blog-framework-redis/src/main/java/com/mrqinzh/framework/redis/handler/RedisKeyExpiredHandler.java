@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.redis.config;
+package com.mrqinzh.framework.redis.handler;
 
 public interface RedisKeyExpiredHandler {
 

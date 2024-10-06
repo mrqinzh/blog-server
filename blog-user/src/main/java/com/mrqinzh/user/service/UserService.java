@@ -2,16 +2,13 @@ package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.framework.common.domain.page.PageCondition;
-import com.mrqinzh.user.domain.entity.User;
+import com.mrqinzh.user.domain.dto.UserStatisticsDTO;
 import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.domain.vo.UserVO;
 
-import java.util.List;
 import java.util.Map;
 
 public interface UserService {
-
-    List<User> test();
 
     void update(UserVO userVO);
 
@@ -25,4 +22,7 @@ public interface UserService {
 
     UserRespDTO getByUsername(String username);
 
+    UserStatisticsDTO statistics();
+
+    long count();
 }

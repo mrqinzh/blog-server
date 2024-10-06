@@ -25,4 +25,5 @@ public interface ArticleService {
 
     void upgradeArticleTag();
 
+    long count();
 }

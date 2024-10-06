@@ -11,8 +11,8 @@ public class ArticleTagRepository {
     @Resource
     private ArticleTagMapper articleTagMapper;
 
-    public void insert(Long articleId, Long tagId) {
-        ArticleTagRelation relation = new ArticleTagRelation(articleId, tagId);
+    public void insert(Long articleId, Long tagId, String tagName) {
+        ArticleTagRelation relation = new ArticleTagRelation(articleId, tagId, tagName);
         articleTagMapper.insert(relation);
     }
 

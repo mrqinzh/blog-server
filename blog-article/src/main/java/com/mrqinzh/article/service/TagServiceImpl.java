@@ -70,4 +70,9 @@ public class TagServiceImpl implements TagService {
         List<TagBO> tagBOS = tagRepository.queryByName(name);
         return BeanUtils.convertList(tagBOS, TagConvert.INSTANCE::convert2RespDTO);
     }
+
+    @Override
+    public List<TagRespDTO> queryByArticleId(Long articleId) {
+        return BeanUtils.convertList(tagRepository.queryByArticleId(articleId), TagConvert.INSTANCE::convert2RespDTO);
+    }
 }

@@ -11,8 +11,8 @@ public class ArticleTagServiceImpl implements ArticleTagService {
     private ArticleTagRepository articleTagRepository;
 
     @Override
-    public void add(Long articleId, Long tagId) {
-        articleTagRepository.insert(articleId, tagId);
+    public void add(Long articleId, Long tagId, String tagName) {
+        articleTagRepository.insert(articleId, tagId, tagName);
     }
 
 }

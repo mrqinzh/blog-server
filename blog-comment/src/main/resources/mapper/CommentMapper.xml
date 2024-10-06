@@ -24,26 +24,6 @@
         </if>
     </select>
 
-    <insert id="add" parameterType="Comment">
-        INSERT INTO `comment` (
-            avatar,
-            nickname,
-            content,
-            articleId,
-            parentId,
-            ip
-        )
-        VALUES
-            (
-                #{avatar},
-                #{nickname},
-                #{content},
-                #{articleId},
-                #{parentId},
-                #{ip}
-            )
-    </insert>
-
     <select id="getById" resultMap="baseMap">
         SELECT
             *

@@ -16,5 +16,6 @@ public class ArticleTagRelation extends BaseEntity {
 
     private Long articleId;
     private Long tagId;
+    private String tagName;
 
 }

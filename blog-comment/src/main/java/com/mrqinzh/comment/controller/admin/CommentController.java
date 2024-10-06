@@ -11,6 +11,7 @@ import com.mrqinzh.comment.domain.vo.CommentPageReqVO;
 import com.mrqinzh.comment.domain.vo.CommentRespVO;
 import com.mrqinzh.comment.service.CommentService;
 import com.mrqinzh.framework.common.resp.CollectionDataResp;
+import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,10 +68,15 @@ public class CommentController extends BaseCommentController {
     }
 
     @Operation(summary = "审批评论")
-    @PostMapping()
+    @PostMapping("approve")
     public Resp applyComments(@RequestBody ApplyCommentReqVO applyCommentReqVO) {
         commentService.applyComments(new ApplyCommentReqDTO(applyCommentReqVO.getCommentIds(), applyCommentReqVO.isApprove()));
         return Resp.success();
+    }
+
+    @GetMapping("count")
+    public Resp count() {
+        return DataResp.ok(commentService.count());
     }
 
 }

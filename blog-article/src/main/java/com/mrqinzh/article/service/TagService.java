@@ -28,4 +28,6 @@ public interface TagService {
     TagRespDTO getById(Long id);
 
     List<TagRespDTO> queryByName(String name);
+
+    List<TagRespDTO> queryByArticleId(Long articleId);
 }

@@ -11,6 +11,8 @@ import com.mrqinzh.user.domain.entity.User;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class UserRepository {
 
@@ -32,5 +34,9 @@ public class UserRepository {
     public UserBO queryByUsername(String username) {
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
         return UserConvert.INSTANCE.convert2BO(user);
+    }
+
+    public long selectCount() {
+        return Optional.ofNullable(userMapper.selectCount(null)).orElse(0L);
     }
 }

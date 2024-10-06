@@ -1,5 +1,6 @@
 package com.mrqinzh.framework.mq.config;
 
+import com.mrqinzh.framework.mq.producer.MessageProducer;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -19,6 +20,11 @@ public class RocketMQConfiguration {
     @Bean
     public RocketMQTemplate rocketMQTemplate() {
         return rocketMqAdapter.getTemplateByTopicName(RocketMqConstant.BUSINESS_PRODUCER_GROUP);
+    }
+
+    @Bean
+    public MessageProducer messageProducer(RocketMQTemplate rocketMQTemplate) {
+        return new MessageProducer(rocketMQTemplate);
     }
 
     @Configuration

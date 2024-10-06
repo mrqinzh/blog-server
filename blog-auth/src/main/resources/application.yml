@@ -12,3 +12,13 @@ spring:
 
   config:
     additional-location: ./config/
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      id-type: assign_id
+    banner: false
+  type-aliases-package: com.mrqinzh.auth.domain.entity
+  type-aliases-super-type: com.mrqinzh.framework.mybatis.entity.BlogTypeAliases

@@ -50,9 +50,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<ArticleRespDTO> Page(PageCondition pageReq) {
-        Page<ArticleBO> page = articleRepository.page(pageReq);
+        Page<ArticleRespDTO> page = PageUtils.convert(articleRepository.page(pageReq), ArticleConvert.INSTANCE::convert2RespDTO);
 
-        return PageUtils.convert(page, ArticleConvert.INSTANCE::convert2RespDTO);
+        page.getRecords().forEach(articleRespDTO -> {
+            List<TagRespDTO> tagRespDTOS = tagService.queryByArticleId(articleRespDTO.getId());
+            articleRespDTO.setTags(tagRespDTOS);
+        });
+
+        return page;
     }
 
     @Override
@@ -147,6 +152,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public long count() {
+        return articleRepository.count(null);
+    }
+
+    @Override
     public void upgradeArticleTag() {
         List<ArticleBO> allArticles = articleRepository.queryAll();
 
@@ -156,7 +166,7 @@ public class ArticleServiceImpl implements ArticleService {
                 String[] tagArray = tags.split(",");
                 for (String tag : tagArray) {
                     List<TagRespDTO> tagRespDTOS = tagService.queryByName(tag);
-                    tagRespDTOS.forEach(t -> articleTagService.add(articleBO.getId(), t.getId()));
+                    tagRespDTOS.forEach(t -> articleTagService.add(articleBO.getId(), t.getId(), t.getName()));
                 }
             }
         }

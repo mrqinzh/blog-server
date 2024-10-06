@@ -17,6 +17,7 @@ public class Article extends BaseEntity {
     private String coverImg;
     private String contentMd;
 
+    @Deprecated // use com.mrqinzh.article.domain.entity.ArticleTagRelation
     private String tag;
 
     private String type;

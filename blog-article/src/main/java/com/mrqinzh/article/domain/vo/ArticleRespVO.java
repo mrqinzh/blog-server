@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,5 +33,7 @@ public class ArticleRespVO implements RespVO {
     private Date updateTime;
 
     private Long userId;
+
+    private List<TagRespVO> tags;
 
 }

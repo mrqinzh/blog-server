@@ -2,9 +2,11 @@ package com.mrqinzh.article.dal.repo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mrqinzh.article.dal.mapper.ArticleTagMapper;
 import com.mrqinzh.article.dal.mapper.TagMapper;
 import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
+import com.mrqinzh.article.domain.entity.ArticleTagRelation;
 import com.mrqinzh.article.domain.entity.Tag;
 import com.mrqinzh.framework.common.domain.page.PageCondition;
 import com.mrqinzh.framework.common.utils.BeanUtils;
@@ -13,6 +15,7 @@ import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -20,6 +23,8 @@ public class TagRepository {
 
     @Resource
     private TagMapper tagMapper;
+    @Resource
+    private ArticleTagMapper articleTagMapper;
 
     public Page<TagBO> page(PageCondition pageReq) {
         Page<Tag> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
@@ -50,5 +55,15 @@ public class TagRepository {
     public void insert(TagBO tagBO) {
         Tag tag = TagConvert.INSTANCE.convert(tagBO);
         tagMapper.insert(tag);
+    }
+
+    public List<TagBO> queryByArticleId(Long articleId) {
+        List<ArticleTagRelation> articleTagRelations = articleTagMapper.selectList(new LambdaQueryWrapper<ArticleTagRelation>().eq(ArticleTagRelation::getArticleId, articleId));
+        return articleTagRelations.stream().map(relation -> {
+            TagBO tagBO = new TagBO();
+            tagBO.setId(relation.getTagId());
+            tagBO.setName(relation.getTagName());
+            return tagBO;
+        }).toList();
     }
 }

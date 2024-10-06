@@ -29,4 +29,6 @@ public interface CommentService {
     void deleteById(String idType, Long id);
 
     void applyComments(ApplyCommentReqDTO applyCommentReqDTO);
+
+    long count();
 }

@@ -12,8 +12,6 @@ import java.util.List;
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    Boolean add(Comment comment);
-
     @Select("select * from comment where ip = #{ip} or nickname = #{nickname}")
     List<Comment> getByIpOrNickname(@Param("ip") String ip, @Param("nickname") String nickname);
 

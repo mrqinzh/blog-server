@@ -24,6 +24,10 @@
         </dependency>
         <dependency>
             <groupId>com.mrqinzh</groupId>
+            <artifactId>blog-framework-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mrqinzh</groupId>
             <artifactId>blog-framework-security</artifactId>
         </dependency>
         <dependency>
