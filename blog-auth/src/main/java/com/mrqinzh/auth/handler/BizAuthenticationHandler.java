@@ -3,7 +3,7 @@ package com.mrqinzh.auth.handler;
 import cn.hutool.http.useragent.UserAgentParser;
 import com.mrqinzh.auth.domain.bo.LoginLogBO;
 import com.mrqinzh.auth.service.LoginLogService;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.security.core.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.ServletUtil;
 import com.mrqinzh.framework.security.handler.AuthenticationHandlerCustomizer;
 import jakarta.servlet.http.HttpServletRequest;

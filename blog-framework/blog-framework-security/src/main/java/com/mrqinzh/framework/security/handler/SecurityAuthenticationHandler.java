@@ -3,7 +3,7 @@ package com.mrqinzh.framework.security.handler;
 import cn.hutool.core.thread.NamedThreadFactory;
 import com.mrqinzh.framework.common.security.LoginUser;
 import com.mrqinzh.framework.common.security.StoreToken;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.security.core.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.ServletUtil;
 import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.common.exception.ErrorCode;
@@ -52,7 +52,7 @@ public class SecurityAuthenticationHandler implements AuthenticationSuccessHandl
     public StoreToken token2BO(Authentication authentication) {
         StoreToken bo = new StoreToken();
         bo.setAuthenticated(authentication.isAuthenticated());
-        bo.setUser(new LoginUser((UserDetailsImpl) authentication.getPrincipal()));
+        bo.setUser(((UserDetailsImpl) authentication.getPrincipal()).toLoginUser());
         return bo;
     }
 

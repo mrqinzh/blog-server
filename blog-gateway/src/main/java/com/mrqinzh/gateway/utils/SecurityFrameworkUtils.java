@@ -2,7 +2,6 @@ package com.mrqinzh.gateway.utils;
 
 import cn.hutool.core.map.MapUtil;
 import com.mrqinzh.framework.common.security.LoginUser;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;

@@ -2,11 +2,9 @@ package com.mrqinzh.framework.security.config;
 
 import com.mrqinzh.framework.common.security.LoginUser;
 import com.mrqinzh.framework.common.utils.JsonUtils;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.security.utils.SecurityFrameworkUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,7 +3,6 @@ package com.mrqinzh.framework.security.filter;
 import cn.hutool.core.util.StrUtil;
 import com.mrqinzh.framework.common.security.LoginUser;
 import com.mrqinzh.framework.common.security.StoreToken;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.JsonUtils;
 import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.security.utils.SecurityFrameworkUtils;

@@ -12,8 +12,4 @@ public class StoreToken implements Serializable {
     private LoginUser user;
     private boolean authenticated;
 
-    public StoreToken(UserDetailsImpl userDetails) {
-        this.user = new LoginUser(userDetails);
-    }
-
 }

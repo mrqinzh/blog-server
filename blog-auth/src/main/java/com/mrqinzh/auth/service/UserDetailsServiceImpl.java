@@ -1,7 +1,7 @@
 package com.mrqinzh.auth.service;
 
 import com.mrqinzh.auth.domain.convert.LoginUserConvert;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.security.core.UserDetailsImpl;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.user.api.UserApi;
 import com.mrqinzh.user.domain.user.LoginUserResponse;

@@ -19,22 +19,4 @@ public class LoginUser {
 
     private List<String> roles = Collections.emptyList();
 
-    public LoginUser(UserDetailsImpl userDetails) {
-        this.id = userDetails.getId();
-        this.nickname = userDetails.getNickname();
-        this.username = userDetails.getUsername();
-        this.avatar = userDetails.getAvatar();
-        this.roles = userDetails.getAuthorities().stream().map(SimpleGrantedAuthority::getAuthority).collect(Collectors.toList());
-    }
-
-    public UserDetailsImpl toUserDetails() {
-        UserDetailsImpl userDetails = new UserDetailsImpl();
-        userDetails.setId(id);
-        userDetails.setUsername(username);
-        userDetails.setNickname(nickname);
-        userDetails.setAvatar(avatar);
-        userDetails.setAuthorities(roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
-        return userDetails;
-    }
-
 }

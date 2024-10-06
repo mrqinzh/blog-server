@@ -1,8 +1,7 @@
 package com.mrqinzh.framework.security.utils;
 
 import com.mrqinzh.framework.common.security.LoginUser;
-import com.mrqinzh.framework.common.security.StoreToken;
-import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.security.core.UserDetailsImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -26,7 +25,7 @@ public class SecurityFrameworkUtils {
         if (authentication == null) {
             return null;
         }
-        return authentication.getPrincipal() instanceof UserDetailsImpl ? new LoginUser((UserDetailsImpl) authentication.getPrincipal()) : null;
+        return authentication.getPrincipal() instanceof UserDetailsImpl userDetails ? userDetails.toLoginUser() : null;
     }
 
     /**
@@ -46,7 +45,7 @@ public class SecurityFrameworkUtils {
      * 将基于token解析的认证信息放入springSecurity的上下文中
      */
     public static void setAuthentication(HttpServletRequest request, LoginUser loginUser) {
-        Authentication authentication = buildAuthentication(request, loginUser.toUserDetails());
+        Authentication authentication = buildAuthentication(request, new UserDetailsImpl(loginUser));
         setAuthentication(authentication);
     }
 
