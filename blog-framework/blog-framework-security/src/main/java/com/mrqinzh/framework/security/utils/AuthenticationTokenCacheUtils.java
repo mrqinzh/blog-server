@@ -54,6 +54,10 @@ public class AuthenticationTokenCacheUtils {
         return RedisUtil.get(cacheKey);
     }
 
+    public static void expire(HttpServletRequest request) {
+        expire(getTokenId(request));
+    }
+
     public static void expire(String tokenId) {
         RedisUtil.expire(getCacheKey(tokenId), 0);
     }

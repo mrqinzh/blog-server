@@ -6,6 +6,7 @@ import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.Resp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +16,7 @@ import java.util.List;
 
 /**
  * @author mrqinzh
- * @Description 全局异常处理器 gateway 模块暂未引入 blog-framework-web
+ * 全局异常处理器 gateway 模块暂未引入 blog-framework-web
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,8 +24,16 @@ public class GlobalExceptionHandler {
     private static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
+     * SERVICE_UNAVAILABLE
+     */
+    @ExceptionHandler(value = NotFoundException.class)
+    public Resp notFountException(NotFoundException exception) {
+        log.error(exception.getMessage(), exception);
+        return Resp.error(ErrorCode.SERVICE_NOT_FOUND.getCode(), exception.getMessage());
+    }
+
+    /**
      * 处理业务发生的异常
-     * @param e
      */
     @ExceptionHandler(value = BizException.class)
     public Resp bizExceptionHandler(BizException e) {
@@ -49,7 +58,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理空指针异常
-     * @param e
      */
     @ExceptionHandler(value = NullPointerException.class)
     public Resp exceptionHandler(NullPointerException e) {

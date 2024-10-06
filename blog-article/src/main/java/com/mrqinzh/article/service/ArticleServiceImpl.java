@@ -8,7 +8,7 @@ import com.mrqinzh.article.domain.dto.ArticleReqDTO;
 import com.mrqinzh.article.domain.dto.ArticleRespDTO;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.rpc.CommentApiClient;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BizAssert;
@@ -49,7 +49,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<ArticleRespDTO> Page(PageCondition pageReq) {
+    public Page<ArticleRespDTO> Page(PageRequest pageReq) {
         Page<ArticleRespDTO> page = PageUtils.convert(articleRepository.page(pageReq), ArticleConvert.INSTANCE::convert2RespDTO);
 
         page.getRecords().forEach(articleRespDTO -> {

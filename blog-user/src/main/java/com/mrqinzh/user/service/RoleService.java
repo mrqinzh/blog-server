@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.user.domain.entity.Role;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public interface RoleService {
 
     List<Role> findAll();
 
-    Page<Role> findPage(PageCondition pageReq);
+    Page<Role> findPage(PageRequest pageReq);
 
     Role getById(Long id);
 

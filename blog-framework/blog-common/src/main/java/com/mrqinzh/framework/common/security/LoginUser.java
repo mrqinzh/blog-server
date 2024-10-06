@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class LoginUser {
 
-    private Long userId;
+    private Long id;
     private String username;
     private String nickname;
     private String avatar;
@@ -20,7 +20,7 @@ public class LoginUser {
     private List<String> roles = Collections.emptyList();
 
     public LoginUser(UserDetailsImpl userDetails) {
-        this.userId = userDetails.getId();
+        this.id = userDetails.getId();
         this.nickname = userDetails.getNickname();
         this.username = userDetails.getUsername();
         this.avatar = userDetails.getAvatar();
@@ -29,7 +29,7 @@ public class LoginUser {
 
     public UserDetailsImpl toUserDetails() {
         UserDetailsImpl userDetails = new UserDetailsImpl();
-        userDetails.setId(userId);
+        userDetails.setId(id);
         userDetails.setUsername(username);
         userDetails.setNickname(nickname);
         userDetails.setAvatar(avatar);

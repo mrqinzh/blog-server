@@ -2,7 +2,7 @@ package com.mrqinzh.user.dal.repo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import com.mrqinzh.user.dal.mapper.UserMapper;
 import com.mrqinzh.user.domain.bo.UserBO;
@@ -19,8 +19,8 @@ public class UserRepository {
     @Resource
     private UserMapper userMapper;
 
-    public Page<UserBO> page(PageCondition pageCondition) {
-        Page<User> page = new Page<>(pageCondition.getCurrentPage(), pageCondition.getPageSize());
+    public Page<UserBO> page(PageRequest pageRequest) {
+        Page<User> page = new Page<>(pageRequest.getCurrentPage(), pageRequest.getPageSize());
         page = userMapper.selectPage(page, null);
 
         return PageUtils.convert(page, UserConvert.INSTANCE::convert2BO);

@@ -8,14 +8,13 @@ import com.mrqinzh.article.domain.bo.TagBO;
 import com.mrqinzh.article.domain.convert.TagConvert;
 import com.mrqinzh.article.domain.entity.ArticleTagRelation;
 import com.mrqinzh.article.domain.entity.Tag;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -26,7 +25,7 @@ public class TagRepository {
     @Resource
     private ArticleTagMapper articleTagMapper;
 
-    public Page<TagBO> page(PageCondition pageReq) {
+    public Page<TagBO> page(PageRequest pageReq) {
         Page<Tag> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
         page = tagMapper.selectPage(page, new LambdaQueryWrapper<Tag>().like(StringUtils.isNotBlank(pageReq.getCondition()), Tag::getName, pageReq.getCondition()));
         return PageUtils.convert(page, TagConvert.INSTANCE::convert2BO);

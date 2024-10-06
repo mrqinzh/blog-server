@@ -1,5 +1,6 @@
 package com.mrqinzh.framework.security.config;
 
+import com.mrqinzh.framework.common.security.LoginUser;
 import com.mrqinzh.framework.common.utils.JsonUtils;
 import com.mrqinzh.framework.common.security.UserDetailsImpl;
 import com.mrqinzh.framework.security.utils.SecurityFrameworkUtils;
@@ -19,25 +20,22 @@ public class RpcSecurityConfiguration {
 
     @Bean
     public RequestInterceptor rpcSecurityInterceptor() {
-        return new RequestInterceptor() {
-
-            @Override
-            @SneakyThrows
-            public void apply(RequestTemplate requestTemplate) {
-                UserDetailsImpl loginUser = SecurityFrameworkUtils.getLoginUser();
-                if (loginUser == null) {
-                    return;
-                }
-                try {
-                    String userStr = JsonUtils.toJsonString(loginUser);
-                    userStr = URLEncoder.encode(userStr, StandardCharsets.UTF_8.name()); // 编码，避免中文乱码
-                    requestTemplate.header(SecurityFrameworkUtils.LOGIN_USER_HEADER, userStr);
-                } catch (Exception ex) {
-                    log.error("[apply][序列化 LoginUser({}) 发生异常]", loginUser, ex);
-                    throw ex;
-                }
+        return requestTemplate -> {
+            LoginUser loginUser = SecurityFrameworkUtils.getLoginUser();
+            if (loginUser == null) {
+                return;
             }
+            String userStr = JsonUtils.toJsonString(loginUser);
+            userStr = URLEncoder.encode(userStr, StandardCharsets.UTF_8); // 编码，避免中文乱码
+            addHeader(requestTemplate, SecurityFrameworkUtils.LOGIN_USER_HEADER, userStr);
         };
+    }
+
+    private void addHeader(RequestTemplate requestTemplate, String name, String... values) {
+        if (!requestTemplate.headers().containsKey(name)) {
+            requestTemplate.header(name, values);
+        }
+
     }
 
 }

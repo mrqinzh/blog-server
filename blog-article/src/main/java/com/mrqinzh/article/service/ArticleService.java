@@ -3,7 +3,7 @@ package com.mrqinzh.article.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mrqinzh.article.domain.dto.ArticleReqDTO;
 import com.mrqinzh.article.domain.dto.ArticleRespDTO;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 
 public interface ArticleService {
 
@@ -11,7 +11,7 @@ public interface ArticleService {
 
     ArticleRespDTO get(Long id);
 
-    Page<ArticleRespDTO> Page(PageCondition pageReq); // 排序全部文章、以及分页
+    Page<ArticleRespDTO> Page(PageRequest pageReq); // 排序全部文章、以及分页
 
     ArticleRespDTO getDetail(Long articleId); // 根据文章id展示当前文章
 

@@ -7,7 +7,7 @@ import com.mrqinzh.article.domain.vo.ArticleReqVO;
 import com.mrqinzh.article.domain.vo.ArticleRespVO;
 import com.mrqinzh.article.domain.vo.TagRespVO;
 import com.mrqinzh.article.service.ArticleService;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -47,7 +47,7 @@ public class ArticleController extends BaseController {
 
     @Operation(summary = "分页加载文章列表")
     @GetMapping("/list")
-    public Resp list(PageCondition pageReq) {
+    public Resp list(PageRequest pageReq) {
 //        if (user != null) {
 //            String message = user.getName() + "刚刚浏览了文章列表，请注意查收。";
 //            WebSocketBean webSocketBean = new WebSocketBean(false, message);

@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.user.domain.entity.Menu;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,8 +21,8 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
 
     public List<Menu> findAll() {
-        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(Menu::getStatus, 0).orderByAsc(Menu::getMenuSort);
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Menu::getStatus, 0).orderByAsc(Menu::getMenuSort);
         List<Menu> menus = menuMapper.selectList(queryWrapper);
         if (menus == null) return null;
 
@@ -43,8 +42,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> findPage(PageCondition pageReq) {
-        List<Menu> menus = menuMapper.selectList(new QueryWrapper<Menu>().lambda().eq(Menu::getStatus, 0));
+    public List<Menu> findPage(PageRequest pageReq) {
+        List<Menu> menus = menuMapper.selectList(new LambdaQueryWrapper<Menu>().eq(Menu::getStatus, 0));
         return menus;
     }
 
@@ -65,8 +64,6 @@ public class MenuServiceImpl implements MenuService {
         }
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuVO, menu);
-        menu.setCreateTime(new Date());
-        menu.setUpdateTime(new Date());
         menu.setStatus(0);
 
         menuMapper.insert(menu);
@@ -74,13 +71,8 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void update(MenuVO menuVO) {
-        if (menuVO.getId() == null || menuVO.getId() == 0) {
-            throw new BizException(ErrorCode.BAD_PARAMETER, "参数校验错误，缺少菜单id");
-        }
         Menu menu = menuMapper.selectById(menuVO.getId());
         BeanUtils.copyProperties(menuVO, menu);
-
-        menu.setUpdateTime(new Date());
 
         menuMapper.updateById(menu);
     }

@@ -1,11 +1,10 @@
 package com.mrqinzh.user.rpc.provider;
 
+import com.mrqinzh.framework.common.domain.rpc.ServiceResponse;
 import com.mrqinzh.framework.common.utils.CollectionUtils;
 import com.mrqinzh.user.api.UserApi;
 import com.mrqinzh.user.domain.convert.RoleConvert;
-import com.mrqinzh.user.domain.convert.UserConvert;
 import com.mrqinzh.user.domain.entity.Role;
-import com.mrqinzh.user.domain.entity.User;
 import com.mrqinzh.user.domain.user.LoginUserResponse;
 import com.mrqinzh.user.domain.dto.UserRespDTO;
 import com.mrqinzh.user.service.RoleService;
@@ -25,7 +24,7 @@ public class UserApiProviderClient implements UserApi {
     private RoleService roleService;
 
     @Override
-    public LoginUserResponse getByUsername(String username) {
+    public ServiceResponse<LoginUserResponse> getByUsername(String username) {
         UserRespDTO user = userService.getByUsername(username);
         if (user == null) {
             return null;
@@ -41,6 +40,6 @@ public class UserApiProviderClient implements UserApi {
         if (CollectionUtils.isNotEmpty(userRoles)) {
             resp.setRoles(userRoles.stream().map(RoleConvert.INSTANCE::convert).collect(Collectors.toList()));
         }
-        return resp;
+        return ServiceResponse.success(resp);
     }
 }

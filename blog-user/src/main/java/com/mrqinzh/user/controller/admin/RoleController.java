@@ -1,7 +1,9 @@
 package com.mrqinzh.user.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
+import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -33,7 +35,7 @@ public class RoleController extends BaseController {
 
     @Operation(summary = "分页获取所有角色列表")
     @GetMapping("page")
-    public Resp findPage(PageCondition pageReq) {
+    public Resp findPage(PageRequest pageReq) {
         Page<Role> roles = roleService.findPage(pageReq);
         return PageResp.ok(roles.getCurrent(), roles.getSize(), roles.getTotal(), roles.getRecords(), RoleConvert.INSTANCE::convert2VO);
     }
@@ -49,6 +51,9 @@ public class RoleController extends BaseController {
     @PostMapping("add")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp add(@RequestBody Role role) {
+        if (role.getRoleName() == null) {
+            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
+        }
         roleService.add(role);
         return Resp.success();
     }
@@ -56,6 +61,9 @@ public class RoleController extends BaseController {
     @Operation(summary = "根据id更新角色信息")
     @PostMapping("update")
     public Resp update(@RequestBody Role role) {
+        if (role.getId() == null || role.getRoleName() == null) {
+            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
+        }
         roleService.update(role);
         return Resp.success();
     }

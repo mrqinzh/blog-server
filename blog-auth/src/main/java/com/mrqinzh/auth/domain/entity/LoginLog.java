@@ -11,7 +11,12 @@ import lombok.Setter;
 public class LoginLog extends BaseEntity {
 
     private Long userId;
+    @Deprecated
     private String token;
     private String ip;
+    private String ipAddress;
+    private String browser;
+    private String os;
+    private String device;
 
 }

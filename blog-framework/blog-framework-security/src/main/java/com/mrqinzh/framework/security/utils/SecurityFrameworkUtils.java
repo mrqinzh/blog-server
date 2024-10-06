@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,12 +21,12 @@ public class SecurityFrameworkUtils {
 
     public static final String LOGIN_USER_HEADER = "login-user";
 
-    public static UserDetailsImpl getLoginUser() {
+    public static LoginUser getLoginUser() {
         Authentication authentication = getAuthentication();
         if (authentication == null) {
             return null;
         }
-        return authentication.getPrincipal() instanceof UserDetailsImpl ? (UserDetailsImpl) authentication.getPrincipal() : null;
+        return authentication.getPrincipal() instanceof UserDetailsImpl ? new LoginUser((UserDetailsImpl) authentication.getPrincipal()) : null;
     }
 
     /**
@@ -44,8 +45,8 @@ public class SecurityFrameworkUtils {
     /**
      * 将基于token解析的认证信息放入springSecurity的上下文中
      */
-    public static void setAuthentication(HttpServletRequest request, StoreToken storeToken) {
-        Authentication authentication = buildAuthentication(request, storeToken);
+    public static void setAuthentication(HttpServletRequest request, LoginUser loginUser) {
+        Authentication authentication = buildAuthentication(request, loginUser.toUserDetails());
         setAuthentication(authentication);
     }
 
@@ -57,9 +58,12 @@ public class SecurityFrameworkUtils {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    public static Authentication buildAuthentication(HttpServletRequest request, StoreToken storeToken) {
-        LoginUser user = storeToken.getUser();
-        UserDetailsImpl userDetails = user.toUserDetails();
+    public static void setAuthentication(HttpServletRequest request, UserDetails userDetails) {
+        Authentication authentication = buildAuthentication(request, userDetails);
+        setAuthentication(authentication);
+    }
+
+    public static Authentication buildAuthentication(HttpServletRequest request, UserDetails userDetails) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

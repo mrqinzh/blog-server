@@ -1,4 +1,4 @@
-package com.mrqinzh.framework.common.domain.enums;
+package com.mrqinzh.user.domain.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

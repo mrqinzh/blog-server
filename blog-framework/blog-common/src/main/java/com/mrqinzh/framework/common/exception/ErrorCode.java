@@ -18,6 +18,7 @@ public enum ErrorCode {
     TOKEN_EXPIRED(40003, "会话失效了，请重新登录哦。。.>_>"),
     TOKEN_EXPIRE_NO_REDIRECT(40013, "会话失效了，删掉cookie就好了。。。-_-"),
     TOKEN_ILLEGAL(40004, "这个token好像有点不正常啊。。。-_-"),
+    AUTHENTICATION_FAILURE(40005, "认证失败"),
 
     // 参数相关
     BAD_PARAMETER(400, "参数校验失败"),
@@ -25,7 +26,9 @@ public enum ErrorCode {
     // 服务器相关
     UNKNOWN_SERVER_ERROR(500, "不好意思，服务端出现了未知的错误，赶快通知管理员修改BUG吧。。。-_-"),
     NULL_PRINTER_EXCEPTION(500, "服务器出现了空指针异常。。。"),
-    SERVICE_ERROR(50000, "业务异常，可能是bug，也可能不是。。。-_-");
+    SERVICE_ERROR(50000, "业务异常，可能是bug，也可能不是。。。-_-"),
+    SERVICE_NOT_FOUND(50001, "没找到服务啊"),
+    ;
 
     // 获取code
     // 属性

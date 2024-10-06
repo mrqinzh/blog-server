@@ -22,13 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginUserResponse loginUser = userApiService.getByUsername(username);
+        LoginUserResponse loginUser = userApiService.getByUsername(username).getCheckData();
         if (loginUser == null) {
             throw new UsernameNotFoundException(username);
         }
         UserDetailsImpl userDetails = LoginUserConvert.INSTANCE.convert(loginUser);
         if (CollectionUtils.isNotEmpty(loginUser.getRoles())) {
-            userDetails.setAuthorities(loginUser.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getRoleName().name())).collect(Collectors.toList()));
+            userDetails.setAuthorities(loginUser.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toList()));
         }
 
         return userDetails;

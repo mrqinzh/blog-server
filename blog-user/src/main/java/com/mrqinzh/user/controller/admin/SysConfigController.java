@@ -1,6 +1,6 @@
 package com.mrqinzh.user.controller.admin;
 
-import com.mrqinzh.framework.common.domain.enums.ConfigKey;
+import com.mrqinzh.user.domain.enums.ConfigKey;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;

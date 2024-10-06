@@ -1,6 +1,6 @@
 package com.mrqinzh.auth.controller.admin;
 
-import com.mrqinzh.auth.service.LoginService;
+import com.mrqinzh.auth.service.LoginLogService;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Resource
-    private LoginService loginService;
+    private LoginLogService loginLogService;
 
     @GetMapping("log/page")
     public Resp loginLog(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-        return PageUtils.resp(loginService.logPage(pageNum, pageSize));
+        return PageUtils.resp(loginLogService.logPage(pageNum, pageSize));
     }
 
 }

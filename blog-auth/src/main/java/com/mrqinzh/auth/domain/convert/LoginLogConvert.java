@@ -6,10 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface LoginConvert {
+public interface LoginLogConvert {
 
-    LoginConvert INSTANCE = Mappers.getMapper(LoginConvert.class);
+    LoginLogConvert INSTANCE = Mappers.getMapper(LoginLogConvert.class);
 
     LoginLogBO convert2LogBO(LoginLog loginLog);
 
+    LoginLog convert(LoginLogBO loginLogBO);
 }

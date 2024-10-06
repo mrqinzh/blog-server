@@ -1,7 +1,7 @@
 package com.mrqinzh.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
@@ -19,7 +19,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -81,7 +80,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserRespDTO> page(PageCondition pageReq) {
+    public Page<UserRespDTO> page(PageRequest pageReq) {
         Page<UserBO> page = userRepository.page(pageReq);
         return PageUtils.convert(page, UserConvert.INSTANCE::convert2RespDTO);
     }

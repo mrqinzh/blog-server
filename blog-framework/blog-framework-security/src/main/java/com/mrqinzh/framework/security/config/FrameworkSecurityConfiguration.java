@@ -3,10 +3,9 @@ package com.mrqinzh.framework.security.config;
 import com.mrqinzh.framework.security.filter.AuthenticationTokenFilter;
 import com.mrqinzh.framework.security.handler.AccessDeniedHandlerImpl;
 import com.mrqinzh.framework.security.handler.AuthenticationEntryPointImpl;
-import com.mrqinzh.framework.security.handler.DefaultAuthenticationHandler;
+import com.mrqinzh.framework.security.handler.SecurityAuthenticationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,13 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +30,12 @@ public class FrameworkSecurityConfiguration {
     private List<AuthorizeRequestsCustomizer> authorizeRequestsCustomizers;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityAuthenticationHandler defaultAuthenticationHandler() {
+        return new SecurityAuthenticationHandler();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, SecurityAuthenticationHandler securityAuthenticationHandler) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
         // 基于 token 机制，所以不需要 Session
@@ -54,13 +52,13 @@ public class FrameworkSecurityConfiguration {
                         .loginProcessingUrl(SecurityProperties.LOGIN_URL)
                         .usernameParameter(SecurityProperties.USERNAME)
                         .passwordParameter(SecurityProperties.PASSWORD)
-                        .successHandler(successHandler())
-                        .failureHandler(failureHandler()));
+                        .successHandler(securityAuthenticationHandler)
+                        .failureHandler(securityAuthenticationHandler));
 
         http.logout(logout ->
                 logout
                         .logoutUrl(SecurityProperties.LOGOUT_URL)
-                        .logoutSuccessHandler(logoutSuccessHandler()));
+                        .logoutSuccessHandler(securityAuthenticationHandler));
 
         // 添加各个模块的自定义过滤规则
         http.authorizeHttpRequests(authorize -> Optional.ofNullable(authorizeRequestsCustomizers).orElseGet(ArrayList::new).forEach(consumer -> consumer.customize(authorize)));
@@ -84,21 +82,6 @@ public class FrameworkSecurityConfiguration {
     @Bean
     public AuthenticationTokenFilter authenticationTokenFilter() {
         return new AuthenticationTokenFilter();
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        return new DefaultAuthenticationHandler();
-    }
-
-    @Bean
-    public AuthenticationFailureHandler failureHandler() {
-        return new DefaultAuthenticationHandler();
-    }
-
-    @Bean
-    public LogoutSuccessHandler logoutSuccessHandler() {
-        return new DefaultAuthenticationHandler();
     }
 
     /**

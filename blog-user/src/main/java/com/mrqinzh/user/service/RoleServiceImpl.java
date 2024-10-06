@@ -3,15 +3,12 @@ package com.mrqinzh.user.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
-import com.mrqinzh.framework.common.exception.BizException;
-import com.mrqinzh.framework.common.exception.ErrorCode;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.user.domain.entity.Role;
 import com.mrqinzh.user.dal.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,14 +19,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> findAll() {
-        QueryWrapper<Role> queryWrapper = new QueryWrapper();
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(Role::getStatus, 0);
         List<Role> roles = roleMapper.selectList(queryWrapper);
         return roles;
     }
 
     @Override
-    public Page<Role> findPage(PageCondition pageReq) {
+    public Page<Role> findPage(PageRequest pageReq) {
         Page<Role> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
         return roleMapper.selectPage(page, new LambdaQueryWrapper<Role>().eq(Role::getStatus, 0));
     }
@@ -42,21 +39,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void add(Role role) {
-        if (role.getRoleName() == null) {
-            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
-        }
-        role.setCreateTime(new Date());
-        role.setUpdateTime(new Date());
         role.setStatus(0);
         roleMapper.insert(role);
     }
 
     @Override
     public void update(Role role) {
-        if (role.getId() == null || role.getRoleName() == null) {
-            throw new BizException(ErrorCode.BAD_PARAMETER, "请输入角色名称");
-        }
-        role.setUpdateTime(new Date());
         roleMapper.updateById(role);
     }
 

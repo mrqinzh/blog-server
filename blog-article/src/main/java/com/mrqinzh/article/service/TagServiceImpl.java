@@ -7,7 +7,7 @@ import com.mrqinzh.article.domain.convert.TagConvert;
 import com.mrqinzh.article.domain.dto.TagReqDTO;
 import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.dal.mapper.TagMapper;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.exception.BizException;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.utils.BeanUtils;
@@ -27,7 +27,7 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
-    public Page<TagRespDTO> page(PageCondition pageReq) {
+    public Page<TagRespDTO> page(PageRequest pageReq) {
         Page<TagBO> tagPage = tagRepository.page(pageReq);
         return PageUtils.convert(tagPage, TagConvert.INSTANCE::convert2RespDTO);
     }

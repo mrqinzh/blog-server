@@ -31,7 +31,7 @@ public class AppUserController extends BaseUserController {
             return Resp.error(ErrorCode.TOKEN_EXPIRED);
         }
         AppUserInfoVO vo = new AppUserInfoVO();
-        vo.setUserId(user.getUserId());
+        vo.setUserId(user.getId());
         vo.setName(user.getNickname());
         vo.setAvatar(user.getAvatar());
         vo.setRoles(user.getRoles());

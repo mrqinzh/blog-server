@@ -29,7 +29,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
             throws IOException, ServletException {
         // 打印 warn 的原因是，不定期合并 warn，看看有没恶意破坏
         // 返回 403
-        ServletUtil.writeJSON(response, Resp.error(ErrorCode.NO_PERMISSION));
+        ServletUtil.writeResponse(response, Resp.error(ErrorCode.NO_PERMISSION));
     }
 
 }

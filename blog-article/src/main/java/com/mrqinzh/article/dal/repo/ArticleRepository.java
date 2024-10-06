@@ -5,7 +5,7 @@ import com.mrqinzh.article.dal.mapper.ArticleMapper;
 import com.mrqinzh.article.domain.bo.ArticleBO;
 import com.mrqinzh.article.domain.convert.ArticleConvert;
 import com.mrqinzh.article.domain.entity.Article;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.utils.BeanUtils;
 import com.mrqinzh.framework.mybatis.utils.PageUtils;
 import jakarta.annotation.Resource;
@@ -19,8 +19,8 @@ public class ArticleRepository {
     @Resource
     private ArticleMapper articleMapper;
 
-    public long count(PageCondition pageCondition) {
-        return articleMapper.pageCount(pageCondition);
+    public long count(PageRequest pageRequest) {
+        return articleMapper.pageCount(pageRequest);
     }
 
     public List<ArticleBO> queryAll() {
@@ -28,12 +28,12 @@ public class ArticleRepository {
         return BeanUtils.convertList(list, ArticleConvert.INSTANCE::convert2BO);
     }
 
-    public List<ArticleBO> list(PageCondition pageCondition) {
-        List<Article> list = articleMapper.list(pageCondition);
+    public List<ArticleBO> list(PageRequest pageRequest) {
+        List<Article> list = articleMapper.list(pageRequest);
         return BeanUtils.convertList(list, ArticleConvert.INSTANCE::convert2BO);
     }
 
-    public Page<ArticleBO> page(PageCondition pageReq) {
+    public Page<ArticleBO> page(PageRequest pageReq) {
         Page<Article> page = new Page<>(pageReq.getCurrentPage(), pageReq.getPageSize());
 
         page = articleMapper.selectPage(page, null);

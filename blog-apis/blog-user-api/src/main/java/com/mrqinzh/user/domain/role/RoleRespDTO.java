@@ -1,6 +1,5 @@
 package com.mrqinzh.user.domain.role;
 
-import com.mrqinzh.framework.common.domain.enums.RoleType;
 import com.mrqinzh.framework.common.domain.dto.RespDTO;
 import lombok.Data;
 
@@ -8,6 +7,6 @@ import lombok.Data;
 public class RoleRespDTO implements RespDTO {
 
     private Long id;
-    private RoleType roleName;
+    private String roleName;
 
 }

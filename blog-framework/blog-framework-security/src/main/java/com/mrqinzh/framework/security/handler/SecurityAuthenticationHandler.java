@@ -1,14 +1,17 @@
 package com.mrqinzh.framework.security.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import cn.hutool.core.thread.NamedThreadFactory;
 import com.mrqinzh.framework.common.security.LoginUser;
 import com.mrqinzh.framework.common.security.StoreToken;
 import com.mrqinzh.framework.common.security.UserDetailsImpl;
+import com.mrqinzh.framework.common.utils.ServletUtil;
 import com.mrqinzh.framework.security.utils.AuthenticationTokenCacheUtils;
 import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,16 +22,31 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class DefaultAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
+public class SecurityAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, LogoutSuccessHandler {
+
+    private final ExecutorService executorService;
+    @Resource
+    private ObjectProvider<List<AuthenticationHandlerCustomizer>> handlersProvider;
+
+    public SecurityAuthenticationHandler() {
+        this.executorService = Executors.newSingleThreadExecutor(new NamedThreadFactory("authentication-handler-", false));
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String tokenId = AuthenticationTokenCacheUtils.save(request, response, token2BO(authentication));
         writeResponse(request, response, DataResp.ok(tokenId));
+
+        handlersProvider.ifAvailable(handlers -> {
+            executorService.submit(() -> {
+                handlers.forEach(handler -> handler.onAuthenticationSuccess(request, response, authentication));
+            });
+        });
     }
 
     public StoreToken token2BO(Authentication authentication) {
@@ -41,11 +59,24 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         writeResponse(httpServletRequest, httpServletResponse, getResp(e));
+
+        handlersProvider.ifAvailable(handlers -> {
+            executorService.submit(() -> {
+                handlers.forEach(handler -> handler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e));
+            });
+        });
     }
 
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+        AuthenticationTokenCacheUtils.expire(httpServletRequest); // token过期
         writeResponse(httpServletRequest, httpServletResponse, Resp.success("退出成功了。"));
+
+        handlersProvider.ifAvailable(handlers -> {
+            executorService.submit(() -> {
+                handlers.forEach(handler -> handler.onLogoutSuccess(httpServletRequest, httpServletResponse, authentication));
+            });
+        });
     }
 
     private Resp getResp(AuthenticationException e) {
@@ -58,20 +89,12 @@ public class DefaultAuthenticationHandler implements AuthenticationSuccessHandle
     }
 
     public static void writeResponse(HttpServletRequest request, HttpServletResponse response, Object data) {
-        response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Expires", "0");
         response.setHeader("Pragma", "No-cache");
 
-        try {
-            String message = new ObjectMapper().writeValueAsString(data);
-            byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
-            OutputStream stream = response.getOutputStream();
-            stream.write(bytes);
-            stream.flush();
-        } catch (IOException ignored) {
+        ServletUtil.writeResponse(response, data);
 
-        }
     }
 
 }

@@ -1,6 +1,8 @@
 package com.mrqinzh.user.controller.admin;
 
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
+import com.mrqinzh.framework.common.exception.BizException;
+import com.mrqinzh.framework.common.exception.ErrorCode;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.Resp;
 import com.mrqinzh.framework.common.web.controller.BaseController;
@@ -32,7 +34,7 @@ public class MenuController extends BaseController {
 
     @Operation(summary = "分页获取菜单信息")
     @GetMapping("page")
-    public Resp findPage(PageCondition pageReq) {
+    public Resp findPage(PageRequest pageReq) {
         List<Menu> menus = menuService.findPage(pageReq);
         return DataResp.ok(menus);
     }
@@ -56,6 +58,9 @@ public class MenuController extends BaseController {
     @PostMapping("update")
 //    @AccessPermission(RoleType.SUPER_ADMIN)
     public Resp update(@RequestBody @Valid MenuVO menuVO) {
+        if (menuVO.getId() == null || menuVO.getId() == 0) {
+            throw new BizException(ErrorCode.BAD_PARAMETER, "参数校验错误，缺少菜单id");
+        }
         menuService.update(menuVO);
         return Resp.success();
     }

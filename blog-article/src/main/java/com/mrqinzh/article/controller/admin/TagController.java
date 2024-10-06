@@ -6,7 +6,7 @@ import com.mrqinzh.article.domain.dto.TagRespDTO;
 import com.mrqinzh.article.domain.vo.TagReqVO;
 import com.mrqinzh.article.domain.vo.TagRespVO;
 import com.mrqinzh.article.service.TagService;
-import com.mrqinzh.framework.common.domain.page.PageCondition;
+import com.mrqinzh.framework.common.domain.page.PageRequest;
 import com.mrqinzh.framework.common.resp.DataResp;
 import com.mrqinzh.framework.common.resp.PageResp;
 import com.mrqinzh.framework.common.resp.Resp;
@@ -43,7 +43,7 @@ public class TagController extends BaseController {
 
     @Operation(summary = "分页查询 tags")
     @GetMapping("page")
-    public PageResp<TagRespVO> page(PageCondition pageReq) {
+    public PageResp<TagRespVO> page(PageRequest pageReq) {
         Page<TagRespDTO> page = tagService.page(pageReq);
         return PageUtils.resp(page, TagConvert.INSTANCE::convert2RespVO);
     }

@@ -5,7 +5,7 @@ import com.mrqinzh.auth.domain.entity.LoginLog;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface LoginMapper extends BaseMapper<LoginLog> {
+public interface LoginLogMapper extends BaseMapper<LoginLog> {
 
 
 

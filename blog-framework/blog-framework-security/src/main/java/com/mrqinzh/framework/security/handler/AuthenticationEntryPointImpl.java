@@ -26,7 +26,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) {
         log.debug("[commence][访问 URL({}) 时，没有登录]", request.getRequestURI(), e);
         // 返回 401
-        ServletUtil.writeJSON(response, Resp.error(ErrorCode.TOKEN_EXPIRED));
+        ServletUtil.writeResponse(response, Resp.error(ErrorCode.AUTHENTICATION_FAILURE));
     }
 
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Schema(description = "分页信息基类")
-public class PageCondition implements Serializable {
+public class PageRequest implements Serializable {
 
     private Integer currentPage = 1;
 
