@@ -2,6 +2,9 @@ package com.mrqinzh.framework.security.core;
 
 import com.mrqinzh.framework.common.security.LoginUser;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
